@@ -2,7 +2,7 @@
 node_modules/
 
 # билд
-
+/dist
 # логи
 npm-debug.log*
 yarn-debug.log*
