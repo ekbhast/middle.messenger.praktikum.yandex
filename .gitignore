@@ -2,7 +2,6 @@
 node_modules/
 
 # билд
-dist/
 
 # логи
 npm-debug.log*
