@@ -1,1 +1,1 @@
-export default `<button>Enabled</button>`;
+export default `<button id={{id}}>Enabled</button>`;
