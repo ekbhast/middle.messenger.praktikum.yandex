@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-=======
     "start": "vite",
->>>>>>> bfe85085016ecfcc30d4fa39b1402414a5346bed
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
