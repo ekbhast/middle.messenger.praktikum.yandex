@@ -1,0 +1,13 @@
+.auth{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    &__header{
+        margin-top: 50px;
+    }
+    &__input{
+        
+    }
+}

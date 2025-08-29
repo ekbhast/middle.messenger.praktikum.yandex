@@ -8,11 +8,12 @@ import  { Input }           from '../components/atoms/input';
 import  { Link }            from '../components/atoms/link';
 import  { H1 }              from '../components/atoms/headers/h1'
 import  { Navigate }        from '../components/organism/navigate';
+import  { Label }           from '../components/atoms/label'
 
 //molecules
 import { LoginActions }     from '../components/molecules/loginActions';
 import { LoginFields }      from '../components/molecules/loginFields';
-import { LoginFromBlock } from '../components/molecules/loginFromBlock';
+import { LoginFromBlock }   from '../components/organism/loginFromBlock';
 
 //import templates
 import { AuthTemplate }     from '../components/templates/authTemplate/indes';
@@ -27,11 +28,12 @@ import  { Page404 }         from '../pages/404';
 import  { Page500 }         from '../pages/500';
 
 export default function registerPartials(){
-    //registerPartial components
+    //registerPartial atoms
     Handlebars.registerPartial('Button', Button);
     Handlebars.registerPartial('Input', Input);
     Handlebars.registerPartial('Link', Link);
     Handlebars.registerPartial('H1', H1);
+    Handlebars.registerPartial('Label', Label);
 
     //molecules
     Handlebars.registerPartial('LoginActions', LoginActions);

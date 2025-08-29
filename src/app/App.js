@@ -1,5 +1,6 @@
 import Handlebars from "handlebars";
 import registerPartials from "../handlebars/partials";
+import { inputGroupData } from "../data/data";
 
 registerPartials();
 export default class App {
