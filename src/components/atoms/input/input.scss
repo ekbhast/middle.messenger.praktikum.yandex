@@ -2,14 +2,18 @@ input{
     width: 280px;
     border: none;
     border-bottom: 1px solid #3369F3;
+    padding: 0 0;
     padding-bottom: 7px;
     box-sizing: border-box;
     &::placeholder{
         color: #999999;
-        font-size: 14px;
+        font-size: 13px;
         opacity: 1;  
     }
     &:focus{
         outline: none;
+        &::placeholder{
+            opacity: 0;
+        }
     }
 }

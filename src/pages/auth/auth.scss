@@ -1,7 +1,24 @@
-.auth-page{
+.auth{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100%;
+    &__inputGroup{
+        display:flex;
+        flex-direction: column;
+            &:focus-within label {
+            visibility: visible; 
+            }
+    }
+    &__header{
+        margin: 0;
+        margin-top: 41px;
+    }
+    &__inputs{
+        margin-top: 50px;
+    }
+    &__button{
+        margin-top: 170px;
+    }
 }
