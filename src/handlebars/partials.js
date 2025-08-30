@@ -13,11 +13,16 @@ import  { Label }           from '../components/atoms/label'
 //molecules
 import { LoginActions }     from '../components/molecules/loginActions';
 import { LoginFields }      from '../components/molecules/loginFields';
+import { RegFields }        from '../components/molecules/regFields';
+import { RegActions } from '../components/molecules/regActions';
+
+//organism
 import { LoginFromBlock }   from '../components/organism/loginFromBlock';
+import { RegFromBlock } from '../components/organism/regFromBlock';
 
 //import templates
-import { AuthTemplate }     from '../components/templates/authTemplate/indes';
-
+import { AuthTemplate }     from '../components/templates/authTemplate';
+import { RegTemplate }      from '../components/templates/regTemplate';
 
 //import pages
 import  { Auth }            from '../pages/auth';
@@ -38,12 +43,17 @@ export default function registerPartials(){
     //molecules
     Handlebars.registerPartial('LoginActions', LoginActions);
     Handlebars.registerPartial('LoginFields', LoginFields);
-    Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);
-    
+    Handlebars.registerPartial('RegFields', RegFields);
     Handlebars.registerPartial('Navigate', Navigate);
+    Handlebars.registerPartial('RegActions', RegActions);
+
+    //organism
+    Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);    
+    Handlebars.registerPartial('RegFromBlock', RegFromBlock);
     
     //registerPartial templates
     Handlebars.registerPartial('AuthTemplate', AuthTemplate);
+    Handlebars.registerPartial('RegTemplate', RegTemplate);
     
     //registerPartial pages
     Handlebars.registerPartial('Auth', Auth);

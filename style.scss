@@ -6,6 +6,11 @@
 @use '/src/components/atoms/headers/h1/h1.scss';
 @use '/src/components/atoms/input/input.scss';
 @use '/src/components/atoms/label/label.scss';
+@use '/src/components/atoms/link/a.scss';
+@use '/src/pages/registration/reg.scss';
+@use '/src/components/templates/regTemplate/regTemplate.scss';
+@use '/src/components/organism/regFromBlock/regFromBlock.scss';
+@use '/src/components/molecules/regFields/regFields.scss';
 
 
 
@@ -28,4 +33,11 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;  
+}
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
 }
