@@ -6,7 +6,8 @@ import  Handlebars          from 'handlebars';
 import  { Button }          from '../components/atoms/button'
 import  { Input }           from '../components/atoms/input';
 import  { Link }            from '../components/atoms/link';
-import  { H1 }              from '../components/atoms/headers/h1'
+import  { H1 }              from '../components/atoms/headers/h1';
+import  { H2 }               from '../components/atoms/headers/h2';
 import  { Navigate }        from '../components/organism/navigate';
 import  { Label }           from '../components/atoms/label'
 
@@ -36,6 +37,7 @@ export default function registerPartials(){
     Handlebars.registerPartial('Input', Input);
     Handlebars.registerPartial('Link', Link);
     Handlebars.registerPartial('H1', H1);
+    Handlebars.registerPartial('H2', H2);
     Handlebars.registerPartial('Label', Label);
 
     //molecules
