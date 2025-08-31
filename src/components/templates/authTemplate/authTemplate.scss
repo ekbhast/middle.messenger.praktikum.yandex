@@ -1,8 +1,4 @@
-.auth__container{
+.auth__template{
     width: 340px;
     height: 460px;
-    &--shadow{
-        border-radius: 12px;
-        box-shadow:  0 0 6px rgba(0, 0, 0, 0.1);
-    }
 }

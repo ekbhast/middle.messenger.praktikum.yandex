@@ -11,10 +11,8 @@ import  { Navigate }        from '../components/organism/navigate';
 import  { Label }           from '../components/atoms/label'
 
 //molecules
-import { LoginActions }     from '../components/molecules/loginActions';
 import { LoginFields }      from '../components/molecules/loginFields';
 import { RegFields }        from '../components/molecules/regFields';
-import { RegActions } from '../components/molecules/regActions';
 
 //organism
 import { LoginFromBlock }   from '../components/organism/loginFromBlock';
@@ -41,11 +39,9 @@ export default function registerPartials(){
     Handlebars.registerPartial('Label', Label);
 
     //molecules
-    Handlebars.registerPartial('LoginActions', LoginActions);
     Handlebars.registerPartial('LoginFields', LoginFields);
     Handlebars.registerPartial('RegFields', RegFields);
     Handlebars.registerPartial('Navigate', Navigate);
-    Handlebars.registerPartial('RegActions', RegActions);
 
     //organism
     Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);    

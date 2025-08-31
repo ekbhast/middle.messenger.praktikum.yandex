@@ -1,1 +1,0 @@
-export { default as RegActions } from './regActions.hbs?raw';

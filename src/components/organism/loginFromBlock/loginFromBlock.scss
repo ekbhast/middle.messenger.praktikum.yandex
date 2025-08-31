@@ -1,6 +1,14 @@
-.auth__fromBlock{
+.auth{
+    &__fromBlock{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    }
+    &__button{
+        margin-top: 170px;
+    }
+    &__link{
+        margin-top: 14px;
+    }
 }
