@@ -4,7 +4,7 @@ import registerPartials from "../handlebars/partials";
 registerPartials();
 export default class App {
   constructor() {
-    this.pages = { template: "Auth" };
+    this.pages = { template: "UserSettings" };
   }
 
   render() {

@@ -1,0 +1,1 @@
+export { default as UserSettingsFromBlock } from './userSettingsFromBlock.hbs?raw';

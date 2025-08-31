@@ -7,9 +7,10 @@ import  { Button }          from '../components/atoms/button'
 import  { Input }           from '../components/atoms/input';
 import  { Link }            from '../components/atoms/link';
 import  { H1 }              from '../components/atoms/headers/h1';
-import  { H2 }               from '../components/atoms/headers/h2';
+import  { H2 }              from '../components/atoms/headers/h2';
 import  { Navigate }        from '../components/organism/navigate';
-import  { Label }           from '../components/atoms/label'
+import  { Label }           from '../components/atoms/label';
+import  { Avatar }          from '../components/atoms/avatar/index';
 
 //molecules
 import { LoginFields }      from '../components/molecules/loginFields';
@@ -18,10 +19,12 @@ import { RegFields }        from '../components/molecules/regFields';
 //organism
 import { LoginFromBlock }   from '../components/organism/loginFromBlock';
 import { RegFromBlock } from '../components/organism/regFromBlock';
+import { UserSettingsFromBlock } from '../components/organism/userSettingsFromBlock';
 
 //import templates
 import { AuthTemplate }     from '../components/templates/authTemplate';
 import { RegTemplate }      from '../components/templates/regTemplate';
+import { UserSettingsTemplate } from '../components/templates/userSettingsTemplate';
 
 //import pages
 import  { Auth }            from '../pages/auth';
@@ -39,6 +42,7 @@ export default function registerPartials(){
     Handlebars.registerPartial('H1', H1);
     Handlebars.registerPartial('H2', H2);
     Handlebars.registerPartial('Label', Label);
+    Handlebars.registerPartial('Avatar', Avatar);
 
     //molecules
     Handlebars.registerPartial('LoginFields', LoginFields);
@@ -48,10 +52,13 @@ export default function registerPartials(){
     //organism
     Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);    
     Handlebars.registerPartial('RegFromBlock', RegFromBlock);
+    Handlebars.registerPartial('UserSettingsFromBlock',UserSettingsFromBlock);
+
     
     //registerPartial templates
     Handlebars.registerPartial('AuthTemplate', AuthTemplate);
     Handlebars.registerPartial('RegTemplate', RegTemplate);
+    Handlebars.registerPartial('UserSettingsTemplate', UserSettingsTemplate);
     
     //registerPartial pages
     Handlebars.registerPartial('Auth', Auth);
