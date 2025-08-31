@@ -1,22 +1,28 @@
+//atoms
 @use '/src/components/atoms/button/button.scss';
-@use '/src/pages/auth/auth.scss';
-@use '/src/components/organism/navigate/navigate.scss';
-@use '/src/components/templates/authTemplate/authTemplate.scss';
-@use '/src/components/organism/loginFromBlock/loginFromBlock.scss';
 @use '/src/components/atoms/headers/h1/h1.scss';
 @use '/src/components/atoms/input/input.scss';
 @use '/src/components/atoms/label/label.scss';
 @use '/src/components/atoms/link/a.scss';
-@use '/src/pages/registration/reg.scss';
-@use '/src/components/templates/regTemplate/regTemplate.scss';
-@use '/src/components/organism/regFromBlock/regFromBlock.scss';
-@use '/src/components/molecules/regFields/regFields.scss';
 @use '/src/components/atoms/headers/h2/h2.scss';
+
+//molecule
+@use '/src/components/molecules/regFields/regFields.scss';
+
+//organism
+@use '/src/components/organism/navigate/navigate.scss';
+@use '/src/components/organism/loginFromBlock/loginFromBlock.scss';
+@use '/src/components/organism/regFromBlock/regFromBlock.scss';
+
+//template
+@use '/src/components/templates/authTemplate/authTemplate.scss';
+@use '/src/components/templates/regTemplate/regTemplate.scss';
+
+//page
+@use '/src/pages/auth/auth.scss';
+@use '/src/pages/registration/reg.scss';
 @use '/src/pages/404/page404.scss';
 @use '/src/pages/500/page500.scss';
-
-
-
 
 body{
     display: flex;
