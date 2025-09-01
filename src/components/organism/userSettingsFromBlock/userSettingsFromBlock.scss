@@ -1,5 +1,45 @@
-.userSettings__fromBlock{
-    width: 510px;
+
+.userSettings{
+    &__fromBlock{
+        width: 510px;
+        display: flex;
+        flex-direction: column;
+        padding-top: 60px;
+    }
+    &__rows{
+        display:flex;
+        flex-direction: column;
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+    &__row{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+        &--bottom{
+            border-bottom: 1px solid #EAEAEA;
+        }
+    }
+    &__label{
+        font-size: 13px;
+        font-weight: 500;
+        color: #1E1E1E;
+    }
+    &__data{
+        font-size: 13px;
+        font-weight: 500;
+        color: #999999;
+    }
+    &__header{
+        margin: auto;
+        font-size: 20px;
+        margin-top: 24px;
+    }
+    &__actionLinks{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        &--bottom{
+            border-bottom: 1px solid #EAEAEA;
+        }
+    }
 }

@@ -1,4 +1,16 @@
 <div class="userSettings__fromBlock">
     {{>Avatar}}
+    {{>H1 class='userSettings__header' label='Иван'}}
     {{>UserSettingsRow}}
+    <div class="userSettings__actionLinks">
+        <div class="userSettings__actionLinks--bottom">
+            {{>Link href='#' class='userSettings__link' text='Изменить данные'}}
+        </div>
+        <div class="userSettings__actionLinks--bottom">
+            {{>Link href='#' class='userSettings__link' text='Изменить пароль'}}
+        </div>
+        <div class="userSettings__actionLinks--bottom">
+            {{>Link href='#' class='userSettings__link' text='Выйти'}}
+        </div>
+    </div>
 </div>
