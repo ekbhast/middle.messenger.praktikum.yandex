@@ -91,3 +91,4 @@ export default function registerPartials(){
     Handlebars.registerPartial('UserChangeData', UserChangeData);
     Handlebars.registerPartial('UserChangePassword', UserChangePassword);
 }
+
