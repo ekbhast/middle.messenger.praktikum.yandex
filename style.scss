@@ -9,6 +9,7 @@
 
 //molecule
 @use '/src/components/molecules/regFields/regFields.scss';
+@use '/src/components/molecules/userSettingsRow/userSettingsRow.scss';
 
 //organism
 @use '/src/components/organism/navigate/navigate.scss';
@@ -49,9 +50,20 @@ body{
 .page{
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
     width: 100%;
+    &__auth{
+        align-items: center;
+    }
+    &__reg{
+        align-items: center;
+    }
+    &404{
+        align-items: center;
+    }
+    &500{
+        align-items: center;
+    }
 }
 .form-inputs{
     display: flex;

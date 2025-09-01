@@ -10,11 +10,13 @@ import  { H1 }              from '../components/atoms/headers/h1';
 import  { H2 }              from '../components/atoms/headers/h2';
 import  { Navigate }        from '../components/organism/navigate';
 import  { Label }           from '../components/atoms/label';
-import  { Avatar }          from '../components/atoms/avatar/index';
+import  { Avatar }          from '../components/atoms/avatar';
+import  { Span }            from '../components/atoms/span';
 
 //molecules
 import { LoginFields }      from '../components/molecules/loginFields';
 import { RegFields }        from '../components/molecules/regFields';
+import { UserSettingsRow}   from '../components/molecules/userSettingsRow';
 
 //organism
 import { LoginFromBlock }   from '../components/organism/loginFromBlock';
@@ -43,11 +45,13 @@ export default function registerPartials(){
     Handlebars.registerPartial('H2', H2);
     Handlebars.registerPartial('Label', Label);
     Handlebars.registerPartial('Avatar', Avatar);
+    Handlebars.registerPartial('Span', Span);
 
     //molecules
     Handlebars.registerPartial('LoginFields', LoginFields);
     Handlebars.registerPartial('RegFields', RegFields);
     Handlebars.registerPartial('Navigate', Navigate);
+    Handlebars.registerPartial('UserSettingsRow', UserSettingsRow);
 
     //organism
     Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);    
