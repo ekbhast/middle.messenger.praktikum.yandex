@@ -3,3 +3,32 @@ a{
     font-size: 13px;
     text-decoration: none;
 }
+.page404_link{
+    font-size: 11px;
+    margin-top: 70px;
+    }
+.page500_link{
+    font-size: 11px;
+    margin-top: 70px;
+    }
+.auth__link{
+    margin-top: 14px;
+
+}
+.reg__link{
+    margin-top: 14px;
+}
+
+.userSettings{
+    &__link--red{
+    color:#FF0000;
+    }
+    &__actionLinks{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        &--bottom{
+            border-bottom: 1px solid #EAEAEA;
+        }
+    } 
+}
