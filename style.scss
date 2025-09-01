@@ -10,12 +10,16 @@
 //molecule
 @use '/src/components/molecules/regFields/regFields.scss';
 @use '/src/components/molecules/userSettingsRow/userSettingsRow.scss';
+@use '/src/components/molecules/userChangeDataRows/userChangeDataRows.scss';
+@use '/src/components/molecules/userChangePasswordRows/userChangePasswordRows.scss';
 
 //organism
 @use '/src/components/organism/navigate/navigate.scss';
 @use '/src/components/organism/loginFromBlock/loginFromBlock.scss';
 @use '/src/components/organism/regFromBlock/regFromBlock.scss';
 @use '/src/components/organism/userSettingsFromBlock/userSettingsFromBlock.scss';
+@use '/src/components/organism/userChangeDataFromBlock/userChangeDataFromBlock.scss';
+@use '/src/components/organism/userChangePasswordFromBlock/userChangePasswordFromBlock.scss';
 
 //template
 @use '/src/components/templates/authTemplate/authTemplate.scss';

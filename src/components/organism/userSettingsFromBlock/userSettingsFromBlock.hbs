@@ -4,13 +4,13 @@
     {{>UserSettingsRow}}
     <div class="userSettings__actionLinks">
         <div class="userSettings__actionLinks--bottom">
-            {{>Link href='#' class='userSettings__link' text='Изменить данные'}}
+            {{>Link id='change_userData'href='#' class='userSettings__link' text='Изменить данные'}}
         </div>
         <div class="userSettings__actionLinks--bottom">
-            {{>Link href='#' class='userSettings__link' text='Изменить пароль'}}
+            {{>Link id='change_userPassword' href='#' class='userSettings__link' text='Изменить пароль'}}
         </div>
-        <div class="userSettings__actionLinks--bottom">
-            {{>Link href='#' class='userSettings__link' text='Выйти'}}
+        <div class="userSettings__actionLinks">
+            {{>Link id='quit' href='#' class='userSettings__link--red' text='Выйти'}}
         </div>
     </div>
 </div>
