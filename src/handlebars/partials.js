@@ -16,7 +16,7 @@ import  { Span }            from '../components/atoms/span';
 //molecules
 import { LoginFields }      from '../components/molecules/loginFields';
 import { RegFields }        from '../components/molecules/regFields';
-import { UserSettingsRow}   from '../components/molecules/userSettingsRow';
+import { UserSettingsRow}   from '../components/molecules/userSettingsRows';
 import { UserChangeDataRows } from '../components/molecules/userChangeDataRows';
 import { UserChangePasswordRows } from '../components/molecules/userChangePasswordRows';
 
