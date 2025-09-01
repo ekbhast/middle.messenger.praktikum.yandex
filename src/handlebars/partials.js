@@ -26,6 +26,7 @@ import { RegFromBlock }     from '../components/organism/regFromBlock';
 import { UserSettingsFromBlock } from '../components/organism/userSettingsFromBlock';
 import { UserChangeDataFromBlock } from '../components/organism/userChangeDataFromBlock';
 import { UserChangePasswordFromBlock } from '../components/organism/userChangePasswordFromBlock';
+import { ChatsFromBlock } from '../components/organism/ChatsFromBlock';
 
 //import templates
 import { AuthTemplate }     from '../components/templates/authTemplate';
@@ -33,6 +34,7 @@ import { RegTemplate }      from '../components/templates/regTemplate';
 import { UserSettingsTemplate } from '../components/templates/userSettingsTemplate';
 import { UserChangeDataTemplate } from '../components/templates/UserChangeDataTemplate';
 import { UserChangePasswordTemplate } from '../components/templates/userChangePasswordTemplate';
+import { ChatsTemplate } from '../components/templates/chatsTemplate';
 
 //import pages
 import  { Auth }            from '../pages/auth';
@@ -69,15 +71,15 @@ export default function registerPartials(){
     Handlebars.registerPartial('UserSettingsFromBlock', UserSettingsFromBlock);
     Handlebars.registerPartial('UserChangeDataFromBlock', UserChangeDataFromBlock);
     Handlebars.registerPartial('UserChangePasswordFromBlock', UserChangePasswordFromBlock);
-    
-
-    
+    Handlebars.registerPartial('ChatsFromBlock', ChatsFromBlock);
+        
     //registerPartial templates
     Handlebars.registerPartial('AuthTemplate', AuthTemplate);
     Handlebars.registerPartial('RegTemplate', RegTemplate);
     Handlebars.registerPartial('UserSettingsTemplate', UserSettingsTemplate);
     Handlebars.registerPartial('UserChangeDataTemplate', UserChangeDataTemplate);
     Handlebars.registerPartial('UserChangePasswordTemplate', UserChangePasswordTemplate);
+    Handlebars.registerPartial('ChatsTemplate', ChatsTemplate);
     
     //registerPartial pages
     Handlebars.registerPartial('Auth', Auth);

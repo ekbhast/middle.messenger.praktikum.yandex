@@ -1,0 +1,1 @@
+export { default as ChatsTemplate } from './chatsTemplate.hbs?raw';
