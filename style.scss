@@ -20,10 +20,12 @@
 @use '/src/components/organism/userSettingsFromBlock/userSettingsFromBlock.scss';
 @use '/src/components/organism/userChangeDataFromBlock/userChangeDataFromBlock.scss';
 @use '/src/components/organism/userChangePasswordFromBlock/userChangePasswordFromBlock.scss';
+@use '/src/components/organism/ChatsFromBlock/chatsFromBlock.scss';
 
 //template
 @use '/src/components/templates/authTemplate/authTemplate.scss';
 @use '/src/components/templates/regTemplate/regTemplate.scss';
+@use '/src/components/templates/chatsTemplate/chatsTemplate.scss';
 
 //page
 @use '/src/pages/404/page404.scss';
