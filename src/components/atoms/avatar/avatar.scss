@@ -1,0 +1,30 @@
+.avatar {
+  border: none;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  width: 130px;
+  height: 130px;
+  margin: auto;
+  position: relative;
+
+  &__img {
+    display: block;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+
+    &--change {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      opacity: 0.9;
+    }
+  }
+  &:hover .avatar__img--change {
+    display: block;
+  }
+}

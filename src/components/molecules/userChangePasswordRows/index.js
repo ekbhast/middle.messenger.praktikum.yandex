@@ -1,0 +1,1 @@
+export { default as UserChangePasswordRows } from './userChangePasswordRows.hbs?raw';

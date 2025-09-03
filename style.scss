@@ -1,0 +1,92 @@
+//atoms
+@use '/src/components/atoms/button/button.scss';
+@use '/src/components/atoms/headers/h1/h1.scss';
+@use '/src/components/atoms/input/input.scss';
+@use '/src/components/atoms/label/label.scss';
+@use '/src/components/atoms/link/a.scss';
+@use '/src/components/atoms/headers/h2/h2.scss';
+@use '/src/components/atoms/avatar/avatar.scss';
+
+//molecule
+@use '/src/components/molecules/userSettingsRows/userSettingsRows.scss';
+@use '/src/components/molecules/userChangeDataRows/userChangeDataRows.scss';
+@use '/src/components/molecules/userChangePasswordRows/userChangePasswordRows.scss';
+
+//organism
+@use '/src/components/organism/navigate/navigate.scss';
+@use '/src/components/organism/loginFromBlock/loginFromBlock.scss';
+@use '/src/components/organism/regFromBlock/regFromBlock.scss';
+@use '/src/components/organism/userSettingsFromBlock/userSettingsFromBlock.scss';
+@use '/src/components/organism/userChangeDataFromBlock/userChangeDataFromBlock.scss';
+@use '/src/components/organism/userChangePasswordFromBlock/userChangePasswordFromBlock.scss';
+@use '/src/components/organism/ChatsFromBlock/chatsFromBlock.scss';
+
+//template
+@use '/src/components/templates/authTemplate/authTemplate.scss';
+@use '/src/components/templates/regTemplate/regTemplate.scss';
+@use '/src/components/templates/chatsTemplate/chatsTemplate.scss';
+
+//page
+@use '/src/pages/404/page404.scss';
+@use '/src/pages/500/page500.scss';
+@use '/src/pages/auth/auth.scss';
+@use '/src/pages/registration/registration.scss';
+@use '/src/pages/userChangeData/userChangeData.scss';
+@use '/src/pages/userChangePassword/userChangePassword.scss';
+@use '/src/pages/userSettings/userSettings.scss';
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+}
+#app {
+    display: flex;
+    width: 1280px;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;  
+}
+.page{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+.form-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+} 
+.form-inputGroup{
+    display:flex;
+    flex-direction: column;
+    margin-top: 5px;
+        &:focus-within label {
+        visibility: visible; 
+        }
+}
+.container--shadow{
+    border-radius: 12px;
+    box-shadow:  0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-header{
+        margin: 0;
+        margin-top: 41px;
+        margin-bottom: 25px;
+        font-size: 20px;
+}
+.form-subitGroup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+}

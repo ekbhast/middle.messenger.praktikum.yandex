@@ -1,0 +1,10 @@
+.navigate{
+    position: absolute;
+    left:0;
+    ul{
+    display:flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 20px;
+}
+} 
