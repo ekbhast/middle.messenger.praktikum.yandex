@@ -3,12 +3,13 @@ import registerPartials from "../handlebars/partials";
 
 registerPartials();
 export default class App {
+    private pages: { template: string };
   constructor() {
     this.pages = { template: "UserChangeData" };
   }
 
   render() {
-    const app = document.getElementById("app");
+    const app: HTMLElement | null = document.getElementById("app");
 
     let template = `
                 {{> ${this.pages.template}}}
@@ -16,8 +17,10 @@ export default class App {
             `
 
     const appTemplate = Handlebars.compile(template);
-    app.innerHTML = appTemplate();
-
+    if (app){
+      app.innerHTML = appTemplate({});
+    }
+    
     let buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
       if (button.dataset.page === "Navigate") {
