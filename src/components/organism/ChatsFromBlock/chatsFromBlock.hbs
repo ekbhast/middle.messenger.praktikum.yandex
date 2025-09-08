@@ -1,6 +1,16 @@
 <div class="chats__fromBlock">
-     <div class="chats__chats"></div>
+     <div class="chats__chats">
+          <div class="chats__profile">
+               {{>Link href='#' class='chats__profileLink' text='Профиль >'}}
+          </div>
+          <div class="chats__search">
+               <img src="/src/assets/search_icon.svg" alt="icon" class="chats__search--icon" />
+               {{>Input class='chats__searchInput' placeholder='Поиск' id='search-input' type='text' name='search-input'}}
+          </div>
+          <div class="chats__dilogs">
+               
+          </div>
+     </div>
      <div class="chats__messages">
-          {{>H1 class='chats__header'label='Скоро тут будут чаты'}}
      </div>
 </div>

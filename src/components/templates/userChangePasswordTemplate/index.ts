@@ -1,1 +1,1 @@
-export { default as UserChangePasswordTemplate} from './userChangePasswordTemplate.hbs?raw';
+export { default as UserChangePasswordTemplate } from './userChangePasswordTemplate.hbs?raw';

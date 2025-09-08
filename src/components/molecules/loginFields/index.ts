@@ -1,1 +1,1 @@
-export { default as LoginFields } from './loginFields.hbs?raw'
+export { default as LoginFields } from './loginFields.hbs?raw';
