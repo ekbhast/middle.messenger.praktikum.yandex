@@ -1,14 +1,16 @@
 <div class="dialog">
-    <div class="dialog__block--avatar">
-        {{>AvatarIcon}}
-    </div>
-    <div class="dialog__block--message">
-        <div class="dialog__block--header">
-            {{>H2 label='Андрей'}}
-            {{>Span text= '10:42'}}
+    <div class="dialog__block">
+        <div class="dialog__block--avatar">
+            {{>AvatarIcon}}
         </div>
-        <div class="dialog_block--textMessage">
-            какое-то сообщение
+        <div class="dialog__block--message">
+            <div class="dialog__block--header">
+                {{>H2 class='dialog__dialogName'label='Андрей'}}
+                {{>Span class='dialog__lastMessageTime'text= '10:42'}}
+            </div>
+            <div class="dialog_block--textMessage">
+                {{>Span class='dialog__textMessage' text='Миллионы россиян ежедневно проводят десятки часов свое...'}}
+            </div>
         </div>
-    </div>
+    </div>    
 </div>
