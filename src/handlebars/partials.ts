@@ -10,7 +10,8 @@ import { H1 } from '../components/atoms/headers/h1';
 import { H2 } from '../components/atoms/headers/h2';
 import { Navigate } from '../components/organism/navigate';
 import { Label } from '../components/atoms/label';
-import { Avatar } from '../components/atoms/avatar';
+import { AvatarButton } from '../components/atoms/avatarButton';
+import { AvatarIcon } from '../components/atoms/avatarIcon';
 import { Span } from '../components/atoms/span';
 
 // molecules
@@ -19,6 +20,7 @@ import { RegFields } from '../components/molecules/regFields';
 import { UserSettingsRow } from '../components/molecules/userSettingsRows';
 import { UserChangeDataRows } from '../components/molecules/userChangeDataRows';
 import { UserChangePasswordRows } from '../components/molecules/userChangePasswordRows';
+import { Dialog } from '../components/molecules/dialog';
 
 // organism
 import { LoginFromBlock } from '../components/organism/loginFromBlock';
@@ -54,7 +56,8 @@ export default function registerPartials() {
   Handlebars.registerPartial('H1', H1);
   Handlebars.registerPartial('H2', H2);
   Handlebars.registerPartial('Label', Label);
-  Handlebars.registerPartial('Avatar', Avatar);
+  Handlebars.registerPartial('AvatarButton', AvatarButton);
+  Handlebars.registerPartial('AvatarIcon', AvatarIcon);
   Handlebars.registerPartial('Span', Span);
 
   // molecules
@@ -64,6 +67,7 @@ export default function registerPartials() {
   Handlebars.registerPartial('UserSettingsRow', UserSettingsRow);
   Handlebars.registerPartial('UserChangeDataRows', UserChangeDataRows);
   Handlebars.registerPartial('UserChangePasswordRows', UserChangePasswordRows);
+  Handlebars.registerPartial('Dialog', Dialog);
 
   // organism
   Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);

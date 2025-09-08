@@ -1,4 +1,4 @@
-.avatar {
+.avatarButton {
   border: none;
   padding: 0;
   background: none;
@@ -24,7 +24,7 @@
       opacity: 0.9;
     }
   }
-  &:hover .avatar__img--change {
+  &:hover .avatarButton__img--change {
     display: block;
   }
 }

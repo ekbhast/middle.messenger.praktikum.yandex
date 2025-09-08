@@ -5,13 +5,15 @@
 @use '/src/components/atoms/label/label.scss';
 @use '/src/components/atoms/link/a.scss';
 @use '/src/components/atoms/headers/h2/h2.scss';
-@use '/src/components/atoms/avatar/avatar.scss';
+@use '/src/components/atoms/avatarButton/avatar.scss';
+@use '/src/components/atoms/avatarIcon/avatarIcon.scss';
 @use '/src/components/atoms/span/span.scss';
 
 //molecule
 @use '/src/components/molecules/userSettingsRows/userSettingsRows.scss';
 @use '/src/components/molecules/userChangeDataRows/userChangeDataRows.scss';
 @use '/src/components/molecules/userChangePasswordRows/userChangePasswordRows.scss';
+@use '/src/components/molecules/dialog/dialog.scss';
 
 //organism
 @use '/src/components/organism/navigate/navigate.scss';

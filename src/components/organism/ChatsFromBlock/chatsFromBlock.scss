@@ -37,4 +37,8 @@
     &__search--icon{
         position: absolute;
     }
+    &__dilogs{
+        display: flex;
+        flex-direction: column;
+    }
 }
