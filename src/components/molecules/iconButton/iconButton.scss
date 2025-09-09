@@ -1,0 +1,25 @@
+.chats__messages{
+    &--buttonMenu{
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        border: none;
+        background-color: #F5F5F5;
+        cursor: pointer;
+        padding: 0px;
+    }
+    &--attachmentButton,
+    &--sendButton{
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 0px;
+        & img{
+            height: 100%;
+            width: 100%;
+        }        
+    }
+}
+    

@@ -21,6 +21,8 @@ import { UserSettingsRow } from '../components/molecules/userSettingsRows';
 import { UserChangeDataRows } from '../components/molecules/userChangeDataRows';
 import { UserChangePasswordRows } from '../components/molecules/userChangePasswordRows';
 import { Dialog } from '../components/molecules/dialog';
+import { IconButton } from '../components/molecules/iconButton';
+import { Message } from '../components/molecules/message/import';
 
 // organism
 import { LoginFromBlock } from '../components/organism/loginFromBlock';
@@ -68,6 +70,8 @@ export default function registerPartials() {
   Handlebars.registerPartial('UserChangeDataRows', UserChangeDataRows);
   Handlebars.registerPartial('UserChangePasswordRows', UserChangePasswordRows);
   Handlebars.registerPartial('Dialog', Dialog);
+  Handlebars.registerPartial('IconButton', IconButton);
+  Handlebars.registerPartial('Message', Message);
 
   // organism
   Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);

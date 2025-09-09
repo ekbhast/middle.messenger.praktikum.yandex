@@ -15,5 +15,26 @@
           </div>
      </div>
      <div class="chats__messages">
+          <div class="chats__messages--header">
+               <div class="chats__messages--user">
+                    {{>AvatarIcon class='chats__messages--avatarIcon'}}
+                    {{>Span class='chats__messages--userName' text='Андрей'}}
+               </div>
+               <div class="chats__messages--headerMenu">
+                    {{>IconButton class='chats__messages--buttonMenu' src='/src/assets/chats__header--buttonMenu.png'}}
+               </div>
+          </div>
+          <div class="chats__messages--chat">
+               {{>Message classMessage='chats__messages-message--inMessage' text='Собеседник' time='14:25'}}
+               {{>Message classMessage='chats__messages-message--outMessage' text='Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение Мое сообщение ' time='13:40'}}
+               {{>Message classMessage='chats__messages-message--inMessage' text='Собеседника сообщение'time='13:14'}}
+               {{>Message classMessage='chats__messages-message--outMessage' text='Опять мое сообщение' time='11:25'}}
+               {{>Span class='chats__messages-date'text='11 июля'}}
+          </div>
+          <div class="chats__messages--actions">
+               {{>IconButton class='chats__messages--attachmentButton' src='/src/assets/attachment.png'}}
+               {{>Input class='chats__message--inputMessage' placeholder='Сообщение' name='message'}}
+               {{>IconButton class='chats__messages--sendButton' src='/src/assets/sendArrow.png'}}
+          </div>
      </div>
 </div>
