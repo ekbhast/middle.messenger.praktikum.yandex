@@ -29,6 +29,7 @@ export default class Block {
     this.lists = this._makePropsProxy({ ...lists });
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
+    eventBus.emit(Block.EVENTS.INIT);
   }
 
   private _getChildrenPropsAndProps(propsAndChildren: BlockProps): {

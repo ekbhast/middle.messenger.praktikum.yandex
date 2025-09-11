@@ -1,35 +1,30 @@
-import Handlebars from 'handlebars';
-import registerPartials from '../handlebars/partials';
+import Auth from '../pages/auth/auth';
 
-registerPartials();
+interface AppState {
+  currentPage: string;
+}
+
 export default class App {
-  private pages: { template: string };
+  private state: AppState;
+  private appElement: HTMLElement;
 
   constructor() {
-    this.pages = { template: 'Chats' };
+    this.state = { currentPage: 'auth' };
+    const el = document.getElementById('app');
+    if (!el) throw new Error('Контейнер #app не найден');
+    this.appElement = el;
   }
 
-  render() {
-    const app: HTMLElement | null = document.getElementById('app');
-
-    const template = `
-                {{> ${this.pages.template}}}
-                {{> Navigate}}
-            `;
-
-    const appTemplate = Handlebars.compile(template);
-    if (app) {
-      app.innerHTML = appTemplate({});
+  render(): void {
+    let pageBlock;
+    if (this.state.currentPage === 'auth') {
+      pageBlock = new Auth({ class: 'page page__auth' });
     }
 
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach((button) => {
-      if (button.dataset.page === 'Navigate') {
-        button.addEventListener('click', () => {
-          this.pages.template = `${button.id}`;
-          this.render();
-        });
-      }
-    });
+    if (pageBlock) {
+      this.appElement.innerHTML = '';
+      console.log(pageBlock);
+      this.appElement.appendChild(pageBlock.getContent());
+    }
   }
 }
