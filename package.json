@@ -27,5 +27,8 @@
   },
   "engines": {
     "node": "22.x"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
   }
 }
