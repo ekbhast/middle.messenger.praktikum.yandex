@@ -6,11 +6,11 @@ interface AuthProps{
 
 export default class Auth extends Block {
     constructor(props: AuthProps){
-        super(props);
+         super("div", props);
     }
     protected render(): string{
         return `
-            <main class="{{class}}">
+            <main class="page page__auth">
                 <h1>Все получилось</h1> 
             </main>
         `
