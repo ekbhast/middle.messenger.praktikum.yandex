@@ -16,7 +16,7 @@ export default class EventBus {
       throw new Error(`No event ${event}`);
     }
     this.listeners[event] = this.listeners[event].filter(
-      (listeners) => listeners !== callback
+        (listeners) => listeners !== callback,
     );
   }
   public emit(event: string, ...args: any[]): void {

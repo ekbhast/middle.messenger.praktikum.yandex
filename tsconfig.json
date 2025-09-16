@@ -12,7 +12,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "strictNullChecks": true 
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
   },
   "include": ["src", "src/types"],
   "exclude": ["node_modules"]

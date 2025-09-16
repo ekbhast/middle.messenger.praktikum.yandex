@@ -1,6 +1,6 @@
-import EventBus, { EventCallback } from "./EventBus";
-import Handlebars from "handlebars";
-import { v4 as uuidv4 } from "uuid";
+import EventBus, { EventCallback } from './EventBus';
+import Handlebars from 'handlebars';
+import { v4 as uuidv4 } from 'uuid';
 
 interface BlockProps {
   [key: string]: any;
@@ -8,10 +8,10 @@ interface BlockProps {
 
 export default class Block {
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_CDU: "flow:component-did-update",
-    FLOW_RENDER: "flow:render",
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
   };
   protected _element: HTMLElement | null = null;
   protected _id: string = uuidv4();
@@ -23,7 +23,7 @@ export default class Block {
   constructor(propsWithChildren: BlockProps = {}) {
     const eventBus = new EventBus();
     const { props, children, lists } =
-    this._getChildrenPropsAndProps(propsWithChildren);
+      this._getChildrenPropsAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
     this.lists = this._makePropsProxy({ ...lists });
@@ -59,7 +59,7 @@ export default class Block {
     return new Proxy(props, {
       get(target: any, prop: string) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target: any, prop: string, value: any) {
         const oldTarget = { ...target };
@@ -68,7 +68,7 @@ export default class Block {
         return true;
       },
       deleteProperty() {
-        throw new Error("No access");
+        throw new Error('No access');
       },
     });
   }
@@ -76,17 +76,14 @@ export default class Block {
   private _registerEvents(eventBus: EventBus): void {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this) as EventCallback);
     eventBus.on(
-      Block.EVENTS.FLOW_CDM,
-      this._componentDidMount.bind(this) as EventCallback
-    );
+        Block.EVENTS.FLOW_CDM,
+        this._componentDidMount.bind(this) as EventCallback);
     eventBus.on(
-      Block.EVENTS.FLOW_CDU,
-      this._componentDidUpdate.bind(this) as EventCallback
-    );
+        Block.EVENTS.FLOW_CDU,
+        this._componentDidUpdate.bind(this) as EventCallback);
     eventBus.on(
-      Block.EVENTS.FLOW_RENDER,
-      this._render.bind(this) as EventCallback
-    );
+        Block.EVENTS.FLOW_RENDER,
+        this._render.bind(this) as EventCallback);
   }
 
   private init(): void {
@@ -98,25 +95,25 @@ export default class Block {
     const tmpId = uuidv4();
 
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+      propsAndStubs[key] = `<div data-id='${child._id}'></div>`;
     });
 
     Object.entries(this.lists).forEach(([key]) => {
-      propsAndStubs[key] = `<div data-id="__l_${tmpId}"></div>`;
+      propsAndStubs[key] = `<div data-id='__l_${tmpId}'></div>`;
     });
 
-    const fragment = this._createDocumentElement("template");
+    const fragment = this._createDocumentElement('template');
     fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
 
     Object.values(this.children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+      const stub = fragment.content.querySelector(`[data-id='${child._id}']`);
       if (stub) {
         stub.replaceWith(child.getContent());
       }
     });
 
     Object.entries(this.lists).forEach(([, child]) => {
-      const listCont = this._createDocumentElement("template");
+      const listCont = this._createDocumentElement('template');
       child.forEach((item) => {
         if (item instanceof Block) {
           listCont.content.append(item.getContent());
@@ -124,7 +121,7 @@ export default class Block {
           listCont.content.append(`${item}`);
         }
       });
-      const stub = fragment.content.querySelector(`[data-id="__l_${tmpId}"]`);
+      const stub = fragment.content.querySelector(`[data-id='__l_${tmpId}']`);
       if (stub) {
         stub.replaceWith(listCont.content);
       }
@@ -140,7 +137,7 @@ export default class Block {
   }
 
   protected render(): string {
-    return "";
+    return '';
   }
 
   private _addEvents(): void {
@@ -154,7 +151,7 @@ export default class Block {
 
   public getContent(): HTMLElement {
     if (!this._element) {
-      throw new Error("Element is not created");
+      throw new Error('Element is not created');
     }
     return this._element;
   }
@@ -166,14 +163,14 @@ export default class Block {
   public show(): void {
     const content = this.getContent();
     if (content) {
-      content.style.display = "block";
+      content.style.display = 'block';
     }
   }
 
   public hide(): void {
     const content = this.getContent();
     if (content) {
-      content.style.display = "none";
+      content.style.display = 'none';
     }
   }
 
@@ -191,8 +188,8 @@ export default class Block {
   }
 
   private _componentDidUpdate(
-    oldProps: BlockProps,
-    newProps: BlockProps
+      oldProps: BlockProps,
+      newProps: BlockProps,
   ): void {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
@@ -201,10 +198,9 @@ export default class Block {
     this._render();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(
-    oldProps: BlockProps,
-    newProps: BlockProps
+      oldProps: BlockProps,
+      newProps: BlockProps,
   ): boolean {
     console.log(oldProps, newProps);
     return true;
@@ -219,6 +215,4 @@ export default class Block {
       }
     });
   }
-
-   
 }

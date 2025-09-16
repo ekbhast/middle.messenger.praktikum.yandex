@@ -3,14 +3,28 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb-base", "eslint:recommended"],
+  "extends": [
+    "google",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "rules": {
-    // тут можно переопределять правила
-  }
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "error",
+        "linebreak-style": ["error", "windows"],
+        "require-jsdoc": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "object-curly-spacing": ["error", "always"]
+      }
+    }
+  ]
 }
