@@ -51,51 +51,51 @@ import { UserChangeData } from '../pages/userChangeData';
 import { UserChangePassword } from '../pages/userChangePassword';
 
 export default function registerPartials() {
-  // registerPartial atoms
-  Handlebars.registerPartial('Button', Button);
-  Handlebars.registerPartial('Input', Input);
-  Handlebars.registerPartial('Link', Link);
-  Handlebars.registerPartial('H1', H1);
-  Handlebars.registerPartial('H2', H2);
-  Handlebars.registerPartial('Label', Label);
-  Handlebars.registerPartial('AvatarButton', AvatarButton);
-  Handlebars.registerPartial('AvatarIcon', AvatarIcon);
-  Handlebars.registerPartial('Span', Span);
+    // registerPartial atoms
+    Handlebars.registerPartial('Button', Button);
+    Handlebars.registerPartial('Input', Input);
+    Handlebars.registerPartial('Link', Link);
+    Handlebars.registerPartial('H1', H1);
+    Handlebars.registerPartial('H2', H2);
+    Handlebars.registerPartial('Label', Label);
+    Handlebars.registerPartial('AvatarButton', AvatarButton);
+    Handlebars.registerPartial('AvatarIcon', AvatarIcon);
+    Handlebars.registerPartial('Span', Span);
 
-  // molecules
-  Handlebars.registerPartial('LoginFields', LoginFields);
-  Handlebars.registerPartial('RegFields', RegFields);
-  Handlebars.registerPartial('Navigate', Navigate);
-  Handlebars.registerPartial('UserSettingsRow', UserSettingsRow);
-  Handlebars.registerPartial('UserChangeDataRows', UserChangeDataRows);
-  Handlebars.registerPartial('UserChangePasswordRows', UserChangePasswordRows);
-  Handlebars.registerPartial('Dialog', Dialog);
-  Handlebars.registerPartial('IconButton', IconButton);
-  Handlebars.registerPartial('Message', Message);
+    // molecules
+    Handlebars.registerPartial('LoginFields', LoginFields);
+    Handlebars.registerPartial('RegFields', RegFields);
+    Handlebars.registerPartial('Navigate', Navigate);
+    Handlebars.registerPartial('UserSettingsRow', UserSettingsRow);
+    Handlebars.registerPartial('UserChangeDataRows', UserChangeDataRows);
+    Handlebars.registerPartial('UserChangePasswordRows', UserChangePasswordRows);
+    Handlebars.registerPartial('Dialog', Dialog);
+    Handlebars.registerPartial('IconButton', IconButton);
+    Handlebars.registerPartial('Message', Message);
 
-  // organism
-  Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);
-  Handlebars.registerPartial('RegFromBlock', RegFromBlock);
-  Handlebars.registerPartial('UserSettingsFromBlock', UserSettingsFromBlock);
-  Handlebars.registerPartial('UserChangeDataFromBlock', UserChangeDataFromBlock);
-  Handlebars.registerPartial('UserChangePasswordFromBlock', UserChangePasswordFromBlock);
-  Handlebars.registerPartial('ChatsFromBlock', ChatsFromBlock);
+    // organism
+    Handlebars.registerPartial('LoginFromBlock', LoginFromBlock);
+    Handlebars.registerPartial('RegFromBlock', RegFromBlock);
+    Handlebars.registerPartial('UserSettingsFromBlock', UserSettingsFromBlock);
+    Handlebars.registerPartial('UserChangeDataFromBlock', UserChangeDataFromBlock);
+    Handlebars.registerPartial('UserChangePasswordFromBlock', UserChangePasswordFromBlock);
+    Handlebars.registerPartial('ChatsFromBlock', ChatsFromBlock);
 
-  // registerPartial templates
-  Handlebars.registerPartial('AuthTemplate', AuthTemplate);
-  Handlebars.registerPartial('RegTemplate', RegTemplate);
-  Handlebars.registerPartial('UserSettingsTemplate', UserSettingsTemplate);
-  Handlebars.registerPartial('UserChangeDataTemplate', UserChangeDataTemplate);
-  Handlebars.registerPartial('UserChangePasswordTemplate', UserChangePasswordTemplate);
-  Handlebars.registerPartial('ChatsTemplate', ChatsTemplate);
+    // registerPartial templates
+    Handlebars.registerPartial('AuthTemplate', AuthTemplate);
+    Handlebars.registerPartial('RegTemplate', RegTemplate);
+    Handlebars.registerPartial('UserSettingsTemplate', UserSettingsTemplate);
+    Handlebars.registerPartial('UserChangeDataTemplate', UserChangeDataTemplate);
+    Handlebars.registerPartial('UserChangePasswordTemplate', UserChangePasswordTemplate);
+    Handlebars.registerPartial('ChatsTemplate', ChatsTemplate);
 
-  // registerPartial pages
-  Handlebars.registerPartial('Auth', Auth);
-  Handlebars.registerPartial('Registration', Registration);
-  Handlebars.registerPartial('UserSettings', UserSettings);
-  Handlebars.registerPartial('Chats', Chats);
-  Handlebars.registerPartial('Page404', Page404);
-  Handlebars.registerPartial('Page500', Page500);
-  Handlebars.registerPartial('UserChangeData', UserChangeData);
-  Handlebars.registerPartial('UserChangePassword', UserChangePassword);
+    // registerPartial pages
+    Handlebars.registerPartial('Auth', Auth);
+    Handlebars.registerPartial('Registration', Registration);
+    Handlebars.registerPartial('UserSettings', UserSettings);
+    Handlebars.registerPartial('Chats', Chats);
+    Handlebars.registerPartial('Page404', Page404);
+    Handlebars.registerPartial('Page500', Page500);
+    Handlebars.registerPartial('UserChangeData', UserChangeData);
+    Handlebars.registerPartial('UserChangePassword', UserChangePassword);
 }

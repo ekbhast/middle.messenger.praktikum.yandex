@@ -7,20 +7,20 @@ interface LoginFromBlockProps{
 }
 
 export default class LoginFromBlock extends Block {
-  constructor(props: LoginFromBlockProps) {
-    super({ ...props,
-         H1: new H1({
-            class: 'form-header',
-            label: 'Вход',
-        }),
-        LoginFields: new LoginFields({
-            class: 'form-inputs',
-        })
-     });
-  }
+    constructor(props: LoginFromBlockProps) {
+        super({ ...props,
+            H1: new H1({
+                class: 'form-header',
+                label: 'Вход',
+            }),
+            LoginFields: new LoginFields({
+                class: 'form-inputs',
+            }),
+        });
+    }
 
-  protected render(): string {
-    return `
+    protected render(): string {
+        return `
         <form class="{{class}}">
             {{{ H1 }}}
             {{{LoginFields}}}
@@ -28,5 +28,5 @@ export default class LoginFromBlock extends Block {
             {{Link href='#' class='auth__link' text='Зарегистрироваться'}}
         </form>
         `;
-  }
+    }
 }

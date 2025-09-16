@@ -4,12 +4,12 @@ interface LoginFieldsProps {
     class?: string,
 }
 
-export default class LoginFields extends Block{
-    constructor(props: LoginFieldsProps){
-        super({...props})
+export default class LoginFields extends Block {
+    constructor(props: LoginFieldsProps) {
+        super({ ...props });
     }
 
-    protected render(){
+    protected render() {
         return `
             <div class="{{class}}">
                 <div class="form-inputGroup">
@@ -21,6 +21,6 @@ export default class LoginFields extends Block{
                     {{ Input class='input' placeholder='Пароль' id='login__password' type='password' name='password'}}
                 </div>
             </div>
-        `
+        `;
     }
 }
