@@ -7,15 +7,15 @@ interface AvatarIconProps {
 }
 
 export default class AvatarIcon extends Block {
-  constructor(props: AvatarIconProps) {
-    super(props);
-  }
+    constructor(props: AvatarIconProps) {
+        super(props);
+    }
 
-  protected render(): string {
-    return `
+    protected render(): string {
+        return `
         <div class="{{class}}">
             <img src="{{imgSrc}}" class="avatarIcon__img" />
         </div>
         `;
-  }
+    }
 }

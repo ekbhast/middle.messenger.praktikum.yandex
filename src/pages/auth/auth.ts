@@ -5,18 +5,18 @@ import { AuthProps } from '../../types/types';
 
 
 export default class Auth extends Block {
-  constructor(props: AuthProps) {
-    super({ ...props,
-      AuthTemplate: new AuthTemplate({
-        class: 'auth__template container--shadow',
-      }),
-    });
-  }
-  protected render(): string {
-    return `
+    constructor(props: AuthProps) {
+        super({ ...props,
+            AuthTemplate: new AuthTemplate({
+                class: 'auth__template container--shadow',
+            }),
+        });
+    }
+    protected render(): string {
+        return `
             <main class="{{class}}">
                 {{{AuthTemplate}}}
             </main>
         `;
-  }
+    }
 }

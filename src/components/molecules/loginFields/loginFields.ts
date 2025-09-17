@@ -3,9 +3,9 @@ import Input from '../../atoms/input/input';
 import Label from '../../atoms/label/label';
 import { LoginFieldsProps } from '../../../types/types';
 
-export default class LoginFields extends Block{
-    constructor(props: LoginFieldsProps){
-        super({...props,
+export default class LoginFields extends Block {
+    constructor(props: LoginFieldsProps) {
+        super({ ...props,
             LabelLogin: new Label({
                 class: 'label',
                 for: 'login__login',
@@ -29,11 +29,11 @@ export default class LoginFields extends Block{
                 id: 'login__password',
                 name: 'password',
                 type: 'password',
-            })
-        })
+            }),
+        });
     }
 
-    protected render(){
+    protected render() {
         return `
             <div class="{{class}}">
                 <div class="form-inputGroup">
@@ -45,6 +45,6 @@ export default class LoginFields extends Block{
                     {{{InputPassword}}}
                 </div>
             </div>
-        `
+        `;
     }
 }
