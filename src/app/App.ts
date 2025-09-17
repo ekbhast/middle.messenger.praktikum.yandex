@@ -1,4 +1,5 @@
 import Auth from '../pages/auth/auth';
+import Registration from '../pages/registration/registration';
 
 interface AppState {
   currentPage: string;
@@ -9,7 +10,7 @@ export default class App {
     private appElement: HTMLElement;
 
     constructor() {
-        this.state = { currentPage: 'auth' };
+        this.state = { currentPage: 'registration' };
         const el = document.getElementById('app');
         if (!el) throw new Error('Контейнер #app не найден');
         this.appElement = el;
@@ -17,8 +18,12 @@ export default class App {
 
     render(): void {
         let pageBlock;
-        if (this.state.currentPage === 'auth') {
+        switch (this.state.currentPage) {
+        case 'auth':
             pageBlock = new Auth({ class: 'page page__auth' });
+            break;
+        case 'registration':
+            pageBlock = new Registration({ class: 'page page__reg' });
         }
 
         if (pageBlock) {

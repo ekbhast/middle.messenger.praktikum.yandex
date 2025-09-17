@@ -1,30 +1,26 @@
-type DefaultClass = {
+export type DefaultClassProps = {
     class?: string;
 }
-
-export type LoginFieldsProps = DefaultClass;
-export type AuthProps = DefaultClass;
-export type AuthTemplateProps = DefaultClass;
-export interface LabelProps extends DefaultClass {
+export interface LabelProps extends DefaultClassProps {
     for?: string,
     label?: string,
 }
 
-export interface InputProps extends DefaultClass {
+export interface InputProps extends DefaultClassProps {
     placeholder?: string,
     id?: string,
     type?: string,
     name?: string,
 }
 
-export interface ButtonProps extends DefaultClass{
+export interface ButtonProps extends DefaultClassProps{
     id?: string,
     dataPage?: string,
     label?: string,
     type?: string,
 }
 
-export interface LinkProps extends DefaultClass{
+export interface LinkProps extends DefaultClassProps{
     href: string,
     text: string,
 }

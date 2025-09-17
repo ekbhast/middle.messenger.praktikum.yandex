@@ -1,10 +1,10 @@
 import Block from '../../../framework/Block';
 import Input from '../../atoms/input/input';
 import Label from '../../atoms/label/label';
-import { LoginFieldsProps } from '../../../types/types';
+import { DefaultClassProps } from '../../../types/types';
 
 export default class LoginFields extends Block {
-    constructor(props: LoginFieldsProps) {
+    constructor(props: DefaultClassProps) {
         super({ ...props,
             LabelLogin: new Label({
                 class: 'label',
