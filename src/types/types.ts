@@ -23,6 +23,7 @@ export interface ButtonProps extends DefaultClassProps{
 export interface LinkProps extends DefaultClassProps{
     href: string,
     text: string,
+    id: string,
 }
 
 export interface HeaderProps{

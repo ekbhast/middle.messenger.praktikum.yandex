@@ -4,6 +4,7 @@ import Auth from '../pages/auth/auth';
 import Registration from '../pages/registration/registration';
 import UserChangeData from '../pages/userChangeData/userChangeData';
 import UserChangePassword from '../pages/userChangePassword/userChangePassword';
+import UserSettings from '../pages/userSettings/UserSettings';
 
 interface AppState {
   currentPage: string;
@@ -14,7 +15,7 @@ export default class App {
     private appElement: HTMLElement;
 
     constructor() {
-        this.state = { currentPage: 'UserChangePassword' };
+        this.state = { currentPage: 'UserSettings' };
         const el = document.getElementById('app');
         if (!el) throw new Error('Контейнер #app не найден');
         this.appElement = el;
@@ -39,10 +40,12 @@ export default class App {
             pageBlock = new UserChangeData({ class: 'page page__userChangeData' });
             break;
         case 'UserChangePassword':
-            pageBlock = new UserChangePassword({ class: 'page page__userChangePassword ' });
+            pageBlock = new UserChangePassword({ class: 'page page__userChangePassword' });
+            break;
+        case 'UserSettings':
+            pageBlock = new UserSettings({ class: 'page page__userSettings' });
             break;
         }
-
         if (pageBlock) {
             this.appElement.innerHTML = '';
             console.log(pageBlock);

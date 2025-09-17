@@ -7,7 +7,7 @@ export default class Link extends Block {
     }
     protected render(): string {
         return `
-            <a href="{{href}}" class="{{class}}">{{text}}</a>
+            <a id="{{id}}"href="{{href}}" class="{{class}}">{{text}}</a>
         `;
     }
 }
