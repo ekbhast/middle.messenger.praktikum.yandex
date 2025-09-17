@@ -3,7 +3,6 @@ import AuthTemplate from '../../components/templates/authTemplate/AuthTemplate';
 import { AuthProps } from '../../types/types';
 
 
-
 export default class Auth extends Block {
     constructor(props: AuthProps) {
         super({ ...props,

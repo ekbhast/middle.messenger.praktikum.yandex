@@ -2,11 +2,9 @@ type DefaultClass = {
     class?: string;
 }
 
-export interface LoginFieldsProps extends DefaultClass{}
-export interface AuthProps extends DefaultClass{}
-export interface AuthTemplateProps extends DefaultClass{
-}
-
+export type LoginFieldsProps = DefaultClass;
+export type AuthProps = DefaultClass;
+export type AuthTemplateProps = DefaultClass;
 export interface LabelProps extends DefaultClass {
     for?: string,
     label?: string,
