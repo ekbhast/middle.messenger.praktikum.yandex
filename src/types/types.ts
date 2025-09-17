@@ -24,3 +24,8 @@ export interface LinkProps extends DefaultClassProps{
     href: string,
     text: string,
 }
+
+export interface HeaderProps{
+    class?: string,
+    label?: string
+}
