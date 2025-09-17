@@ -1,11 +1,5 @@
 import Block from '../../../framework/Block';
-
-interface AvatarIconProps {
-  class?: string;
-  imgSrc?: string;
-  attr?: Record<string, string>;
-}
-
+import { AvatarIconProps } from '../../../types/types';
 export default class AvatarIcon extends Block {
     constructor(props: AvatarIconProps) {
         super(props);

@@ -29,3 +29,20 @@ export interface HeaderProps{
     class?: string,
     label?: string
 }
+export interface AvatarIconProps extends DefaultClassProps {
+  imgSrc?: string;
+  classImg?: string;
+}
+
+export interface AvatarButtonProps extends DefaultClassProps {
+  imgSrcAvatar?: string;
+  imgSrcAvatarChange?: string;
+  buttonType?: string;
+  classImgAvatar?: string;
+  classImgAvatarChange?: string;
+  alt: string;
+}
+
+export interface SpanProps extends DefaultClassProps{
+    text: string;
+}
