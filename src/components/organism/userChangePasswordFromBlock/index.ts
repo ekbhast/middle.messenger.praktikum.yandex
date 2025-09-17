@@ -1,1 +1,0 @@
-export { default as UserChangePasswordFromBlock } from './userChangePasswordFromBlock.hbs?raw';

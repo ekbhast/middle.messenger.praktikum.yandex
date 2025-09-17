@@ -3,6 +3,7 @@ import Page404 from '../pages/404/page404';
 import Auth from '../pages/auth/auth';
 import Registration from '../pages/registration/registration';
 import UserChangeData from '../pages/userChangeData/userChangeData';
+import UserChangePassword from '../pages/userChangePassword/userChangePassword';
 
 interface AppState {
   currentPage: string;
@@ -13,7 +14,7 @@ export default class App {
     private appElement: HTMLElement;
 
     constructor() {
-        this.state = { currentPage: 'UserChangeData' };
+        this.state = { currentPage: 'UserChangePassword' };
         const el = document.getElementById('app');
         if (!el) throw new Error('Контейнер #app не найден');
         this.appElement = el;
@@ -36,6 +37,9 @@ export default class App {
             break;
         case 'UserChangeData':
             pageBlock = new UserChangeData({ class: 'page page__userChangeData' });
+            break;
+        case 'UserChangePassword':
+            pageBlock = new UserChangePassword({ class: 'page page__userChangePassword ' });
             break;
         }
 
