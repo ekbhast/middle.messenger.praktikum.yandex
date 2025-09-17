@@ -1,9 +1,8 @@
 import Block from '../../framework/Block';
 import AuthTemplate from '../../components/templates/authTemplate/AuthTemplate';
+import { AuthProps } from '../../types/types';
 
-interface AuthProps{
-    class?: string;
-}
+
 
 export default class Auth extends Block {
   constructor(props: AuthProps) {

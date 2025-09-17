@@ -1,9 +1,8 @@
 import Block from '../../../framework/Block';
 import LoginFromBlock from '../../organism/loginFromBlock/LoginFromBlock';
+import { AuthTemplateProps } from '../../../types/types';
 
-interface AuthTemplateProps {
-    class?: string;
-}
+
 
 export default class AuthTemplate extends Block {
   constructor(props: AuthTemplateProps) {

@@ -1,24 +1,48 @@
 import Block from '../../../framework/Block';
-
-interface LoginFieldsProps {
-    class?: string,
-}
+import Input from '../../atoms/input/input';
+import Label from '../../atoms/label/label';
+import { LoginFieldsProps } from '../../../types/types';
 
 export default class LoginFields extends Block{
     constructor(props: LoginFieldsProps){
-        super({...props})
+        super({...props,
+            LabelLogin: new Label({
+                class: 'label',
+                for: 'login__login',
+                label: 'Логин',
+            }),
+            LabelPassword: new Label({
+                class: 'label',
+                for: 'login__password',
+                label: 'Пароль',
+            }),
+            InputLogin: new Input({
+                class: 'input',
+                placeholder: 'Логин',
+                id: 'login__login',
+                name: 'login',
+                type: 'text',
+            }),
+            InputPassword: new Input({
+                class: 'input',
+                placeholder: 'Пароль',
+                id: 'login__password',
+                name: 'password',
+                type: 'password',
+            })
+        })
     }
 
     protected render(){
         return `
             <div class="{{class}}">
                 <div class="form-inputGroup">
-                    {{ Label class='label' label='Логин' for='login__login'}}
-                    {{ Input class='input' placeholder='Логин' id='login__login'type='text' name='login'}}
+                    {{{LabelLogin}}}
+                    {{{InputLogin}}}
                 </div>
                 <div class="form-inputGroup">
-                    {{ Label class='label' label='Пароль'  for='login__password'}}
-                    {{ Input class='input' placeholder='Пароль' id='login__password' type='password' name='password'}}
+                    {{{LabelPassword}}}
+                    {{{InputPassword}}}
                 </div>
             </div>
         `
