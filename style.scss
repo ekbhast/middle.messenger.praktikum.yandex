@@ -1,4 +1,3 @@
-//atoms
 @use '/src/components/atoms/button/button.scss';
 @use '/src/components/atoms/headers/h1/h1.scss';
 @use '/src/components/atoms/input/input.scss';
@@ -9,7 +8,6 @@
 @use '/src/components/atoms/avatarIcon/avatarIcon.scss';
 @use '/src/components/atoms/span/span.scss';
 
-//molecule
 @use '/src/components/molecules/userSettingsRows/userSettingsRows.scss';
 @use '/src/components/molecules/userChangeDataRows/userChangeDataRows.scss';
 @use '/src/components/molecules/userChangePasswordRows/userChangePasswordRows.scss';
@@ -17,7 +15,6 @@
 @use '/src/components/molecules/iconButton/iconButton.scss';
 @use '/src/components/molecules/message/message.scss';
 
-//organism
 @use '/src/components/organism/navigate/navigate.scss';
 @use '/src/components/organism/loginFromBlock/loginFromBlock.scss';
 @use '/src/components/organism/regFromBlock/regFromBlock.scss';
@@ -26,12 +23,10 @@
 @use '/src/components/organism/userChangePasswordFromBlock/userChangePasswordFromBlock.scss';
 @use '/src/components/organism/ChatsFromBlock/chatsFromBlock.scss';
 
-//template
 @use '/src/components/templates/authTemplate/authTemplate.scss';
 @use '/src/components/templates/regTemplate/regTemplate.scss';
 @use '/src/components/templates/chatsTemplate/chatsTemplate.scss';
 
-//page
 @use '/src/pages/404/page404.scss';
 @use '/src/pages/500/page500.scss';
 @use '/src/pages/auth/auth.scss';
