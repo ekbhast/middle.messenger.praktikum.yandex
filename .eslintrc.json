@@ -25,7 +25,7 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "object-curly-spacing": ["error", "always"],
         "indent": ["error", 4],
-        "max-len": "off",
+        "max-len": "off"
       }
     }
   ]
