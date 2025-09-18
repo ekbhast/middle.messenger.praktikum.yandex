@@ -47,3 +47,17 @@ export interface AvatarButtonProps extends DefaultClassProps {
 export interface SpanProps extends DefaultClassProps{
     text: string;
 }
+
+export interface IconButtonProps extends DefaultClassProps {
+    imgSrc: string,
+    alt?: string,
+    imgClass: string,
+}
+
+export interface MessageProps extends DefaultClassProps{
+    text: string,
+    time: string,
+    classText: string,
+    classTime: string,
+    classMessage: string,
+}

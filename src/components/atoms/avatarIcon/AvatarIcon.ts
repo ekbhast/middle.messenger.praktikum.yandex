@@ -2,7 +2,7 @@ import Block from '../../../framework/Block';
 import { AvatarIconProps } from '../../../types/types';
 export default class AvatarIcon extends Block {
     constructor(props: AvatarIconProps) {
-        super(props);
+        super({ ...props });
     }
 
     protected render(): string {

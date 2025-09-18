@@ -5,6 +5,7 @@ import Registration from '../pages/registration/registration';
 import UserChangeData from '../pages/userChangeData/userChangeData';
 import UserChangePassword from '../pages/userChangePassword/userChangePassword';
 import UserSettings from '../pages/userSettings/UserSettings';
+import Chats from '../pages/chats/chats';
 
 interface AppState {
   currentPage: string;
@@ -15,7 +16,7 @@ export default class App {
     private appElement: HTMLElement;
 
     constructor() {
-        this.state = { currentPage: 'UserSettings' };
+        this.state = { currentPage: 'Chats' };
         const el = document.getElementById('app');
         if (!el) throw new Error('Контейнер #app не найден');
         this.appElement = el;
@@ -44,6 +45,9 @@ export default class App {
             break;
         case 'UserSettings':
             pageBlock = new UserSettings({ class: 'page page__userSettings' });
+            break;
+        case 'Chats':
+            pageBlock = new Chats({ class: 'page page__chats' });
             break;
         }
         if (pageBlock) {
