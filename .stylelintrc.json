@@ -3,6 +3,7 @@
     "stylelint-scss"
   ],
   "rules": {
+    "indentation": 4,
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
     "scss/dollar-variable-pattern": "^foo",
