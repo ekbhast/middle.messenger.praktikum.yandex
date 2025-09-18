@@ -95,11 +95,9 @@ export default class App {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             const formData: Record<string, string> = {};
-            let hasError = false;
             inputs.forEach((input) => {
                 const error = validateField(input.name, input.value);
                 if (error) {
-                    hasError = true;
                     input.classList.add('errorBottom');
                     console.log('неверно!!!');
                 } else {                    
