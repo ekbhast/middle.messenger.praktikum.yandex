@@ -7,6 +7,8 @@ import UserChangePassword from '../pages/userChangePassword/userChangePassword';
 import UserSettings from '../pages/userSettings/UserSettings';
 import Chats from '../pages/chats/chats';
 import Navigate from '../components/organism/navigate/navigate';
+import { validateField, validationRules, FieldName } from '../utils/validation';
+
 
 interface AppState {
   currentPage: string;
@@ -25,7 +27,7 @@ export default class App {
         this.navigate = new Navigate({ class: 'navigate' });
         this.navigate.getContent().addEventListener('click', (event) => {
             const target: HTMLElement = event.target as HTMLElement;
-            const page: string = target.id; // <-- читаем id
+            const page: string = target.id;
             if (page) {
                 this.state = { currentPage: page };
                 this.render();
@@ -63,10 +65,51 @@ export default class App {
         }
         if (pageBlock) {
             this.appElement.innerHTML = '';
-            console.log(pageBlock);
             this.appElement.appendChild(pageBlock.getContent());
             this.appElement.appendChild(this.navigate.getContent());
+            this.validationPage();
         }
     }
-}
+    private validationPage() {
+        if(this.state.currentPage === 'Auth') return;
+        const form: HTMLFormElement | null = this.appElement.querySelector('form');
+        if (!form) return;
 
+        const inputs: NodeListOf<HTMLInputElement> = form.querySelectorAll('input');
+
+        inputs.forEach((input) => {
+            input.addEventListener('blur', () => {
+                if (input.name in validationRules) {
+                    const isError = validateField(input.name as FieldName, input.value);
+                    if (isError) {
+                        input.classList.add('errorBottom');
+                        console.log(`Поле ${input.name} заполнено неверно`);
+                    } else {
+                        console.log(`Поле ${input.name} корректно`);
+                        input.classList.remove('errorBottom');
+                    }
+                }
+            });
+        });
+        // submit с проверкой всех полей
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData: Record<string, string> = {};
+            let hasError = false;
+            inputs.forEach((input) => {
+                const error = validateField(input.name, input.value);
+                if (error) {
+                    hasError = true;
+                    input.classList.add('errorBottom');
+                    console.log('неверно!!!');
+                } else {                    
+                    inputs.forEach((input) => {
+                        formData[input.name] = input.value;
+                    });
+                    console.log(formData);
+                        input.classList.remove('errorBottom');
+                }
+            });
+        });
+    }
+}

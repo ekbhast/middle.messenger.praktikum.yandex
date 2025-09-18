@@ -109,11 +109,11 @@ export default class ChatsFromBlock extends Block {
                         {{{MessageOut}}}
                         {{{SpanDate}}}
                     </div>
-                    <div class="chats__messages--actions">
+                    <form class="chats__messages--actions">
                         {{{IconButtonAttachment}}}
                         {{{MessageInput}}}
                         {{{IconButtonSend}}}
-                    </div>
+                    </form>
                 </div>
             </div>
 

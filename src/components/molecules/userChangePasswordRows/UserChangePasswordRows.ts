@@ -21,7 +21,7 @@ export default class UserChangePasswordRows extends Block {
             InputNewPasswordConfirm: new Input({
                 class: 'userChangeData__input',
                 placeholder: 'Иван',
-                name: 'first_name',
+                name: 'password_confirm',
                 type: 'newPassword-confirm',
             }),
 
