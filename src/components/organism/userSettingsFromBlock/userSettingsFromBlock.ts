@@ -3,6 +3,7 @@ import { DefaultClassProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import H1 from '../../atoms/headers/h1/h1';
 import Link from '../../atoms/link/link';
+import UserSettingsRows from '../../molecules/userSettingsRows/UserSettingsRows';
 
 export default class UserSettingsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
@@ -38,6 +39,9 @@ export default class UserSettingsFromBlock extends Block {
                 href: '#',
                 text: 'Выйти',
             }),
+            UserSettingsRows: new UserSettingsRows({
+                class: 'userSettings__rows',
+            }),
         });
     }
     protected render(): string {
@@ -45,7 +49,7 @@ export default class UserSettingsFromBlock extends Block {
         <div class="{{class}}">
             {{{AvatarButton}}}
             {{{H1}}}
-            {{{UserSettingsRow}}}
+            {{{UserSettingsRows}}}
             <div class="userSettings__actionLinks">
                 <div class="userSettings__actionLinks--bottom">
                     {{{LinkUserData}}}
