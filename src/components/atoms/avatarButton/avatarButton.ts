@@ -2,7 +2,7 @@ import Block from '../../../framework/Block';
 import { AvatarButtonProps } from '../../../types/types';
 export default class AvatarButton extends Block {
     constructor(props: AvatarButtonProps) {
-        super(props);
+        super({ ...props });
     }
 
     protected render(): string {
