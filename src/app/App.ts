@@ -6,6 +6,7 @@ import UserChangeData from '../pages/userChangeData/userChangeData';
 import UserChangePassword from '../pages/userChangePassword/userChangePassword';
 import UserSettings from '../pages/userSettings/UserSettings';
 import Chats from '../pages/chats/chats';
+import Navigate from '../components/organism/navigate/navigate';
 
 interface AppState {
   currentPage: string;
@@ -14,27 +15,37 @@ interface AppState {
 export default class App {
     private state: AppState;
     private appElement: HTMLElement;
+    private navigate: Navigate;
 
     constructor() {
-        this.state = { currentPage: 'Chats' };
+        this.state = { currentPage: 'Auth' };
         const el = document.getElementById('app');
         if (!el) throw new Error('Контейнер #app не найден');
         this.appElement = el;
+        this.navigate = new Navigate({ class: 'navigate' });
+        this.navigate.getContent().addEventListener('click', (event) => {
+            const target: HTMLElement = event.target as HTMLElement;
+            const page: string = target.id; // <-- читаем id
+            if (page) {
+                this.state = { currentPage: page };
+                this.render();
+            }
+        });
     }
 
     render(): void {
         let pageBlock;
         switch (this.state.currentPage) {
-        case 'auth':
+        case 'Auth':
             pageBlock = new Auth({ class: 'page page__auth' });
             break;
-        case 'registration':
+        case 'Registration':
             pageBlock = new Registration({ class: 'page page__reg' });
             break;
-        case 'page500':
+        case 'Page500':
             pageBlock = new Page500({ class: 'page page500' });
             break;
-        case 'page404':
+        case 'Page404':
             pageBlock = new Page404({ class: 'page page404' });
             break;
         case 'UserChangeData':
@@ -54,6 +65,7 @@ export default class App {
             this.appElement.innerHTML = '';
             console.log(pageBlock);
             this.appElement.appendChild(pageBlock.getContent());
+            this.appElement.appendChild(this.navigate.getContent());
         }
     }
 }
