@@ -4,14 +4,17 @@ input{
     height: 30px;
     border: none;
     border-bottom: 2px solid #3369F3;
-    padding: 0 0;
+    padding: 0;
+
     &::placeholder{
-        color: #999999;
+        color: #999;
         font-size: 13px;
         opacity: 1;  
     }
+
     &:focus{
         outline: none;
+
         &::placeholder{
             opacity: 0;
         }
@@ -28,9 +31,10 @@ input{
     border: none;
     background-color: #EFEFEF;
     border-radius: 5px;
+
     &:focus + .chats__search--icon,
     &:focus ~ .chats__search--icon {
-      opacity: 0;  // иконка становится невидимой при фокусе
+      opacity: 0;
     }       
 }
 
@@ -40,6 +44,6 @@ input{
     width: 849px;
     background-color: #EFEFEF;
     border-radius: 30px;
-    padding: 0px 20px 0px 20px;
+    padding: 0 20px;
 }
 

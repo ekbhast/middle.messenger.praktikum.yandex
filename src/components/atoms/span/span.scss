@@ -1,12 +1,13 @@
 .dialog{
     &__lastMessageTime{
         font-size: 9px;
-        color: #999999;
+        color: #999;
         display: block;
     }
+
     &__textMessage{
         font-size: 12px;
-        color: #999999;
+        color: #999;
         line-height: 0.8;
     }
 }

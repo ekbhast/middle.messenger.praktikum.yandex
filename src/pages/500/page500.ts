@@ -8,15 +8,15 @@ export default class Page500 extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
             H1: new H1({
-                class: 'page500_header',
+                class: 'page500__header',
                 label: '500',
             }),
             H2: new H2({
-                class: 'page500_2header',
+                class: 'page500___header2',
                 label: 'Мы уже фиксим',
             }),
             Link: new Link({
-                class: 'page500_link',
+                class: 'page500__link',
                 href: '#',
                 text: 'Назад к чатам',
             }),

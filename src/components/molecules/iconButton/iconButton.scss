@@ -6,8 +6,9 @@
         border: none;
         background-color: #F5F5F5;
         cursor: pointer;
-        padding: 0px;
+        padding: 0;
     }
+
     &--attachmentButton,
     &--sendButton{
         width: 32px;
@@ -15,7 +16,8 @@
         border: none;
         border-radius: 50%;
         cursor: pointer;
-        padding: 0px;
+        padding: 0;
+
         & img{
             height: 100%;
             width: 100%;

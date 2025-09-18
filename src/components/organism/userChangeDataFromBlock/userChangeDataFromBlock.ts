@@ -17,7 +17,7 @@ export default class UerChangeDataFromBlock extends Block {
                 alt: 'User avatar',
             }),
             Button: new Button({
-                class: 'button_primary userChangeData__button',
+                class: 'button__primary userChangeData__button',
                 label: 'Сохранить',
                 type: 'submit',
             }),

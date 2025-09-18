@@ -8,15 +8,15 @@ export default class Page404 extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
             H1: new H1({
-                class: 'page404_header',
+                class: 'page404__header',
                 label: '404',
             }),
             H2: new H2({
-                class: 'page404_2header',
+                class: 'page404___header2',
                 label: 'Не туда попали',
             }),
             Link: new Link({
-                class: 'page404_link',
+                class: 'page404__link',
                 href: '#',
                 text: 'Назад к чатам',
             }),

@@ -13,7 +13,7 @@ export default class RegFromBlock extends Block {
                 label: 'Регистрация',
             }),
             Button: new Button({
-                class: 'button_primary reg__button',
+                class: 'button__primary reg__button',
                 id: 'enter',
                 label: 'Войти',
                 type: 'submit',

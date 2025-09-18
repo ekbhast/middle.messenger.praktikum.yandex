@@ -19,7 +19,7 @@ export default class LoginFromBlock extends Block {
                 class: 'form-inputs',
             }),
             Button: new Button({
-                class: 'button_primary auth__button',
+                class: 'button__primary auth__button',
                 id: 'enter',
                 label: 'Войти',
                 type: 'submit',
