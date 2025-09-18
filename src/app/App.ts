@@ -71,7 +71,7 @@ export default class App {
         }
     }
     private validationPage() {
-        if(this.state.currentPage === 'Auth') return;
+        if (this.state.currentPage === 'Auth') return;
         const form: HTMLFormElement | null = this.appElement.querySelector('form');
         if (!form) return;
 
@@ -100,12 +100,12 @@ export default class App {
                 if (error) {
                     input.classList.add('errorBottom');
                     console.log('неверно!!!');
-                } else {                    
+                } else {
                     inputs.forEach((input) => {
                         formData[input.name] = input.value;
                     });
                     console.log(formData);
-                        input.classList.remove('errorBottom');
+                    input.classList.remove('errorBottom');
                 }
             });
         });

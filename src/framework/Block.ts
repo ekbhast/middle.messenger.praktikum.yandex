@@ -108,7 +108,7 @@ export default class Block<
             if (stub) stub.replaceWith(child.getContent());
         });
 
-        Object.entries(this.lists).forEach(([_, list]) => {
+        Object.entries(this.lists).forEach(([, list]) => {
             const listCont = document.createElement('template');
             list.forEach((item) => {
                 if (item instanceof Block) {
