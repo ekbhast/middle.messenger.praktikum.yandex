@@ -2,6 +2,8 @@ import UserChangePasswordTemplate from '../../components/templates/userChangePas
 import Block from '../../framework/Block';
 
 import { DefaultClassProps } from '../../types/types';
+import createFormEvents from '../../utils/fromEvents';
+
 
 export default class UserChangePassword extends Block {
     constructor(props: DefaultClassProps) {
@@ -9,6 +11,7 @@ export default class UserChangePassword extends Block {
             UserChangePasswordTemplate: new UserChangePasswordTemplate({
                 class: 'userChangePasswordTemplate',
             }),
+            events: createFormEvents(),
         });
     }
 

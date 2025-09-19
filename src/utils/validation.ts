@@ -9,6 +9,7 @@ export const validationRules = {
     newPassword: { regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/ },
     phone: { regex: /^\+?\d{10,15}$/ },
     message: { regex: /.+/ },
+    display_name: { regex: /^[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё-]*$/ },
 } as const;
 
 export type FieldName = keyof typeof validationRules;
