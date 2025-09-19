@@ -47,14 +47,19 @@ export default class UserChangePasswordRows extends Block {
                     <div>{{{SpanOldPassword}}}</div>
                     {{{InputOldPassword}}}  
                 </div>
+                <div class="input-error" data-error-for="oldPassword"></div>
+
                 <div class="userSettings__row userSettings__row--bottom">
                     <div>{{{SpanNewPassword}}}</div>
                     {{{InputNewPassword}}}  
                 </div>
+                <div class="input-error" data-error-for="newPassword"></div>
+
                 <div class="userSettings__row userSettings__row--bottom">
                     <div>{{{SpanNewPasswordConfirm}}}</div>
                     {{{InputNewPasswordConfirm}}}  
                 </div>
+                <div class="input-error" data-error-for="password_confirm"></div>
             </div>
 
         `;

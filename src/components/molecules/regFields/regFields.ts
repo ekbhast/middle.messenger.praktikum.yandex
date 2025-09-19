@@ -100,30 +100,43 @@ export default class RegFields extends Block {
                     {{{LabelMail}}}
                     {{{InputMail}}}
                 </div>
+                <div class="input-error" data-error-for="email"></div>
+
                 <div class="form-inputGroup">
                     {{{LabelLogin}}}
                     {{{InputLogin}}}
                 </div>
+                <div class="input-error" data-error-for="login"></div>
+
                 <div class="form-inputGroup">
                     {{{LabelName}}}
                     {{{InputName}}}
                 </div>
+                <div class="input-error" data-error-for="first_name"></div>
+
                 <div class="form-inputGroup">
                     {{{LabelSecondName}}}
                     {{{InputSecondName}}}
                 </div>
+                <div class="input-error" data-error-for="second_name"></div>
+
                 <div class="form-inputGroup">
                     {{{LabelPhone}}}
                     {{{InputPhone}}}
                 </div>
+                <div class="input-error" data-error-for="phone"></div>
+
                 <div class="form-inputGroup">
                     {{{LabelPassword}}}
                     {{{InputPassword}}}
                 </div>
+                <div class="input-error" data-error-for="password"></div>
+
                 <div class="form-inputGroup">
                     {{{LabelPasswordConfirm}}}
                     {{{InputPasswordConfirm}}}
                 </div>
+                <div class="input-error" data-error-for="password_confirm"></div>
             </div>
         `;
     }

@@ -76,26 +76,37 @@ export default class UserChangeDataRows extends Block {
                     <div>{{{SpanMail}}}</div>
                     {{{InputMail}}}  
                 </div>
+                <div class="input-error" data-error-for="email"></div>
+
                 <div class="userSettings__row userSettings__row--bottom">
                     <div>{{{SpanLogin}}}</div>
                     {{{InputLogin}}}  
                 </div>
+                <div class="input-error" data-error-for="login"></div>
+
                 <div class="userSettings__row userSettings__row--bottom">
                     <div>{{{SpanName}}}</div>
                     {{{InputName}}}  
                 </div>
+                <div class="input-error" data-error-for="first_name"></div>
+
                 <div class="userSettings__row userSettings__row--bottom">
                     <div>{{{SpanSecondName}}}</div>
                     {{{InputSecondName}}}  
                 </div>
+                <div class="input-error" data-error-for="second_name"></div>
+
                 <div class="userSettings__row userSettings__row--bottom">
                     <div>{{{SpanDisplayName}}}</div>
                     {{{InputDisplayName}}}  
                 </div>
+                <div class="input-error" data-error-for="display_name"></div>
+
                 <div class="userSettings__row">
                     <div>{{{SpanPhone}}}</div>
                     {{{InputPhone}}}  
                 </div>
+                <div class="input-error" data-error-for="phone"></div>
             </div>
 
         `;

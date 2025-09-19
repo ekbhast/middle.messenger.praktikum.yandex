@@ -5,11 +5,23 @@ export default function createFormEvents() {
         focusout: (e: Event) => {
             const input = e.target as HTMLInputElement;
             if (input && input.name in validationRules) {
-                const isError = validateField(input.name as FieldName, input.value);
+                const { isError, errorMessage } = validateField(input.name as FieldName, input.value);
+
                 if (isError) {
                     input.classList.add('errorBottom');
                 } else {
                     input.classList.remove('errorBottom');
+                }
+
+                const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement;
+                if (errorElem) {
+                    if (isError) {
+                        errorElem.textContent = errorMessage;
+                        errorElem.style.display = 'block';
+                    } else {
+                        errorElem.textContent = '';
+                        errorElem.style.display = 'none';
+                    }
                 }
             }
         },
@@ -21,12 +33,24 @@ export default function createFormEvents() {
             const formData: Record<string, string> = {};
 
             inputs.forEach((input) => {
-                const isError = validateField(input.name as FieldName, input.value);
+                const { isError, errorMessage } = validateField(input.name as FieldName, input.value);
+
                 if (isError) {
                     input.classList.add('errorBottom');
                 } else {
                     input.classList.remove('errorBottom');
                     formData[input.name] = input.value;
+                }
+
+                const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement;
+                if (errorElem) {
+                    if (isError) {
+                        errorElem.textContent = errorMessage;
+                        errorElem.style.display = 'block';
+                    } else {
+                        errorElem.textContent = '';
+                        errorElem.style.display = 'none';
+                    }
                 }
             });
 
@@ -34,4 +58,3 @@ export default function createFormEvents() {
         },
     };
 }
-

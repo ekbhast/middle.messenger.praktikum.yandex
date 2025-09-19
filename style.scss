@@ -94,3 +94,16 @@ body{
     border-bottom: 2px solid red;
 }
 
+.input-error {
+  display: none;       
+  color: red;
+  font-size: 8px;
+  margin-bottom: 8px;
+  align-items: left;
+  width: 280px;
+  margin-left: auto;
+}
+
+.userChangeData__input.errorBottom {
+  border-color: red;
+}
