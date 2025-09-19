@@ -15,6 +15,12 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": [
+    "vite.config.js",
+    "node_modules/",
+    "dist/",
+    "*.test.js"
+  ],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
