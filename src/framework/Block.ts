@@ -121,6 +121,8 @@ export default class Block<
             if (stub) stub.replaceWith(listCont.content);
         });
 
+        this._removeEvents();
+
         const newElement = fragment.content.firstElementChild as HTMLElement;
         if (this._element && newElement) this._element.replaceWith(newElement);
         this._element = newElement;
@@ -137,6 +139,16 @@ export default class Block<
         const { events = {} } = this.props;
         Object.entries(events).forEach(([eventName, handler]) => {
             if (this._element) this._element.addEventListener(eventName, handler);
+        });
+    }
+    private _removeEvents(): void {
+        const { events = {} as Record<string, EventListenerOrEventListenerObject> } = this.props;
+
+        Object.keys(events).forEach((eventName) => {
+            const handler = events[eventName];
+            if (handler !== undefined) {
+                this._element?.removeEventListener(eventName, handler);
+            }
         });
     }
 
