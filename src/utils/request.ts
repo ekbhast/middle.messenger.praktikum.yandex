@@ -1,50 +1,51 @@
-enum METHODS {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
+export enum METHODS {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE',
 }
 
-type Options = {
-  method?: METHODS;
-  data?: unknown;
-  timeout?: number;
+export type Options = {
+    method?: METHODS;
+    data?: unknown;
+    timeout?: number;
 };
 
-type HTTPMethod = <R = unknown>(url: string, options?: Options) => Promise<R>;
+export type HTTPMethod = <R = unknown>(url: string, options?: Options) => Promise<R>;
 
 function queryStringify(data: Record<string, string | number | boolean>): string {
-    if (!data) return '';
+    if (!data || Object.keys(data).length === 0) return '';
     return (
         '?' +
-    Object.entries(data)
-        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-        .join('&')
+        Object.entries(data)
+            .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+            .join('&')
     );
 }
 
 export class HTTPTransport {
-    get: HTTPMethod = (url, options = {}) =>
-        this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+    get: HTTPMethod = (url, options?: Options) =>
+        this.request(url, { ...(options || {}), method: METHODS.GET }, options?.timeout);
 
-    put: HTTPMethod = (url, options = {}) =>
-        this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+    put: HTTPMethod = (url, options?: Options) =>
+        this.request(url, { ...(options || {}), method: METHODS.PUT }, options?.timeout);
 
-    post: HTTPMethod = (url, options = {}) =>
-        this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+    post: HTTPMethod = (url, options?: Options) =>
+        this.request(url, { ...(options || {}), method: METHODS.POST }, options?.timeout);
 
-    delete: HTTPMethod = (url, options = {}) =>
-        this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+    delete: HTTPMethod = (url, options?: Options) =>
+        this.request(url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
 
+    // Основной метод запроса
     private request<R = unknown>(url: string, options: Options = { method: METHODS.GET }, timeout?: number): Promise<R> {
         const { method = METHODS.GET, data } = options;
 
         return new Promise<R>((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-
             let requestUrl = url;
-            if (method === METHODS.GET && data) {
-                requestUrl += queryStringify(data);
+
+            if (method === METHODS.GET && data && typeof data === 'object') {
+                requestUrl += queryStringify(data as Record<string, string | number | boolean>);
             }
 
             xhr.open(method, requestUrl);

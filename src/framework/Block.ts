@@ -65,12 +65,12 @@ export default class Block<
     private _makePropsProxy<T extends Record<string, unknown>>(props: T): T {
         return new Proxy(props, {
             get: (target, prop: string) => {
-                const value = target[prop];
+                const value = target[prop as keyof T]; // безопасное чтение
                 return typeof value === 'function' ? value.bind(target) : value;
             },
             set: (target, prop: string, value) => {
                 const oldTarget = { ...target };
-                target[prop] = value;
+                (target as Record<string, unknown>)[prop] = value; // каст к индексируемому типу
                 this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
@@ -186,7 +186,7 @@ export default class Block<
 
     // Просто прокидываем пропсы
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    protected componentDidUpdate(oldProps: P, newProps: P): boolean {
+    protected componentDidUpdate(_oldProps: P, _newProps: P): boolean {
         return true;
     }
 

@@ -4,25 +4,20 @@ export default function createFormEvents() {
     return {
         focusout: (e: Event) => {
             const input = e.target as HTMLInputElement;
-            if (input && input.name in validationRules) {
-                const { isError, errorMessage } = validateField(input.name as FieldName, input.value);
+            if (!input || !(input.name in validationRules)) return;
 
-                if (isError) {
-                    input.classList.add('errorBottom');
-                } else {
-                    input.classList.remove('errorBottom');
-                }
+            const { isError, errorMessage } = validateField(input.name as FieldName, input.value);
 
-                const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement;
-                if (errorElem) {
-                    if (isError) {
-                        errorElem.textContent = errorMessage;
-                        errorElem.style.display = 'block';
-                    } else {
-                        errorElem.textContent = '';
-                        errorElem.style.display = 'none';
-                    }
-                }
+            if (isError) {
+                input.classList.add('errorBottom');
+            } else {
+                input.classList.remove('errorBottom');
+            }
+
+            const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement | null;
+            if (errorElem) {
+                errorElem.textContent = isError ? (errorMessage ?? '') : '';
+                errorElem.style.display = isError ? 'block' : 'none';
             }
         },
 
@@ -42,15 +37,10 @@ export default function createFormEvents() {
                     formData[input.name] = input.value;
                 }
 
-                const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement;
+                const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement | null;
                 if (errorElem) {
-                    if (isError) {
-                        errorElem.textContent = errorMessage;
-                        errorElem.style.display = 'block';
-                    } else {
-                        errorElem.textContent = '';
-                        errorElem.style.display = 'none';
-                    }
+                    errorElem.textContent = isError ? (errorMessage ?? '') : '';
+                    errorElem.style.display = isError ? 'block' : 'none';
                 }
             });
 
