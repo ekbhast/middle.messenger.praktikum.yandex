@@ -9,6 +9,10 @@ export interface BlockProps {
 }
 export default class Block<
   P extends BlockProps = BlockProps,
+// Используем {} как дефолтное значение для generic L.
+// eslint ругался на empty object type, но в данном случае это безопасно,
+// потому что мы указываем тип через Record<string, Array<...>>.
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   L extends Record<string, Array<Block | string | number | HTMLElement>> = {}
 > {
     static EVENTS = {
@@ -58,20 +62,19 @@ export default class Block<
         return { props: props as P, children, lists: lists as L };
     }
 
-    private _makePropsProxy<T extends object>(props: T): T {
-        const self = this;
+    private _makePropsProxy<T extends Record<string, unknown>>(props: T): T {
         return new Proxy(props, {
-            get(target, prop: string) {
-                const value = (target as T & Record<string, unknown>)[prop];
+            get: (target, prop: string) => {
+                const value = target[prop];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target, prop: string, value) {
+            set: (target, prop: string, value) => {
                 const oldTarget = { ...target };
-                (target as T & Record<string, unknown>)[prop] = value;
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+                target[prop] = value;
+                this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
-            deleteProperty() {
+            deleteProperty: () => {
                 throw new Error('No access');
             },
         });
@@ -181,6 +184,8 @@ export default class Block<
         if (response) this._render();
     }
 
+    // Просто прокидываем пропсы
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected componentDidUpdate(oldProps: P, newProps: P): boolean {
         return true;
     }

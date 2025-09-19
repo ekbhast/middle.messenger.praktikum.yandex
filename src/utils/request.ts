@@ -7,13 +7,13 @@ enum METHODS {
 
 type Options = {
   method?: METHODS;
-  data?: any;
+  data?: unknown;
   timeout?: number;
 };
 
 type HTTPMethod = <R = unknown>(url: string, options?: Options) => Promise<R>;
 
-function queryStringify(data: Record<string, any>): string {
+function queryStringify(data: Record<string, string | number | boolean>): string {
     if (!data) return '';
     return (
         '?' +
