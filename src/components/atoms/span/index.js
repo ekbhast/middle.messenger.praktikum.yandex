@@ -1,1 +1,0 @@
-export { default as Span } from './span.hbs?raw';

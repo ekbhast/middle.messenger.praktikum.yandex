@@ -1,1 +1,0 @@
-export { default as UserChangeData } from './userChangeData.hbs?raw';

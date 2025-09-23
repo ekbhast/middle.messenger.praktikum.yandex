@@ -1,1 +1,0 @@
-export { default as RegFields } from './regFields.hbs?raw';

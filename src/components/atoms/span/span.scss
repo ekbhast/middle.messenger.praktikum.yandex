@@ -1,0 +1,23 @@
+.dialog{
+    &__lastMessageTime{
+        font-size: 9px;
+        color: #999;
+        display: block;
+    }
+
+    &__textMessage{
+        font-size: 12px;
+        color: #999;
+        line-height: 0.8;
+    }
+}
+
+.chats__messages--userName{
+    margin-left: 10px;
+    font-size: 13px;
+    color: #1E1E1E;
+}
+
+
+
+
