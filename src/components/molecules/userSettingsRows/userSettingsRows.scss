@@ -5,16 +5,19 @@
         margin-top: 60px;
         margin-bottom: 60px;
     }
+
      &__row{
     display: flex;
     justify-content: space-between;
+
         &--bottom{
             border-bottom: 1px solid #EAEAEA;
         }
     }
+
      &__data{
         font-size: 13px;
         font-weight: 500;
-        color: #999999;
+        color: #999;
     } 
 }

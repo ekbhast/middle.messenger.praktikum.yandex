@@ -1,1 +1,0 @@
-export { default as UserSettingsTemplate} from './userSettingsTemplate.hbs?raw';

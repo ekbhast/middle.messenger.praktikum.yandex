@@ -1,0 +1,25 @@
+.avatarIcon{
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__img{
+        height: 100%;
+        object-fit: cover;
+        width: auto;
+    }
+}
+
+.chats__messages--avatarIcon{
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

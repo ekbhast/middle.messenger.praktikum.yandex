@@ -1,1 +1,0 @@
-export { default as RegTemplate } from './regTemplate.hbs?raw';
