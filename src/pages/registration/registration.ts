@@ -15,7 +15,7 @@ export default class Registration extends Block {
     }
     protected render(): string {
         return `
-            <main class="{{class}}">
+            <main class="page page__reg">
                 {{{RegTemplate}}}
             </main>
         `;

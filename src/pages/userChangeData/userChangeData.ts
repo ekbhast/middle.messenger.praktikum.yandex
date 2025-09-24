@@ -15,7 +15,7 @@ export default class UserChangeData extends Block {
 
     protected render(): string {
         return `
-            <main class="{{class}}">
+            <main class="page page__userChangeData">
                 {{{UserChangeDataTemplate}}}
             </main>
         `;

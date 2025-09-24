@@ -17,7 +17,7 @@ export default class UserChangePassword extends Block {
 
     protected render(): string {
         return `
-        <main class="{{class}}">
+        <main class="page page__userChangePassword">
             {{{UserChangePasswordTemplate}}}
         </main>
 
