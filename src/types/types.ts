@@ -1,3 +1,5 @@
+import Block from '../framework/Block';
+
 export type DefaultClassProps = {
     class?: string;
 }
@@ -61,3 +63,6 @@ export interface MessageProps extends DefaultClassProps{
     classTime: string,
     classMessage: string,
 }
+
+export type BlockConstructor = new (props: { rootQuery: HTMLElement; class: string }) => Block;
+

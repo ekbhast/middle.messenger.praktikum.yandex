@@ -6,7 +6,7 @@ import UserChangeData from '../pages/userChangeData/userChangeData';
 import UserChangePassword from '../pages/userChangePassword/userChangePassword';
 import UserSettings from '../pages/userSettings/UserSettings';
 import Chats from '../pages/chats/chats';
-import Router from '../framework/router';
+import Router from '../framework/Router';
 
 
 export default class App {

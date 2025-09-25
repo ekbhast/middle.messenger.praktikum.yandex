@@ -1,33 +1,31 @@
 import { Route } from './Route';
+import { BlockConstructor } from '../types/types';
 
 export default class Router {
     private static __instance: Router;
-    private routes: Route[];
-    private history: History;
-    private _currentRoute: Route | null;
-    private _rootQuery: HTMLElement;
+    private routes: Route[] = [];
+    private history: History = window.history;
+    private _currentRoute: Route | null = null;
+    private _rootQuery!: HTMLElement;
 
     constructor(rootQuery: HTMLElement) {
         if (Router.__instance) return Router.__instance;
 
-        this.routes = [];
-        this.history = window.history;
-        this._currentRoute = null;
-        this._rootQuery = rootQuery; // контейнер для рендеринга
+        if (!rootQuery) throw new Error('Контейнер rootQuery не найден');
+        this._rootQuery = rootQuery;
 
         Router.__instance = this;
     }
 
-    use(pathname: string, block: any) {
-        const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+    use(pathname: string, block: BlockConstructor, className?: string) {
+        const route = new Route(pathname, block, { rootQuery: this._rootQuery, class: className || '' });
         this.routes.push(route);
         return this;
     }
 
     start() {
-        window.onpopstate = (event) => {
-            const path = event.currentTarget?.location.pathname;
-            if (path) this._onRoute(path);
+        window.onpopstate = () => {
+            this._onRoute(window.location.pathname);
         };
 
         this._onRoute(window.location.pathname);
@@ -42,7 +40,7 @@ export default class Router {
         }
 
         this._currentRoute = route;
-        route.render(); // Route использует переданный rootQuery
+        this._currentRoute.render();
     }
 
     go(pathname: string) {
@@ -58,7 +56,7 @@ export default class Router {
         this.history.forward();
     }
 
-    getRoute(pathname: string) {
+    getRoute(pathname: string): Route | null {
         return this.routes.find((route) => route.match(pathname)) || null;
     }
 }
