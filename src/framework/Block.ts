@@ -58,7 +58,6 @@ export default class Block<
                 (props as Partial<P>)[key as keyof P] = value;
             }
         });
-
         return { props: props as P, children, lists: lists as L };
     }
 
@@ -184,7 +183,6 @@ export default class Block<
         if (response) this._render();
     }
 
-    // Просто прокидываем пропсы
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected componentDidUpdate(_oldProps: P, _newProps: P): boolean {
         return true;

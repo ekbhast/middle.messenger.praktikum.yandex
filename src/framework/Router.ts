@@ -60,3 +60,5 @@ export default class Router {
         return this.routes.find((route) => route.match(pathname)) || null;
     }
 }
+export const router = new Router(document.getElementById('app')!);
+

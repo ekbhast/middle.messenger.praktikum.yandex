@@ -6,14 +6,11 @@ import UserChangeData from '../pages/userChangeData/userChangeData';
 import UserChangePassword from '../pages/userChangePassword/userChangePassword';
 import UserSettings from '../pages/userSettings/UserSettings';
 import Chats from '../pages/chats/chats';
-import Router from '../framework/Router';
+import { router } from '../framework/Router';
 
 
 export default class App {
     constructor() {
-        const appElement = document.getElementById('app');
-        if (!appElement) throw new Error('Контейнер #app не найден');
-        const router = new Router(appElement);
         router
             .use('/', Auth)
             .use('/chats', Chats)

@@ -24,19 +24,19 @@ export default class UserSettingsFromBlock extends Block {
             LinkUserData: new Link({
                 id: 'change_userData',
                 class: 'userSettings__link',
-                href: '#',
+                href: 'user-change-date',
                 text: 'Изменить данные',
             }),
             LinkUserPassword: new Link({
                 id: 'change_userPassword',
                 class: 'userSettings__link',
-                href: '#',
+                href: 'user-change-password',
                 text: 'Изменить пароль',
             }),
             LinkUserActionLinks: new Link({
                 id: 'quit',
                 class: 'userSettings__link--red',
-                href: '#',
+                href: '/',
                 text: 'Выйти',
             }),
             UserSettingsRows: new UserSettingsRows({

@@ -20,12 +20,18 @@ export interface ButtonProps extends DefaultClassProps{
     dataPage?: string,
     label?: string,
     type?: string,
+    events?: {
+        [key: string]: () => void;
+    };
 }
 
 export interface LinkProps extends DefaultClassProps{
     href: string,
     text: string,
     id?: string,
+    events?: {
+        [key: string]: () => void;
+    };
 }
 
 export interface HeaderProps{

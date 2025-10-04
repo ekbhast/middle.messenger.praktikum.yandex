@@ -12,7 +12,7 @@ export default class ChatsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
             Link: new Link({
-                href: '#',
+                href: 'user-settings',
                 class: 'chats__profileLink',
                 text: 'Профиль',
             }),
