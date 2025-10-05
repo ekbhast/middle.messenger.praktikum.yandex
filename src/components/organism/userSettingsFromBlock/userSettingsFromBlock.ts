@@ -4,6 +4,8 @@ import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import H1 from '../../atoms/headers/h1/h1';
 import Link from '../../atoms/link/link';
 import UserSettingsRows from '../../molecules/userSettingsRows/UserSettingsRows';
+import { LogoutAPI } from '../../../utils/API/logout-api';
+import { router } from '../../../framework/Router';
 
 export default class UserSettingsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
@@ -38,6 +40,19 @@ export default class UserSettingsFromBlock extends Block {
                 class: 'userSettings__link--red',
                 href: '/',
                 text: 'Выйти',
+                events: {
+                    click: async (e: Event)=>{
+                        e.preventDefault();
+                        const logoutApi = new LogoutAPI;
+                        try {
+                            await logoutApi.logout();
+                            console.log('вышел');
+                            router.go('/');
+                        } catch {
+                            console.log('вы не авторизованны');
+                        }
+                    },
+                },
             }),
             UserSettingsRows: new UserSettingsRows({
                 class: 'userSettings__rows',

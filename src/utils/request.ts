@@ -24,17 +24,24 @@ function queryStringify(data: Record<string, string | number | boolean>): string
 }
 
 export class HTTPTransport {
-    get: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.GET }, options?.timeout);
+    private baseUrl: string;
 
-    put: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.PUT }, options?.timeout);
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
 
-    post: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.POST }, options?.timeout);
+    // Методы для запросов
+    get: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.GET }, options?.timeout);
 
-    delete: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
+    post: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.POST }, options?.timeout);
+
+    put: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.PUT }, options?.timeout);
+
+    delete: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
 
     // Основной метод запроса
     private request<R = unknown>(url: string, options: Options = { method: METHODS.GET }, timeout?: number): Promise<R> {
@@ -44,17 +51,30 @@ export class HTTPTransport {
             const xhr = new XMLHttpRequest();
             let requestUrl = url;
 
+            // Для GET добавляем query string
             if (method === METHODS.GET && data && typeof data === 'object') {
                 requestUrl += queryStringify(data as Record<string, string | number | boolean>);
             }
 
             xhr.open(method, requestUrl);
+            xhr.withCredentials = true; // для сессий и cookie
 
             xhr.onload = () => {
+                let response: any = xhr.response;
+
                 try {
-                    resolve(JSON.parse(xhr.response) as R);
+                    response = xhr.response ? JSON.parse(xhr.response) : null;
                 } catch {
-                    resolve(xhr.response as unknown as R);
+                    // оставляем response как строку, если это не JSON
+                }
+
+                if (xhr.status === 200) {
+                    resolve(response as R); // успех
+                } else {
+                    const error = new Error(`HTTP error: ${xhr.status}`) as any;
+                    error.status = xhr.status;
+                    error.response = response;
+                    reject(error); // отказ
                 }
             };
             xhr.onabort = reject;

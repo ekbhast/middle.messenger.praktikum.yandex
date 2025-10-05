@@ -13,6 +13,7 @@ export interface InputProps extends DefaultClassProps {
     id?: string,
     type?: string,
     name?: string,
+    suggested?: string,
 }
 
 export interface ButtonProps extends DefaultClassProps{
@@ -21,7 +22,7 @@ export interface ButtonProps extends DefaultClassProps{
     label?: string,
     type?: string,
     events?: {
-        [key: string]: () => void;
+        [key: string]: (e: Event) => void;
     };
 }
 
@@ -30,7 +31,7 @@ export interface LinkProps extends DefaultClassProps{
     text: string,
     id?: string,
     events?: {
-        [key: string]: () => void;
+        [key: string]: (e: Event) => void;
     };
 }
 
