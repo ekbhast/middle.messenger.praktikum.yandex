@@ -5,15 +5,24 @@ export function validateForm(e: Event) {
     const form = e.target as HTMLFormElement;
     const inputs = form.querySelectorAll<HTMLInputElement>('input');
     const formData: Record<string, string> = {};
+    let error: boolean = false;
 
     inputs.forEach((input) => {
         const { isError, errorMessage } = validateField(input.name as FieldName, input.value);
 
         if (isError) {
             input.classList.add('errorBottom');
+            if (!error) {
+                error = true;
+            }
         } else {
             input.classList.remove('errorBottom');
-            formData[input.name] = input.value;
+            if (input.name !== 'password_confirm') {
+                formData[input.name] = input.value;
+            }
+            if (error) {
+                error = false;
+            }
         }
 
         const errorElem = document.querySelector(`.input-error[data-error-for="${input.name}"]`) as HTMLElement | null;
@@ -22,4 +31,5 @@ export function validateForm(e: Event) {
             errorElem.style.display = isError ? 'block' : 'none';
         }
     });
+    return ({ error, formData });
 }
