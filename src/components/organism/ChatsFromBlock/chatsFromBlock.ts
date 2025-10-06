@@ -1,4 +1,5 @@
 import Block from '../../../framework/Block';
+import { router } from '../../../framework/Router';
 import { DefaultClassProps } from '../../../types/types';
 import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
 import Input from '../../atoms/input/input';
@@ -12,9 +13,15 @@ export default class ChatsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
             Link: new Link({
-                href: 'user-settings',
+                href: '/user-settings',
                 class: 'chats__profileLink',
                 text: 'Профиль',
+                events: {
+                    click: (e:Event) => {
+                        e.preventDefault();
+                        router.go('/user-settings');
+                    },
+                },
             }),
             SearchInput: new Input({
                 class: 'chats__searchInput',

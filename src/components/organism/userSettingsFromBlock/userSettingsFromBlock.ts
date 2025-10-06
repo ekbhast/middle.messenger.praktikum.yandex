@@ -3,10 +3,8 @@ import { DefaultClassProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import H1 from '../../atoms/headers/h1/h1';
 import Link from '../../atoms/link/link';
-import UserSettingsRows from '../../molecules/userSettingsRows/UserSettingsRows';
-import { LogoutAPI } from '../../../utils/API/logout-api';
-import { router } from '../../../framework/Router';
-
+import { ConnectedUserSettingsRows } from '../../molecules/userSettingsRows/UserSettingsRows';
+import { authController } from '../../../controllers/AuthController';
 export default class UserSettingsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
@@ -41,20 +39,17 @@ export default class UserSettingsFromBlock extends Block {
                 href: '/',
                 text: 'Выйти',
                 events: {
-                    click: async (e: Event)=>{
+                    click: async (e:Event)=> {
                         e.preventDefault();
-                        const logoutApi = new LogoutAPI;
                         try {
-                            await logoutApi.logout();
-                            console.log('вышел');
-                            router.go('/');
+                            await authController.logout();
                         } catch {
-                            console.log('вы не авторизованны');
+                            console.log('не вышло');
                         }
                     },
                 },
             }),
-            UserSettingsRows: new UserSettingsRows({
+            UserSettingsRows: new ConnectedUserSettingsRows({
                 class: 'userSettings__rows',
             }),
         });

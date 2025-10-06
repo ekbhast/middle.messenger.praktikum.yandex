@@ -73,3 +73,6 @@ export interface MessageProps extends DefaultClassProps{
 
 export type BlockConstructor = new (props: { rootQuery: HTMLElement; class: string }) => Block;
 
+export type Indexed<T = any> = {
+  [key in string]: T;
+};

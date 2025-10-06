@@ -1,6 +1,8 @@
 import UserChangeDataTemplate from '../../components/templates/UserChangeDataTemplate/userChangeDataTemplate';
 import Block from '../../framework/Block';
 import { DefaultClassProps } from '../../types/types';
+import { validateInput } from '../../utils/fromEvents';
+import { validateForm } from '../../utils/validateForm';
 
 export default class UserChangeData extends Block {
     constructor(props: DefaultClassProps) {
@@ -8,6 +10,13 @@ export default class UserChangeData extends Block {
             UserChangeDataTemplate: new UserChangeDataTemplate({
                 class: 'userChangeData__template',
             }),
+            events: {
+                focusout: (e:Event) => validateInput(e),
+                submit: async (e:Event) => {
+                    const prev = () => validateForm(e);
+                    console.log(prev().formData);
+                },
+            },
         });
     }
 

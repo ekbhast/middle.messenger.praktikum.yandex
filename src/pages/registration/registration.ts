@@ -3,8 +3,7 @@ import Block from '../../framework/Block';
 import { DefaultClassProps } from '../../types/types';
 import { validateForm } from '../../utils/validateForm';
 import { validateInput } from '../../utils/fromEvents';
-import { RegAPI } from '../../utils/api/reg-api';
-
+import { authController } from '../../controllers/AuthController';
 export default class Registration extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
@@ -14,15 +13,14 @@ export default class Registration extends Block {
             events: {
                 focusout: (e:Event) => validateInput(e),
                 submit: async (e:Event) => {
-                    const prev = ()=>validateForm(e);
-                    if (!prev().error) {
-                        console.log(prev().formData);
-                        const regApi = new RegAPI();
+                    e.preventDefault();
+                    const validationResult = ()=>validateForm(e);
+                    if (!validationResult().error) {
+                        const formData = validationResult().formData;
                         try {
-                            const user = await regApi.registration(prev().formData);
-                            console.log('зарегистрирован', user);
-                        } catch (err: string | unknown) {
-                            console.log('ошибка', err);
+                            await authController.signup(formData);
+                        } catch (err: unknown) {
+                            console.log(err);
                         }
                     }
                 },

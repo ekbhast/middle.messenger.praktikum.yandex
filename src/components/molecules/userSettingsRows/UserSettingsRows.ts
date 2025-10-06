@@ -1,60 +1,20 @@
 import Block from '../../../framework/Block';
 import { DefaultClassProps } from '../../../types/types';
 import Span from '../../atoms/span/spat';
+import { connect } from '../../../utils/connect';
+import { Indexed } from '../../../types/types';
 
-export default class UserSettingsRows extends Block {
-    constructor(props: DefaultClassProps) {
-        super({ ...props,
-            // labels
-            SpanLabelMail: new Span({
-                class: 'userSettings__label',
-                text: 'Почта',
-            }),
-            SpanLabelLogin: new Span({
-                class: 'userSettings__label',
-                text: 'Логин',
-            }),
-            SpanLabelName: new Span({
-                class: 'userSettings__label',
-                text: 'Имя',
-            }),
-            SpanLabelSecondName: new Span({
-                class: 'userSettings__label',
-                text: 'Фамилия',
-            }),
-            SpanLabelDisplayName: new Span({
-                class: 'userSettings__label',
-                text: 'Имя в чате',
-            }),
-            SpanLabelPhone: new Span({
-                class: 'userSettings__label',
-                text: 'Телефон',
-            }),
-            // data
-            SpanDataMail: new Span({
-                class: 'userSettings__data',
-                text: 'pochta@yandex.ru',
-            }),
-            SpanDataLogin: new Span({
-                class: 'userSettings__data',
-                text: 'ivanivanov',
-            }),
-            SpanDataName: new Span({
-                class: 'userSettings__data',
-                text: 'Иван',
-            }),
-            SpanDataSecondName: new Span({
-                class: 'userSettings__data',
-                text: 'Иванов',
-            }),
-            SpanDataDisplayName: new Span({
-                class: 'userSettings__data',
-                text: 'Иван',
-            }),
-            SpanDataPhone: new Span({
-                class: 'userSettings__data',
-                text: '+7 (909) 967 30 30',
-            }),
+class UserSettingsRows extends Block {
+    constructor(props?: DefaultClassProps) {
+        super({
+            ...props,
+            // labels (статичные)
+            SpanLabelMail: new Span({ class: 'userSettings__label', text: 'Почта' }),
+            SpanLabelLogin: new Span({ class: 'userSettings__label', text: 'Логин' }),
+            SpanLabelName: new Span({ class: 'userSettings__label', text: 'Имя' }),
+            SpanLabelSecondName: new Span({ class: 'userSettings__label', text: 'Фамилия' }),
+            SpanLabelDisplayName: new Span({ class: 'userSettings__label', text: 'Имя в чате' }),
+            SpanLabelPhone: new Span({ class: 'userSettings__label', text: 'Телефон' }),
         });
     }
 
@@ -89,3 +49,20 @@ export default class UserSettingsRows extends Block {
         `;
     }
 }
+
+// Функция для получения данных пользователя из стора
+function mapUserToProps(state: Indexed) {
+    const user = state.user || {};
+    console.log(state.user);
+    return {
+        SpanDataMail: new Span({ class: 'userSettings__data', text: user.email || '' }),
+        SpanDataLogin: new Span({ class: 'userSettings__data', text: user.login || '' }),
+        SpanDataName: new Span({ class: 'userSettings__data', text: user.first_name || '' }),
+        SpanDataSecondName: new Span({ class: 'userSettings__data', text: user.second_name || '' }),
+        SpanDataDisplayName: new Span({ class: 'userSettings__data', text: user.display_name || '' }),
+        SpanDataPhone: new Span({ class: 'userSettings__data', text: user.phone || '' }),
+    };
+}
+
+// Подключаем компонент к стору через HOC
+export const ConnectedUserSettingsRows = connect(UserSettingsRows, mapUserToProps);
