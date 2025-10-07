@@ -37,6 +37,8 @@ export default class Router {
 
         if (this._currentRoute && this._currentRoute !== route) {
             this._currentRoute.leave();
+            // полностью очищаем контейнер перед рендером нового компонента
+            this._rootQuery.innerHTML = '';
         }
 
         this._currentRoute = route;
