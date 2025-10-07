@@ -1,5 +1,5 @@
 import Block from '../../../framework/Block';
-import UserChangeDataRows from '../../molecules/userChangeDataRows/userChangeDataRows';
+import { ConnectedUserChangeDataRows } from '../../molecules/userChangeDataRows/userChangeDataRows';
 import { DefaultClassProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import Button from '../../atoms/button/button';
@@ -21,7 +21,7 @@ export default class UerChangeDataFromBlock extends Block {
                 label: 'Сохранить',
                 type: 'submit',
             }),
-            UserChangeDataRows: new UserChangeDataRows({
+            UserChangeDataRows: new ConnectedUserChangeDataRows({
                 class: 'userChangeData__rows',
             }),
         });

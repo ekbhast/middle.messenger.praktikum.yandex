@@ -8,7 +8,7 @@ export default class Input extends Block {
 
     protected render(): string {
         return `
-            <input class="{{class}}"placeholder="{{placeholder}} " id="{{id}}" type="{{type}}" name="{{name}}" autocomplete="{{suggested}}" >
+            <input class="{{class}}"placeholder="{{placeholder}} " id="{{id}}" type="{{type}}" name="{{name}}" autocomplete="{{suggested}}" value={{value}} >
         `;
     }
 }

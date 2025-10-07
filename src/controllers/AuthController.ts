@@ -9,8 +9,6 @@ class AuthController {
         try {
             const user = await authApi.getUser();
             console.log('Авторизован', user);
-            store.set('user', user);
-            console.log('📦 Store после getUser:', store.getState());
             return user;
         } catch (err) {
             console.error('Не авторизован', err);

@@ -14,6 +14,7 @@ export interface InputProps extends DefaultClassProps {
     type?: string,
     name?: string,
     suggested?: string,
+    value?: string,
 }
 
 export interface ButtonProps extends DefaultClassProps{

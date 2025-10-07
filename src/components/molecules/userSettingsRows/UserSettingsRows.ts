@@ -8,7 +8,6 @@ class UserSettingsRows extends Block {
     constructor(props?: DefaultClassProps) {
         super({
             ...props,
-            // labels (статичные)
             SpanLabelMail: new Span({ class: 'userSettings__label', text: 'Почта' }),
             SpanLabelLogin: new Span({ class: 'userSettings__label', text: 'Логин' }),
             SpanLabelName: new Span({ class: 'userSettings__label', text: 'Имя' }),
