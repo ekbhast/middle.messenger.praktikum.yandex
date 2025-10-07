@@ -9,7 +9,6 @@ export function connect(Component: typeof Block, mapStateToProps: (state: Indexe
         constructor(props) {
             super({ ...props, ...mapStateToProps(store.getState()) });
 
-            // подписываемся на событие
             store.on(StoreEvents.Updated, () => {
                 const newProps = mapStateToProps(store.getState());
                 Object.keys(newProps).forEach((key) => {
