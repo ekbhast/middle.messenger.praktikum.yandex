@@ -1,11 +1,11 @@
 import Block from '../../../framework/Block';
 import { DefaultClassProps } from '../../../types/types';
-import UserSettingsFromBlock from '../../organism/userSettingsFromBlock/userSettingsFromBlock';
+import { ConnectedUserSettingsFromBlock } from '../../organism/userSettingsFromBlock/userSettingsFromBlock';
 
 export default class UserSettingsTemplate extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
-            UserSettingsFromBlock: new UserSettingsFromBlock({
+            UserSettingsFromBlock: new ConnectedUserSettingsFromBlock({
                 class: 'userSettings__fromBlock',
             }),
         });
