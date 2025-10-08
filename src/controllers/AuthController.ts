@@ -19,7 +19,7 @@ class AuthController {
         try {
             await authApi.signin(data);
             const user = await this.getUser();
-            console.log('Авторизован', user);
+            store.set('user', user);
             router.go('/chats');
             return user;
         } catch (err) {
@@ -40,8 +40,10 @@ class AuthController {
     }
     public async signup(data: Record<string, string>) {
         try {
-            const user = await authApi.signup(data);
-            console.log('Зарегистрирован', user);
+            const userId = await authApi.signup(data);
+            const user = await this.getUser();
+            store.set('user', user);
+            console.log('Зарегистрирован', userId);
             router.go('/chats');
             return user;
         } catch (err) {

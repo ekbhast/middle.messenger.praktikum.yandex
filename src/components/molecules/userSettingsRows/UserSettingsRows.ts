@@ -52,7 +52,6 @@ class UserSettingsRows extends Block {
 // Функция для получения данных пользователя из стора
 function mapUserToProps(state: Indexed) {
     const user = state.user || {};
-    console.log(state.user);
     return {
         SpanDataMail: new Span({ class: 'userSettings__data', text: user.email || '' }),
         SpanDataLogin: new Span({ class: 'userSettings__data', text: user.login || '' }),

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (window.location.pathname ==='/') {
             router.go('/chats');
         }
-        console.log('Авторизован', user);
+        console.log('Авторизован', store);
     } catch (err) {
         console.log('Не авторизован', err);
         router.go('/');

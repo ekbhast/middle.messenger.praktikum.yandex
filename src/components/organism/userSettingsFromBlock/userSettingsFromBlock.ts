@@ -7,6 +7,7 @@ import { ConnectedUserSettingsRows } from '../../molecules/userSettingsRows/User
 import { authController } from '../../../controllers/AuthController';
 import { Indexed } from '../../../types/types';
 import { connect } from '../../../utils/connect';
+import { router } from '../../../framework/Router';
 
 export default class UserSettingsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
@@ -25,6 +26,12 @@ export default class UserSettingsFromBlock extends Block {
                 class: 'userSettings__link',
                 href: 'user-change-date',
                 text: 'Изменить данные',
+                events: {
+                    click: (e:Event)=>{
+                        e.preventDefault();
+                        router.go('/user-change-date');
+                    },
+                },
             }),
             LinkUserPassword: new Link({
                 id: 'change_userPassword',
@@ -78,7 +85,6 @@ export default class UserSettingsFromBlock extends Block {
 
 function mapUserToProps(state: Indexed) {
     const user = state.user || {};
-    console.log(state.user);
     return {
         H1: new H1({
             class: 'userSettings__header',

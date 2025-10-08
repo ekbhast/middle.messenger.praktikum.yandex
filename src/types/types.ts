@@ -52,6 +52,9 @@ export interface AvatarButtonProps extends DefaultClassProps {
   classImgAvatar?: string;
   classImgAvatarChange?: string;
   alt: string;
+  events?: {
+        [key: string]: (e: Event) => void;
+    };
 }
 
 export interface SpanProps extends DefaultClassProps{

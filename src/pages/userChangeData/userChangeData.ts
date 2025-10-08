@@ -3,7 +3,7 @@ import Block from '../../framework/Block';
 import { DefaultClassProps } from '../../types/types';
 import { validateInput } from '../../utils/fromEvents';
 import { validateForm } from '../../utils/validateForm';
-
+import { userController } from '../../controllers/UserController';
 export default class UserChangeData extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
@@ -13,8 +13,16 @@ export default class UserChangeData extends Block {
             events: {
                 focusout: (e:Event) => validateInput(e),
                 submit: async (e:Event) => {
-                    const prev = () => validateForm(e);
-                    console.log(prev().formData);
+                    e.preventDefault();
+                    const validationResult = ()=>validateForm(e);
+                    if (!validationResult().error) {
+                        const formData = validationResult().formData;
+                        try {
+                            await userController.profile(formData);
+                        } catch (err: unknown) {
+                            console.log(err);
+                        }
+                    }
                 },
             },
         });

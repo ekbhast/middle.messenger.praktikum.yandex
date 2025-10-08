@@ -3,6 +3,7 @@ import { ConnectedUserChangeDataRows } from '../../molecules/userChangeDataRows/
 import { DefaultClassProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import Button from '../../atoms/button/button';
+import { userController } from '../../../controllers/UserController';
 
 export default class UerChangeDataFromBlock extends Block {
     constructor(props: DefaultClassProps) {
@@ -15,6 +16,8 @@ export default class UerChangeDataFromBlock extends Block {
                 classImgAvatar: 'avatarButton__img',
                 classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
                 alt: 'User avatar',
+                events: {
+                },
             }),
             Button: new Button({
                 class: 'button__primary userChangeData__button',

@@ -82,7 +82,6 @@ export default class UserChangeDataRows extends Block {
 
 function mapUserToProps(state: Indexed) {
     const user = state.user || {};
-    console.log(state.user);
     return {
         InputMail: new Input({
             class: 'userChangeData__input',

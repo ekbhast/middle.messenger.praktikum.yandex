@@ -12,16 +12,12 @@ export function validateForm(e: Event) {
 
         if (isError) {
             input.classList.add('errorBottom');
-            if (!error) {
-                error = true;
-            }
+            error = isError;
+            return ({ error, formData });
         } else {
             input.classList.remove('errorBottom');
             if (input.name !== 'password_confirm') {
                 formData[input.name] = input.value;
-            }
-            if (error) {
-                error = false;
             }
         }
 
@@ -31,5 +27,8 @@ export function validateForm(e: Event) {
             errorElem.style.display = isError ? 'block' : 'none';
         }
     });
+    if (error) {
+        console.log('ошибка валидации формы');
+    }
     return ({ error, formData });
 }

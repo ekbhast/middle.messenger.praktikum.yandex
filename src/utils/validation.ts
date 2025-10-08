@@ -21,11 +21,11 @@ export const validationRules = {
     },
     password_confirm: {
         regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/,
-        errorMessage: 'Подтверждение пароля должно соответствовать паролю',
+        errorMessage: 'От 8 до 40 символов, заглавная буква и цифра',
     },
     oldPassword: {
         regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/,
-        errorMessage: 'Старый пароль указан неверно',
+        errorMessage: 'От 8 до 40 символов, заглавная буква и цифра',
     },
     newPassword: {
         regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/,
