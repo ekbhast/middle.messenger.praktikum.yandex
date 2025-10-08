@@ -34,6 +34,10 @@ export class Route {
     }
 
     render() {
-        this._block = render(this._block, this._blockClass, this._props);
+        if (this._block) {
+            this._block.getContent().remove();
+        }
+        this._block = new this._blockClass(this._props);
+        this._props.rootQuery.appendChild(this._block.getContent());
     }
 }
