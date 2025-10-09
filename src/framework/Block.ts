@@ -79,6 +79,15 @@ export default class Block<
         });
     }
 
+    public setProps(nextProps: Partial<Record<string, unknown>>) {
+        console.log('сработал сет пропс');
+        if (!nextProps) return;
+
+        Object.keys(nextProps).forEach((key) => {
+            this.props[key] = nextProps[key];
+        });
+    }
+
     private _registerEvents(eventBus: EventBus): void {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this) as EventCallback);
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this) as EventCallback);

@@ -1,6 +1,7 @@
 import Block from '../framework/Block';
 import store, { StoreEvents } from '../framework/Store';
 import { Indexed } from '../types/types';
+import isEqual from './isEqual';
 
 
 export function connect<P extends Indexed = Indexed>(
@@ -10,21 +11,17 @@ export function connect<P extends Indexed = Indexed>(
     return class extends Component {
         constructor(props?: P) {
             super({ ...props, ...mapStateToProps(store.getState()) });
-
+            let state = mapStateToProps(store.getState());
             store.on(StoreEvents.Updated, () => {
-                const newProps = mapStateToProps(store.getState());
-                Object.keys(newProps).forEach((key) => {
-                    this.props[key] = newProps[key];
-                });
+                // при обновлении получаем новое состояние
+                const newState = mapStateToProps(store.getState());
+                if (!isEqual(state, newState)) {
+                    this.setProps({ ...newState });
+                }
+
+                // не забываем сохранить новое состояние
+                state = newState;
             });
         }
-    };
-}
-
-export function mapUserToProps(state) {
-    const user = state.user || {};
-    return {
-        name: user.name,
-        avatar: user.avatar,
     };
 }

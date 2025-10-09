@@ -1,8 +1,8 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
+import { SearchFormProps } from '../../../types/types';
 import Input from '../../atoms/input/input';
 export default class SearchFrom extends Block {
-    constructor(props: DefaultClassProps) {
+    constructor(props: SearchFormProps) {
         super({ ...props,
             SearchInput: new Input({
                 class: 'chats__searchInput',

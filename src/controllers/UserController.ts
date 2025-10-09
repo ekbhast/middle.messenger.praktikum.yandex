@@ -1,6 +1,7 @@
 import { UserAPI } from '../api/user-api';
+
 // import { router } from '../framework/Router';
-// import store from '../framework/Store';
+import store from '../framework/Store';
 
 const userApi = new UserAPI();
 
@@ -42,10 +43,23 @@ class UserController {
     public async searchUserByLogin(login: string) {
         try {
             const response = await userApi.searchUser(login);
-            console.log('Пользователь найден:', response);
+            store.set('searchUser', response);
+            console.log(store);
             return response;
         } catch (err) {
             console.error('Ошибка поиска пользователя', err);
+            throw err;
+        }
+    }
+    public async getUserById(id: number) {
+        try {
+            const user = await userApi.getUserById(id);
+            console.log('Пользователь найден по ID:', user);
+            store.set('searchUser', user);
+            console.log(store);
+            return user;
+        } catch (err) {
+            console.error('Ошибка при получении пользователя по ID:', err);
             throw err;
         }
     }

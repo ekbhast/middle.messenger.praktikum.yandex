@@ -9,6 +9,10 @@ import Dialog from '../../molecules/dialog/dialog';
 import IconButton from '../../molecules/iconButton/iconButton';
 import Message from '../../molecules/message/message';
 import SearchFrom from '../../molecules/searchForm/searchForm';
+import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
+import { userController } from '../../../controllers/UserController';
+import store, { StoreEvents } from '../../../framework/Store';
+
 
 export default class ChatsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
@@ -24,9 +28,27 @@ export default class ChatsFromBlock extends Block {
                     },
                 },
             }),
-            SearchForm: new SearchFrom(
-                { class: 'chats__search' },
-            ),
+            SearchForm: new SearchFrom({
+                class: 'chats__search',
+                events: {
+                    submit: async (e: Event) => {
+                        e.preventDefault();
+
+                        const inputEl = document.getElementById('search-input') as HTMLInputElement;
+                        const login = inputEl?.value.trim();
+
+                        if (!login) return;
+
+                        try {
+                            const user = await userController.getUserById(Number(login));
+                            console.log('Пользователь найден:', user);
+                            // Здесь можешь обновить Dialog, чтобы показать найденного пользователя
+                        } catch (err) {
+                            console.error('Ошибка поиска пользователя', err);
+                        }
+                    },
+                },
+            }),
             MessageInput: new Input({
                 class: 'chats__message--inputMessage',
                 placeholder: 'Сообщение',
@@ -34,6 +56,9 @@ export default class ChatsFromBlock extends Block {
                 name: 'message',
             }),
             Dialog: new Dialog({
+                class: 'dialog',
+            }),
+            SearchDilog: new ConnectedSearchDialog({
                 class: 'dialog',
             }),
             AvatarIcon: new AvatarIcon({
@@ -93,6 +118,7 @@ export default class ChatsFromBlock extends Block {
                     {{{SearchForm}}}
                     <div class="chats__dilogs">
                         {{{Dialog}}}
+                        {{{SearchDilog}}}
                     </div>
                 </div>
                 <div class="chats__messages">

@@ -44,6 +44,11 @@ export interface AvatarIconProps extends DefaultClassProps {
   imgSrc?: string;
   classImg?: string;
 }
+export interface SearchFormProps extends DefaultClassProps{
+    events?: {
+    [key: string]: (e: Event) => void;
+    };
+}
 
 export interface AvatarButtonProps extends DefaultClassProps {
   imgSrcAvatar?: string;

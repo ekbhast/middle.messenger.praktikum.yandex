@@ -16,7 +16,12 @@ export class UserAPI {
     }
 
     searchUser(login: string) {
-        return userAPIInstance.post('/user/search', { login });
+        return userAPIInstance.post('/user/search', {
+            data: { login },
+        });
+    }
+    getUserById(id: number) {
+        return userAPIInstance.get(`/user/${id}`);
     }
 }
 
