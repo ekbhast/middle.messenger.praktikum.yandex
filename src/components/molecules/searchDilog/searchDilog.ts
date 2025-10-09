@@ -9,17 +9,17 @@ import store from '../../../framework/Store';
 
 
 export default class SearchDialog extends Block {
-    constructor(props: DefaultClassProps, userSearchName: string) {
+    constructor(props: DefaultClassProps) {
         super({ ...props,
             AvatarIcon: new AvatarIcon({
                 class: 'avatarIcon',
                 imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
                 classImg: 'avatarIcon__img',
             }),
-            // H2: new H2({
-            //     class: 'dialog__dialogName',
-            //     label: userSearchName,
-            // }),
+            H2: new H2({
+                class: 'dialog__dialogName',
+                label: 'Валентин',
+            }),
         });
     }
     protected render(): string {
@@ -42,13 +42,10 @@ export default class SearchDialog extends Block {
 
 
 function mapUserToProps(state: Indexed) {
-    const displayName = state.searchUser?.display_name || '';
+    const displayName = store.getState().searchUser?.display_name;
+    console.log(displayName);
 
     return {
-        H2: new H2({
-            class: 'dialog__dialogName',
-            label: displayName,
-        }),
         userSearchName: state.searchUser?.display_name,
         avatar: `${baseUrlResourse+state.searchUser?.avatar}`,
     };

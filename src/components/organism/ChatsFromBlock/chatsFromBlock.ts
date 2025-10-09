@@ -117,7 +117,6 @@ export default class ChatsFromBlock extends Block {
                     </div>
                     {{{SearchForm}}}
                     <div class="chats__dilogs">
-                        {{{Dialog}}}
                         {{{SearchDilog}}}
                     </div>
                 </div>
