@@ -1,31 +1,42 @@
-.avatarButton {
-  border: none;
-  padding: 0;
-  background: none;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
+.avatar-wrapper {
+  position: relative;
   width: 130px;
   height: 130px;
   margin: auto;
-  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
 
-  &__img {
-    display: block;
-    width: 130px;
-    height: 130px;
-    object-fit: cover;
-
-    &--change {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: none;
-      opacity: 0.9;
-    }
+  .avatar-input {
+    display: none;
   }
 
-  &:hover .avatarButton__img--change {
+  .avatar-img {
+    width: 100%;       // подгоняем под контейнер
+    height: 100%;      // подгоняем под контейнер
+    object-fit: cover; // обрезает и масштабирует по контейнеру
+    display: block;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  /* слой смены аватара */
+  .avatar-img--change {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    line-height: 130px; // можно заменить на flex для центровки
+    font-size: 14px;
+  }
+
+  &:hover .avatar-img--change {
     display: block;
   }
 }

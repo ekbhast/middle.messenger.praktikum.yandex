@@ -8,6 +8,7 @@ import Span from '../../atoms/span/spat';
 import Dialog from '../../molecules/dialog/dialog';
 import IconButton from '../../molecules/iconButton/iconButton';
 import Message from '../../molecules/message/message';
+import SearchFrom from '../../molecules/searchForm/searchForm';
 
 export default class ChatsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
@@ -23,13 +24,9 @@ export default class ChatsFromBlock extends Block {
                     },
                 },
             }),
-            SearchInput: new Input({
-                class: 'chats__searchInput',
-                placeholder: 'Поиск',
-                id: 'search-input',
-                type: 'text',
-                name: 'search-input',
-            }),
+            SearchForm: new SearchFrom(
+                { class: 'chats__search' },
+            ),
             MessageInput: new Input({
                 class: 'chats__message--inputMessage',
                 placeholder: 'Сообщение',
@@ -93,10 +90,7 @@ export default class ChatsFromBlock extends Block {
                     <div class="chats__profile">
                     {{{Link}}}
                     </div>
-                    <div class="chats__search">
-                        <img src="/src/assets/search_icon.svg" alt="icon" class="chats__search--icon" />
-                        {{{SearchInput}}}
-                    </div>
+                    {{{SearchForm}}}
                     <div class="chats__dilogs">
                         {{{Dialog}}}
                     </div>

@@ -17,11 +17,16 @@ export default class UserChangeData extends Block {
                     const validationResult = ()=>validateForm(e);
                     if (!validationResult().error) {
                         const formData = validationResult().formData;
+                        console.log(formData);
                         try {
                             await userController.profile(formData);
                         } catch (err: unknown) {
                             console.log(err);
                         }
+                        const avatarInput = document.getElementById('avatarInput') as HTMLInputElement;
+                        const avatarFile = avatarInput.files?.[0] ?? null;
+                        console.log('аватарочка', avatarFile);
+                        if (avatarFile) await userController.changeAvatar(avatarFile);
                     }
                 },
             },

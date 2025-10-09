@@ -3,16 +3,18 @@ import store, { StoreEvents } from '../framework/Store';
 import { Indexed } from '../types/types';
 
 
-export function connect(Component: typeof Block, mapStateToProps: (state: Indexed) => Indexed) {
-    // используем class expression
+export function connect<P extends Indexed = Indexed>(
+    Component: typeof Block,
+    mapStateToProps: (state: Indexed) => P,
+) {
     return class extends Component {
-        constructor(props) {
+        constructor(props?: P) {
             super({ ...props, ...mapStateToProps(store.getState()) });
 
             store.on(StoreEvents.Updated, () => {
                 const newProps = mapStateToProps(store.getState());
                 Object.keys(newProps).forEach((key) => {
-                    this.props[key] = newProps[key]; // Proxy обработает обновление
+                    this.props[key] = newProps[key];
                 });
             });
         }

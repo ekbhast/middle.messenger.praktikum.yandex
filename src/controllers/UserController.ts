@@ -25,13 +25,27 @@ class UserController {
             throw err;
         }
     }
-    public async changeAvatar(data: FormData) {
+    public async changeAvatar(file: File) {
+        const formData = new FormData();
+        formData.append('avatar', file);
+        console.log(formData); // обязательно имя 'avatar'
+
         try {
-            const avatar = await userApi.changeAvatar(data);
+            const avatar = await userApi.changeAvatar(formData);
             console.log('Аватар успешно обновлён', avatar);
             return avatar;
         } catch (err) {
             console.error('Ошибка при обновлении аватара', err);
+            throw err;
+        }
+    }
+    public async searchUserByLogin(login: string) {
+        try {
+            const response = await userApi.searchUser(login);
+            console.log('Пользователь найден:', response);
+            return response;
+        } catch (err) {
+            console.error('Ошибка поиска пользователя', err);
             throw err;
         }
     }

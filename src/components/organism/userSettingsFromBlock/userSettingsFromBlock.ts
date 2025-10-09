@@ -8,19 +8,11 @@ import { authController } from '../../../controllers/AuthController';
 import { Indexed } from '../../../types/types';
 import { connect } from '../../../utils/connect';
 import { router } from '../../../framework/Router';
+import { baseUrlResourse } from '../../../api/baseUrls';
 
 export default class UserSettingsFromBlock extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
-            AvatarButton: new AvatarButton({
-                class: 'avatarButton',
-                imgSrcAvatarChange: '/src/assets/change_avatar.jpg',
-                imgSrcAvatar: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
-                buttonType: 'file',
-                classImgAvatar: 'avatarButton__img',
-                classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
-                alt: 'User avatar',
-            }),
             LinkUserData: new Link({
                 id: 'change_userData',
                 class: 'userSettings__link',
@@ -89,6 +81,15 @@ function mapUserToProps(state: Indexed) {
         H1: new H1({
             class: 'userSettings__header',
             label: user.first_name || '',
+        }),
+        AvatarButton: new AvatarButton({
+            class: 'avatarButton',
+            imgSrcAvatarChange: '/src/assets/change_avatar.jpg',
+            imgSrcAvatar: `${baseUrlResourse + user.avatar}`,
+            buttonType: 'file',
+            classImgAvatar: 'avatar-img',
+            classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
+            alt: 'User avatar',
         }),
     };
 }

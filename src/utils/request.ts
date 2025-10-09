@@ -30,7 +30,6 @@ export class HTTPTransport {
         this.baseUrl = baseUrl;
     }
 
-    // Методы для запросов
     get: HTTPMethod = (url, options) =>
         this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.GET }, options?.timeout);
 
@@ -43,7 +42,6 @@ export class HTTPTransport {
     delete: HTTPMethod = (url, options) =>
         this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
 
-    // Основной метод запроса
     private request<R = unknown>(url: string, options: Options = { method: METHODS.GET }, timeout?: number): Promise<R> {
         const { method = METHODS.GET, data } = options;
 
@@ -51,43 +49,42 @@ export class HTTPTransport {
             const xhr = new XMLHttpRequest();
             let requestUrl = url;
 
-            // Для GET добавляем query string
             if (method === METHODS.GET && data && typeof data === 'object') {
                 requestUrl += queryStringify(data as Record<string, string | number | boolean>);
             }
 
             xhr.open(method, requestUrl);
-            xhr.withCredentials = true; // для сессий и cookie
+            xhr.withCredentials = true;
 
             xhr.onload = () => {
                 let response: any = xhr.response;
-
                 try {
                     response = xhr.response ? JSON.parse(xhr.response) : null;
-                } catch {
-                    // оставляем response как строку, если это не JSON
-                }
-
+                } catch {}
                 if (xhr.status === 200) {
-                    resolve(response as R); // успех
+                    resolve(response as R);
                 } else {
                     const error = new Error(`HTTP error: ${xhr.status}`) as any;
                     error.status = xhr.status;
                     error.response = response;
-                    reject(error); // отказ
+                    reject(error);
                 }
             };
+
             xhr.onabort = reject;
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            if (timeout) {
-                xhr.timeout = timeout;
-            }
+            if (timeout) xhr.timeout = timeout;
 
             if (method !== METHODS.GET && data) {
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify(data));
+                // ✅ проверяем на FormData
+                if (data instanceof FormData) {
+                    xhr.send(data);
+                } else {
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify(data));
+                }
             } else {
                 xhr.send();
             }

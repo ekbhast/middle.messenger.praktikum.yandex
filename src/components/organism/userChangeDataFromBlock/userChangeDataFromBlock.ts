@@ -3,22 +3,12 @@ import { ConnectedUserChangeDataRows } from '../../molecules/userChangeDataRows/
 import { DefaultClassProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import Button from '../../atoms/button/button';
-import { userController } from '../../../controllers/UserController';
-
-export default class UerChangeDataFromBlock extends Block {
-    constructor(props: DefaultClassProps) {
+import { connect } from '../../../utils/connect';
+import { Indexed } from '../../../types/types';
+import { baseUrlResourse } from '../../../api/baseUrls';
+export default class UserChangeDataFromBlock extends Block {
+    constructor(props?: DefaultClassProps) {
         super({ ...props,
-            AvatarButton: new AvatarButton({
-                class: 'avatarButton',
-                imgSrcAvatarChange: '/src/assets/change_avatar.jpg',
-                imgSrcAvatar: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
-                buttonType: 'file',
-                classImgAvatar: 'avatarButton__img',
-                classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
-                alt: 'User avatar',
-                events: {
-                },
-            }),
             Button: new Button({
                 class: 'button__primary userChangeData__button',
                 label: 'Сохранить',
@@ -41,3 +31,42 @@ export default class UerChangeDataFromBlock extends Block {
         `;
     }
 }
+
+function mapUserToProps(state: Indexed) {
+    const avatar = state.user.avatar;
+    return {
+        AvatarButton: new AvatarButton({
+            class: 'avatarButton',
+            imgSrcAvatarChange: '/src/assets/change_avatar.jpg',
+            imgSrcAvatar: `${baseUrlResourse + avatar}`,
+            buttonType: 'file',
+            classImgAvatar: 'avatar-img',
+            classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
+            alt: 'User avatar',
+            events: {
+                click: (e:Event)=>{
+                    console.log('click');
+                    const target = e.target as HTMLElement;
+                    if (target.id === 'avatarPreview') {
+                        const input = document.querySelector('#avatarInput') as HTMLInputElement;
+                        input?.click();
+                    }
+                },
+                change: (event: Event) => {
+                    const input = event.target as HTMLInputElement;
+                    const file = input.files?.[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            const img = document.querySelector('#avatarPreview') as HTMLImageElement;
+                            img.src = reader.result as string;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                },
+            },
+        }),
+    };
+}
+
+export const ConnectedUserChangeDataFromBlock = connect(UserChangeDataFromBlock, mapUserToProps);

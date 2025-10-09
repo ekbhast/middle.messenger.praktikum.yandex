@@ -7,10 +7,28 @@ export default class AvatarButton extends Block {
 
     protected render(): string {
         return `
-        <button class="{{class}}" type="{{buttonType}}">
-            <img src="{{imgSrcAvatarChange}}" alt="{{alt}}" class="{{classImgAvatarChange}}"/>
-            <img src="{{imgSrcAvatar}}" alt="{{alt}}" class="{{classImgAvatar}}"/>
-        </button>
+        <div class="avatar-wrapper">
+            <input 
+                class="avatar-input" 
+                type="file" 
+                id="avatarInput" 
+                name="avatar" 
+                accept="image/*"
+                style="display: none;"
+            >
+
+            <img 
+                src="{{imgSrcAvatar}}" 
+                alt="{{alt}}" 
+                class="{{classImgAvatar}}" 
+                id="avatarPreview"
+            >
+        </div>
         `;
     }
 }
+
+// <button class="{{class}}" type="{{buttonType}}">
+//             <img src="{{imgSrcAvatarChange}}" alt="{{alt}}" class="{{classImgAvatarChange}}"/>
+//             <img src="{{imgSrcAvatar}}" alt="{{alt}}" class="{{classImgAvatar}}"/>
+//         </button>
