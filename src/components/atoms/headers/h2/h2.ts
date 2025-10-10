@@ -14,9 +14,11 @@ export default class H2 extends Block {
     }
 }
 
-function mapSearchUserToProps(state: Indexed) {
+function mapSearchUserToProps(state: unknown) {
+    const s = state as Indexed;
+
     return {
-        label: state.searchUser?.display_name || 'Неизвестный пользователь',
+        label: s.searchUser?.display_name || 'Неизвестный пользователь',
         class: 'dialog__dialogName',
     };
 }

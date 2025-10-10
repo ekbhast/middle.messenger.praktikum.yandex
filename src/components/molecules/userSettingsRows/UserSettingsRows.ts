@@ -51,8 +51,10 @@ class UserSettingsRows extends Block {
 }
 
 // Функция для получения данных пользователя из стора
-function mapUserToProps(state: Indexed) {
-    const user = state.user || {};
+function mapUserToProps(state: unknown) {
+    const s = state as Indexed;
+    const user = s.user || {};
+
     return {
         class: 'userSettings__rows',
         SpanDataMail: new Span({ class: 'userSettings__data', text: user.email || '' }),
@@ -63,6 +65,7 @@ function mapUserToProps(state: Indexed) {
         SpanDataPhone: new Span({ class: 'userSettings__data', text: user.phone || '' }),
     };
 }
+
 
 // Подключаем компонент к стору через HOC
 export const ConnectedUserSettingsRows = connect(UserSettingsRows, mapUserToProps);

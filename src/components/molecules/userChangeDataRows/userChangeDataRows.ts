@@ -80,8 +80,10 @@ export default class UserChangeDataRows extends Block {
     }
 }
 
-function mapUserToProps(state: Indexed) {
-    const user = state.user || {};
+function mapUserToProps(state: unknown) {
+    const s = state as Indexed;
+    const user = s.user || {};
+
     return {
         class: 'userChangeData__rows',
         InputMail: new Input({
@@ -128,6 +130,7 @@ function mapUserToProps(state: Indexed) {
         }),
     };
 }
+
 
 // Подключаем компонент к стору через HOC
 export const ConnectedUserChangeDataRows = connect(UserChangeDataRows, mapUserToProps);

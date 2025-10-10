@@ -74,8 +74,10 @@ export default class UserSettingsFromBlock extends Block {
     }
 }
 
-function mapUserToProps(state: Indexed) {
-    const user = state.user || {};
+function mapUserToProps(state: unknown) {
+    const s = state as Indexed;
+    const user = s.user || {};
+
     return {
         class: 'userSettings__fromBlock',
         H1: new H1({
@@ -85,7 +87,7 @@ function mapUserToProps(state: Indexed) {
         AvatarButton: new AvatarButton({
             class: 'avatarButton',
             imgSrcAvatarChange: '/src/assets/change_avatar.jpg',
-            imgSrcAvatar: `${baseUrlResourse + user.avatar}`,
+            imgSrcAvatar: `${baseUrlResourse + (user.avatar || '')}`,
             buttonType: 'file',
             classImgAvatar: 'avatar-img',
             classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
@@ -93,6 +95,7 @@ function mapUserToProps(state: Indexed) {
         }),
     };
 }
+
 
 // Подключаем компонент к стору через HOC
 export const ConnectedUserSettingsFromBlock = connect(UserSettingsFromBlock, mapUserToProps);

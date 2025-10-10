@@ -19,9 +19,15 @@ export default class AvatarIcon extends Block<AvatarIconProps> {
     }
 }
 
-function mapSearchUserToPropsAvatar(state: Indexed) {
+function mapSearchUserToPropsAvatar(state: unknown): {
+    imgSrc: string;
+    class: string;
+    classImg: string;
+} {
+    const s = state as Indexed;
+
     return {
-        imgSrc: baseUrlResourse + state.searchUser?.avatar,
+        imgSrc: baseUrlResourse + s.searchUser?.avatar, // ✅ используем s
         class: 'avatarIcon',
         classImg: 'avatarIcon__img',
     };

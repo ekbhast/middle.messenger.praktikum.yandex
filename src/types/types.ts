@@ -87,7 +87,8 @@ export interface MessageProps extends DefaultClassProps{
 }
 
 export type BlockConstructor = new (props: { rootQuery: HTMLElement; class: string }) => Block;
-
+// как сделать по другому я не понял
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Indexed<T = any> = {
   [key in string]: T;
 };

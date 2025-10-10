@@ -42,7 +42,11 @@ export class HTTPTransport {
     delete: HTTPMethod = (url, options) =>
         this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
 
-    private request<R = unknown>(url: string, options: Options = { method: METHODS.GET }, timeout?: number): Promise<R> {
+    private request<R = unknown>(
+        url: string,
+        options: Options = { method: METHODS.GET },
+        timeout?: number,
+    ): Promise<R> {
         const { method = METHODS.GET, data } = options;
 
         return new Promise<R>((resolve, reject) => {
@@ -57,14 +61,21 @@ export class HTTPTransport {
             xhr.withCredentials = true;
 
             xhr.onload = () => {
-                let response: any = xhr.response;
+                let response: unknown = xhr.response;
+
                 try {
                     response = xhr.response ? JSON.parse(xhr.response) : null;
-                } catch {}
+                } catch {
+                    throw new Error('Response is not valid JSON');
+                }
+
                 if (xhr.status === 200) {
                     resolve(response as R);
                 } else {
-                    const error = new Error(`HTTP error: ${xhr.status}`) as any;
+                    const error = new Error(`HTTP error: ${xhr.status}`) as Error & {
+                        status: number;
+                        response: unknown;
+                    };
                     error.status = xhr.status;
                     error.response = response;
                     reject(error);
@@ -78,7 +89,6 @@ export class HTTPTransport {
             if (timeout) xhr.timeout = timeout;
 
             if (method !== METHODS.GET && data) {
-                // ✅ проверяем на FormData
                 if (data instanceof FormData) {
                     xhr.send(data);
                 } else {

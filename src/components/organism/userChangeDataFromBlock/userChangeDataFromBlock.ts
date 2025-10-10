@@ -31,8 +31,10 @@ export default class UserChangeDataFromBlock extends Block {
     }
 }
 
-function mapUserToProps(state: Indexed) {
-    const avatar = state.user.avatar;
+function mapUserToProps(state: unknown) {
+    const s = state as Indexed;
+    const avatar = s.user?.avatar || '';
+
     return {
         class: 'userChangeDataFromBlock',
         AvatarButton: new AvatarButton({
@@ -44,7 +46,7 @@ function mapUserToProps(state: Indexed) {
             classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
             alt: 'User avatar',
             events: {
-                click: (e:Event)=>{
+                click: (e: Event) => {
                     console.log('click');
                     const target = e.target as HTMLElement;
                     if (target.id === 'avatarPreview') {
@@ -68,5 +70,6 @@ function mapUserToProps(state: Indexed) {
         }),
     };
 }
+
 
 export const ConnectedUserChangeDataFromBlock = connect(UserChangeDataFromBlock, mapUserToProps);
