@@ -1,11 +1,12 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
+import { DefaultClassProps, BlockProps } from '../../../types/types';
 import Span from '../../atoms/span/spat';
 import { connect } from '../../../utils/connect';
 import { Indexed } from '../../../types/types';
+type UserSettingsRows2Props = DefaultClassProps & BlockProps;
 
 class UserSettingsRows extends Block {
-    constructor(props?: DefaultClassProps) {
+    constructor(props?: UserSettingsRows2Props) {
         super({
             ...props,
             SpanLabelMail: new Span({ class: 'userSettings__label', text: 'Почта' }),
@@ -53,6 +54,7 @@ class UserSettingsRows extends Block {
 function mapUserToProps(state: Indexed) {
     const user = state.user || {};
     return {
+        class: 'userSettings__rows',
         SpanDataMail: new Span({ class: 'userSettings__data', text: user.email || '' }),
         SpanDataLogin: new Span({ class: 'userSettings__data', text: user.login || '' }),
         SpanDataName: new Span({ class: 'userSettings__data', text: user.first_name || '' }),

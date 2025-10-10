@@ -4,9 +4,7 @@ import { ConnectedUserChangeDataFromBlock } from '../../organism/userChangeDataF
 export default class UserChangeDataTemplate extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
-            UserChangeDataFromBlock: new ConnectedUserChangeDataFromBlock({
-                class: 'userChangeDataFromBlock',
-            }),
+            UserChangeDataFromBlock: new ConnectedUserChangeDataFromBlock(),
         });
     }
 

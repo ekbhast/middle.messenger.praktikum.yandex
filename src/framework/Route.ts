@@ -1,4 +1,3 @@
-import { render } from '../utils/render';
 import Block from './Block';
 import { BlockConstructor } from '../types/types';
 

@@ -1,12 +1,9 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
+import { BlockProps } from '../types/types';
 
-export interface BlockProps {
-  events?: Record<string, (event: Event) => void>;
-  attr?: Record<string, string>;
-  [key: string]: unknown;
-}
+
 export default class Block<
   P extends BlockProps = BlockProps,
 // Используем {} как дефолтное значение для generic L.
@@ -80,11 +77,10 @@ export default class Block<
     }
 
     public setProps(nextProps: Partial<Record<string, unknown>>) {
-        console.log('сработал сет пропс');
         if (!nextProps) return;
 
         Object.keys(nextProps).forEach((key) => {
-            this.props[key] = nextProps[key];
+            (this.props as Record<string, unknown>)[key] = nextProps[key];
         });
     }
 

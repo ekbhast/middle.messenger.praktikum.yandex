@@ -1,33 +1,25 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
-import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
-import H2 from '../../atoms/headers/h2/h2';
-import { Indexed } from '../../../types/types';
+import { DefaultClassProps, BlockProps } from '../../../types/types';
+import { ConnecteSearchUserH2 } from '../../atoms/headers/h2/h2';
+import { ConnecteSearchUserAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
 import { connect } from '../../../utils/connect';
-import { baseUrlResourse } from '../../../api/baseUrls';
-import store from '../../../framework/Store';
 
+type SearchDialog2Props = DefaultClassProps & BlockProps;
 
 export default class SearchDialog extends Block {
-    constructor(props: DefaultClassProps) {
+    constructor(props?: SearchDialog2Props) {
         super({ ...props,
-            AvatarIcon: new AvatarIcon({
-                class: 'avatarIcon',
-                imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
-                classImg: 'avatarIcon__img',
-            }),
-            H2: new H2({
-                class: 'dialog__dialogName',
-                label: 'Валентин',
-            }),
+            AvatarIcon: new ConnecteSearchUserAvatarIcon(),
+            H2: new ConnecteSearchUserH2(),
         });
     }
     protected render(): string {
-        return `
+        return `    
         <div class="{{class}}">
             <div class="dialog__block">
                 <div class="dialog__block--avatar">
                     {{{AvatarIcon}}}
+                    {{Error}}
                 </div>
                 <div class="dialog__block--message">
                     <div class="dialog__block--header">
@@ -40,14 +32,9 @@ export default class SearchDialog extends Block {
     }
 }
 
-
-function mapUserToProps(state: Indexed) {
-    const displayName = store.getState().searchUser?.display_name;
-    console.log(displayName);
-
+function mapUserToProps() {
     return {
-        userSearchName: state.searchUser?.display_name,
-        avatar: `${baseUrlResourse+state.searchUser?.avatar}`,
+        class: 'dialog',
     };
 }
 

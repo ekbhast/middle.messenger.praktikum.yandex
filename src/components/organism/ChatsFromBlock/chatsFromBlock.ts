@@ -11,7 +11,6 @@ import Message from '../../molecules/message/message';
 import SearchFrom from '../../molecules/searchForm/searchForm';
 import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
 import { userController } from '../../../controllers/UserController';
-import store, { StoreEvents } from '../../../framework/Store';
 
 
 export default class ChatsFromBlock extends Block {
@@ -58,9 +57,7 @@ export default class ChatsFromBlock extends Block {
             Dialog: new Dialog({
                 class: 'dialog',
             }),
-            SearchDilog: new ConnectedSearchDialog({
-                class: 'dialog',
-            }),
+            SearchDilog: new ConnectedSearchDialog(),
             AvatarIcon: new AvatarIcon({
                 class: 'chats__messages--avatarIcon',
                 imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',

@@ -1,5 +1,11 @@
 import Block from '../framework/Block';
 
+export interface BlockProps {
+  events?: Record<string, (event: Event) => void>;
+  attr?: Record<string, string>;
+  [key: string]: unknown;
+}
+
 export type DefaultClassProps = {
     class?: string;
 }
@@ -40,7 +46,7 @@ export interface HeaderProps{
     class?: string,
     label?: string
 }
-export interface AvatarIconProps extends DefaultClassProps {
+export interface AvatarIconProps extends DefaultClassProps, BlockProps{
   imgSrc?: string;
   classImg?: string;
 }

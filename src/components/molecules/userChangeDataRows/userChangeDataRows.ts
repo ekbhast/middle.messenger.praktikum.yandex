@@ -1,12 +1,12 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
+import { DefaultClassProps, BlockProps } from '../../../types/types';
 import Input from '../../atoms/input/input';
 import Span from '../../atoms/span/spat';
 import { connect } from '../../../utils/connect';
 import { Indexed } from '../../../types/types';
-
+type UserChangeDataRows2Props = DefaultClassProps & BlockProps;
 export default class UserChangeDataRows extends Block {
-    constructor(props: DefaultClassProps) {
+    constructor(props?: UserChangeDataRows2Props) {
         super({ ...props,
 
             SpanMail: new Span({
@@ -83,6 +83,7 @@ export default class UserChangeDataRows extends Block {
 function mapUserToProps(state: Indexed) {
     const user = state.user || {};
     return {
+        class: 'userChangeData__rows',
         InputMail: new Input({
             class: 'userChangeData__input',
             placeholder: 'pochta@yandex.ru',

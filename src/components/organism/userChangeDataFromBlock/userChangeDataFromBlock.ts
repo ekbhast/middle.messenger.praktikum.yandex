@@ -1,22 +1,21 @@
 import Block from '../../../framework/Block';
 import { ConnectedUserChangeDataRows } from '../../molecules/userChangeDataRows/userChangeDataRows';
-import { DefaultClassProps } from '../../../types/types';
+import { DefaultClassProps, BlockProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import Button from '../../atoms/button/button';
 import { connect } from '../../../utils/connect';
 import { Indexed } from '../../../types/types';
 import { baseUrlResourse } from '../../../api/baseUrls';
+type UserChangeDataFromBlock2Props = DefaultClassProps & BlockProps;
 export default class UserChangeDataFromBlock extends Block {
-    constructor(props?: DefaultClassProps) {
+    constructor(props?: UserChangeDataFromBlock2Props) {
         super({ ...props,
             Button: new Button({
                 class: 'button__primary userChangeData__button',
                 label: 'Сохранить',
                 type: 'submit',
             }),
-            UserChangeDataRows: new ConnectedUserChangeDataRows({
-                class: 'userChangeData__rows',
-            }),
+            UserChangeDataRows: new ConnectedUserChangeDataRows(),
         });
     }
 
@@ -35,6 +34,7 @@ export default class UserChangeDataFromBlock extends Block {
 function mapUserToProps(state: Indexed) {
     const avatar = state.user.avatar;
     return {
+        class: 'userChangeDataFromBlock',
         AvatarButton: new AvatarButton({
             class: 'avatarButton',
             imgSrcAvatarChange: '/src/assets/change_avatar.jpg',

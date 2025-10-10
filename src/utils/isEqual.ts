@@ -33,7 +33,6 @@ function isEqual(lhs: PlainObject, rhs: PlainObject) {
         }
 
         if (value !== rightValue) {
-            console.log('false');
             return false;
         }
     }

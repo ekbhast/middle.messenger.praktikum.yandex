@@ -1,5 +1,5 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
+import { DefaultClassProps, BlockProps } from '../../../types/types';
 import AvatarButton from '../../atoms/avatarButton/avatarButton';
 import H1 from '../../atoms/headers/h1/h1';
 import Link from '../../atoms/link/link';
@@ -9,9 +9,10 @@ import { Indexed } from '../../../types/types';
 import { connect } from '../../../utils/connect';
 import { router } from '../../../framework/Router';
 import { baseUrlResourse } from '../../../api/baseUrls';
+type UserSettings2Props = DefaultClassProps & BlockProps;
 
 export default class UserSettingsFromBlock extends Block {
-    constructor(props: DefaultClassProps) {
+    constructor(props?: UserSettings2Props) {
         super({ ...props,
             LinkUserData: new Link({
                 id: 'change_userData',
@@ -47,9 +48,7 @@ export default class UserSettingsFromBlock extends Block {
                     },
                 },
             }),
-            UserSettingsRows: new ConnectedUserSettingsRows({
-                class: 'userSettings__rows',
-            }),
+            UserSettingsRows: new ConnectedUserSettingsRows(),
         });
     }
     protected render(): string {
@@ -78,6 +77,7 @@ export default class UserSettingsFromBlock extends Block {
 function mapUserToProps(state: Indexed) {
     const user = state.user || {};
     return {
+        class: 'userSettings__fromBlock',
         H1: new H1({
             class: 'userSettings__header',
             label: user.first_name || '',

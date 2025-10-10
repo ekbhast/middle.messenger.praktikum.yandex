@@ -5,9 +5,7 @@ import { ConnectedUserSettingsFromBlock } from '../../organism/userSettingsFromB
 export default class UserSettingsTemplate extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
-            UserSettingsFromBlock: new ConnectedUserSettingsFromBlock({
-                class: 'userSettings__fromBlock',
-            }),
+            UserSettingsFromBlock: new ConnectedUserSettingsFromBlock(),
         });
     }
     protected render(): string {
