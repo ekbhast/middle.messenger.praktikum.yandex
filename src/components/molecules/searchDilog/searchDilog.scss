@@ -1,0 +1,17 @@
+.searchDilog{
+    display: flex;
+    flex-direction: column;
+    background-color:#E4EDFD;
+    border-radius: 5px;
+    & span{
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+}
+
+.active{
+    display: block;
+}
+.disable{
+    display: none;
+}

@@ -27,10 +27,25 @@ function mapSearchUserToPropsAvatar(state: unknown): {
     const s = state as Indexed;
 
     return {
-        imgSrc: baseUrlResourse + s.searchUser?.avatar, // ✅ используем s
+        imgSrc: baseUrlResourse + s.searchUser?.avatar || '',
+        class: 'avatarIcon',
+        classImg: 'avatarIcon__img',
+    };
+}
+
+function mapActiveChatToPropsAvatar(state: unknown): {
+    imgSrc: string;
+    class: string;
+    classImg: string;
+} {
+    const s = state as Indexed;
+
+    return {
+        imgSrc: baseUrlResourse + s.activChatUser?.avatar || '',
         class: 'avatarIcon',
         classImg: 'avatarIcon__img',
     };
 }
 
 export const ConnecteSearchUserAvatarIcon = connect(AvatarIcon, mapSearchUserToPropsAvatar);
+export const ConnecteActiveChatAvatarIcon = connect(AvatarIcon, mapActiveChatToPropsAvatar);

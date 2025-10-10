@@ -69,7 +69,7 @@ export interface AvatarButtonProps extends DefaultClassProps {
 }
 
 export interface SpanProps extends DefaultClassProps{
-    text: string;
+    text?: string;
 }
 
 export interface IconButtonProps extends DefaultClassProps {

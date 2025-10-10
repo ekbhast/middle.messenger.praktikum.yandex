@@ -1,12 +1,12 @@
 import Block from '../../../framework/Block';
 import { SearchFormProps } from '../../../types/types';
-import Input from '../../atoms/input/input';
+import { ConnectedSearchIdValue } from '../../atoms/input/input';
 export default class SearchFrom extends Block {
     constructor(props: SearchFormProps) {
         super({ ...props,
-            SearchInput: new Input({
+            SearchInput: new ConnectedSearchIdValue({
                 class: 'chats__searchInput',
-                placeholder: 'Поиск',
+                placeholder: 'Поиск пользователя по ID',
                 id: 'search-input',
                 type: 'text',
                 name: 'search-input',

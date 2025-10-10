@@ -1,7 +1,6 @@
 import Block from '../../../framework/Block';
 import { router } from '../../../framework/Router';
 import { DefaultClassProps } from '../../../types/types';
-import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
 import Input from '../../atoms/input/input';
 import Link from '../../atoms/link/link';
 import Span from '../../atoms/span/spat';
@@ -10,7 +9,10 @@ import IconButton from '../../molecules/iconButton/iconButton';
 import Message from '../../molecules/message/message';
 import SearchFrom from '../../molecules/searchForm/searchForm';
 import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
+import { ConnecteActiveChatSpan } from '../../atoms/span/spat';
 import { userController } from '../../../controllers/UserController';
+import store from '../../../framework/Store';
+import { ConnecteActiveChatAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
 
 
 export default class ChatsFromBlock extends Block {
@@ -35,13 +37,17 @@ export default class ChatsFromBlock extends Block {
 
                         const inputEl = document.getElementById('search-input') as HTMLInputElement;
                         const login = inputEl?.value.trim();
+                        store.set('searchIdValue', login);
+                        console.log(store.getState());
 
                         if (!login) return;
 
                         try {
                             const user = await userController.getUserById(Number(login));
                             console.log('Пользователь найден:', user);
-                            // Здесь можешь обновить Dialog, чтобы показать найденного пользователя
+                            store.set('searchIdValue', '');
+                            const visibleBlock = document.querySelector('.searchDilog') as HTMLElement;
+                            visibleBlock.classList.remove('disable');
                         } catch (err) {
                             console.error('Ошибка поиска пользователя', err);
                         }
@@ -57,16 +63,22 @@ export default class ChatsFromBlock extends Block {
             Dialog: new Dialog({
                 class: 'dialog',
             }),
-            SearchDilog: new ConnectedSearchDialog(),
-            AvatarIcon: new AvatarIcon({
+            SearchDilog: new ConnectedSearchDialog({
+                events: {
+                    click: () => {
+                        console.log('click');
+                        store.set('activChatUser', store.getState().searchUser);
+                        document.querySelector('.searchDilog')?.classList.add('disable');
+                        console.log(store.getState());
+                    },
+                },
+            }),
+            AvatarIcon: new ConnecteActiveChatAvatarIcon({
                 class: 'chats__messages--avatarIcon',
                 imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
                 classImg: 'avatarIcon__img',
             }),
-            SpanMessagesUser: new Span({
-                class: 'chats__messages--userName',
-                text: 'Андрей',
-            }),
+            SpanMessagesUser: new ConnecteActiveChatSpan(),
             IconButtonMenu: new IconButton({
                 class: 'chats__messages--buttonMenu',
                 imgClass: 'chats__messages--buttonMenu',
@@ -114,7 +126,8 @@ export default class ChatsFromBlock extends Block {
                     </div>
                     {{{SearchForm}}}
                     <div class="chats__dilogs">
-                        {{{SearchDilog}}}
+                    {{{SearchDilog}}}
+                    {{{Dialog}}}
                     </div>
                 </div>
                 <div class="chats__messages">

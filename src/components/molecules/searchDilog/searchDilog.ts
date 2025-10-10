@@ -3,6 +3,7 @@ import { DefaultClassProps, BlockProps } from '../../../types/types';
 import { ConnecteSearchUserH2 } from '../../atoms/headers/h2/h2';
 import { ConnecteSearchUserAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
 import { connect } from '../../../utils/connect';
+import { Indexed } from '../../../types/types';
 
 type SearchDialog2Props = DefaultClassProps & BlockProps;
 
@@ -16,15 +17,16 @@ export default class SearchDialog extends Block {
     protected render(): string {
         return `    
         <div class="{{class}}">
+            <span>Найден пользователь:</span>
             <div class="dialog__block">
                 <div class="dialog__block--avatar">
                     {{{AvatarIcon}}}
-                    {{Error}}
                 </div>
                 <div class="dialog__block--message">
                     <div class="dialog__block--header">
                         {{{H2}}}
-                    </div>          
+                    </div>
+                    <span>id: {{id}}</span>          
                 </div>
             </div>    
         </div>
@@ -32,9 +34,11 @@ export default class SearchDialog extends Block {
     }
 }
 
-function mapUserToProps() {
+function mapUserToProps(state: unknown) {
+    const s = state as Indexed;
     return {
-        class: 'dialog',
+        class: 'dialog searchDilog disable',
+        id: s.searchUser?.id || '',
     };
 }
 

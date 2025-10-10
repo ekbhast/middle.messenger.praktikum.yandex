@@ -18,7 +18,7 @@ function mapSearchUserToProps(state: unknown) {
     const s = state as Indexed;
 
     return {
-        label: s.searchUser?.display_name || 'Неизвестный пользователь',
+        label: s.searchUser?.first_name || 'Неизвестный пользователь',
         class: 'dialog__dialogName',
     };
 }
