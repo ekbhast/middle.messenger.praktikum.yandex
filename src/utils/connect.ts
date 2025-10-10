@@ -7,7 +7,7 @@ type BlockClass<P extends BlockProps = BlockProps> = new (props?: P) => Block<P>
 
 export function connect<P extends BlockProps = BlockProps>(
     Component: BlockClass<P>,
-    mapStateToProps: (state: any) => P,
+    mapStateToProps: (state: unknown) => P,
 ) {
     return class extends Component {
         constructor(props?: P) {
