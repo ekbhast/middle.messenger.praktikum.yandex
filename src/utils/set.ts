@@ -12,6 +12,8 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
 
     const result = path.split('.').reduceRight<Indexed>((acc, key) => ({
         [key]: acc,
+        // как сделать по другому я не понял
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }), value as any);
     return merge(object as Indexed, result);
 }
