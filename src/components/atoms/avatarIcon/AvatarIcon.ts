@@ -46,6 +46,20 @@ function mapActiveChatToPropsAvatar(state: unknown): {
         classImg: 'avatarIcon__img',
     };
 }
+function mapUserChatsToProps(state: unknown): {
+    imgSrc: string;
+    class: string;
+    classImg: string;
+} {
+    const s = state as Indexed;
+
+    return {
+        imgSrc: baseUrlResourse + s.chats?.[0]?.avatar || '',
+        class: 'chats__messages--avatarIcon',
+        classImg: 'avatarIcon__img',
+    };
+}
 
 export const ConnecteSearchUserAvatarIcon = connect(AvatarIcon, mapSearchUserToPropsAvatar);
 export const ConnecteActiveChatAvatarIcon = connect(AvatarIcon, mapActiveChatToPropsAvatar);
+export const ConnecteUserChatsToProps = connect(AvatarIcon, mapUserChatsToProps);

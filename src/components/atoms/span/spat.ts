@@ -26,5 +26,32 @@ function mapActiveChatToPropsAvatar(state: unknown): {
         text: s.activChatUser?.first_name || '',
     };
 }
+
+function mapUserChatsToProps(state: unknown): {
+    text: string;
+    class: string
+} {
+    const s = state as Indexed;
+
+    return {
+        class: 'dialog__lastMessageTime',
+        text: s.chats?.[0]?.last_message || 'Сообщений нет',
+    };
+}
+
+function mapUserChatsUnreadToProps(state: unknown): {
+    text: string;
+    class: string
+} {
+    const s = state as Indexed;
+
+    return {
+        class: 'dialog__newMessageCount--text',
+        text: s.chats?.[0]?.unread_count,
+    };
+}
+
 export const ConnecteActiveChatSpan = connect(Span, mapActiveChatToPropsAvatar);
+export const ConnecteUserChatsSpan = connect(Span, mapUserChatsToProps);
+export const ConnecteUserChatsUnreadSpan = connect(Span, mapUserChatsUnreadToProps);
 

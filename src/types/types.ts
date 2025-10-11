@@ -95,3 +95,11 @@ export type BlockConstructor = new (props: { rootQuery: HTMLElement; class: stri
 export type Indexed<T = any> = {
   [key in string]: T;
 };
+
+export type ChatProps = {
+  id: number;
+  title: string;
+  avatar?: string;
+  last_message?: string;
+  unread_count?: number;
+};

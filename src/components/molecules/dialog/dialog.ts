@@ -1,34 +1,47 @@
 import Block from '../../../framework/Block';
 import { DefaultClassProps } from '../../../types/types';
-import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
-import H2 from '../../atoms/headers/h2/h2';
 import Span from '../../atoms/span/spat';
+import H2 from '../../atoms/headers/h2/h2';
+import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
+import { baseUrlResourse } from '../../../api/baseUrls';
+// import { ConnecteUserChatsToProps } from '../../atoms/avatarIcon/AvatarIcon';
+// import { ConnecteUserChatsH2 } from '../../atoms/headers/h2/h2';
+// import { ConnecteUserChatsSpan } from '../../atoms/span/spat';
+// import { ConnecteUserChatsUnreadSpan } from '../../atoms/span/spat';
+type DialogProps = DefaultClassProps & {
+    chatData: {
+        avatar: string;
+        title: string;
+        lastMessage: string;
+        unreadCount: number;
+    };
+};
 
 export default class Dialog extends Block {
-    constructor(props: DefaultClassProps) {
-        super({ ...props,
+    constructor(props: DialogProps) {
+        super({
+            ...props,
             AvatarIcon: new AvatarIcon({
                 class: 'avatarIcon',
-                imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
+                imgSrc: baseUrlResourse + props.chatData.avatar,
                 classImg: 'avatarIcon__img',
             }),
             H2: new H2({
                 class: 'dialog__dialogName',
-                label: 'Андрей',
+                label: props.chatData.title,
             }),
             SpanLastMessageTime: new Span({
                 class: 'dialog__lastMessageTime',
-                text: '10:42',
+                text: '12:00', // Временная заглушка, можно заменить на реальное время из props.chatData.lastMessageTime
             }),
             SpanTextMessage: new Span({
                 class: 'dialog__textMessage',
-                text: 'Миллионы россиян ежедневно проводят десятки часов свое...',
+                text: props.chatData.lastMessage,
             }),
             SpanMessageCount: new Span({
                 class: 'dialog__newMessageCount--text',
-                text: '4',
+                text: String(props.chatData.unreadCount),
             }),
-
         });
     }
     protected render(): string {

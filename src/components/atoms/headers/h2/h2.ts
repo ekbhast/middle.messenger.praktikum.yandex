@@ -22,5 +22,15 @@ function mapSearchUserToProps(state: unknown) {
         class: 'dialog__dialogName',
     };
 }
+function mapUserChatsToProps(state: unknown) {
+    const s = state as Indexed;
+
+    return {
+        label: s.chats?.[0]?.title || 'Неизвестный пользователь',
+        class: 'dialog__dialogName',
+    };
+}
+
 
 export const ConnecteSearchUserH2 = connect(H2, mapSearchUserToProps);
+export const ConnecteUserChatsH2 = connect(H2, mapUserChatsToProps);

@@ -5,7 +5,7 @@ const chatsApi = new ChatsAPI();
 class ChatsController {
     public async createChat() {
         try {
-            const chat = await chatsApi.createChat({ title: 'Новый чат' });
+            const chat = await chatsApi.createChat({ title: 'Клевый чатик' });
             store.set('currentChat', chat);
             console.log('Чат создан', chat);
             console.log(store.getState());
