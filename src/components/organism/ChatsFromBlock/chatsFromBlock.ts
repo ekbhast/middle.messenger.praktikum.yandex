@@ -10,6 +10,7 @@ import store from '../../../framework/Store';
 import { userController } from '../../../controllers/UserController';
 import { chatsController } from '../../../controllers/ChatsController';
 import { ChatProps } from '../../../types/types';
+import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
 
 export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: Dialog[] }> {
     constructor(props: DefaultClassProps) {
@@ -46,6 +47,7 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     },
                 },
             }),
+            SearchDilog: new ConnectedSearchDialog(),
             MessageInput: new Input({
                 class: 'chats__message--inputMessage',
                 placeholder: 'Сообщение',
@@ -113,6 +115,7 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     {{{SearchForm}}}
                     {{{NewChatButton}}}
                     <div class="chats__dialogs">
+                    {{{SearchDilog}}}
                         <span class='chats__mychats'>Мои чаты</span>
                         {{{dialogs}}}
                     </div>

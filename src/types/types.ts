@@ -8,6 +8,8 @@ export interface BlockProps {
 
 export type DefaultClassProps = {
     class?: string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
 }
 export interface LabelProps extends DefaultClassProps {
     for?: string,
