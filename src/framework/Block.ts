@@ -136,6 +136,10 @@ export default class Block<
 
         this._addEvents();
         this.addAttributes();
+        if (!this._isMounted) {
+            this._isMounted = true;
+            this.dispatchComponentDidMount();
+        }
     }
 
     protected render(): string {
@@ -171,7 +175,7 @@ export default class Block<
     public hide(): void {
         this.getContent().style.display = 'none';
     }
-
+    private _isMounted = false;
     private _componentDidMount(): void {
         this.componentDidMount();
         Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());

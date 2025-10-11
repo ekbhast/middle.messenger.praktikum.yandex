@@ -1,6 +1,4 @@
 import { UserAPI } from '../api/user-api';
-
-// import { router } from '../framework/Router';
 import store from '../framework/Store';
 
 const userApi = new UserAPI();

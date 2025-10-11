@@ -14,6 +14,7 @@ import { userController } from '../../../controllers/UserController';
 import store from '../../../framework/Store';
 import { ConnecteActiveChatAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
 import Button from '../../atoms/button/button';
+import { chatsController } from '../../../controllers/ChatsController';
 
 
 export default class ChatsFromBlock extends Block {
@@ -75,8 +76,13 @@ export default class ChatsFromBlock extends Block {
                 label: 'Создать чат',
                 type: 'button',
                 events: {
-                    click: ()=>{
-                        console.log('создан новый чат');
+                    click: async ()=>{
+                        try {
+                            const chats = await chatsController.createChat();
+                            console.log('Чат создан', chats);
+                        } catch (err) {
+                            console.error('jошибка создания чата', err);
+                        }
                     },
                 },
             }),
@@ -140,6 +146,17 @@ export default class ChatsFromBlock extends Block {
             }),
         });
     }
+    protected componentDidMount(): void {
+        (async () => {
+            try {
+                const chats = await chatsController.getChats();
+                console.log('Чаты получены', chats);
+            } catch (err) {
+                console.error('Ошибка получения чатов', err);
+            }
+        })();
+    }
+
 
     protected render(): string {
         return `
@@ -152,6 +169,7 @@ export default class ChatsFromBlock extends Block {
                     {{{NewChatButton}}}
                     <div class="chats__dilogs">
                     {{{SearchDilog}}}
+                    <span class='chats__mychats'>Мои чаты</span>
                     {{{Dialog}}}
                     </div>
                 </div>
