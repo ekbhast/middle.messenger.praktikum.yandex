@@ -13,6 +13,8 @@
         border-right: 2px solid #EAEAEA;
         background-color: #FBFBFB;
         padding: 20px 10px 0;
+        display: flex;
+        flex-direction: column;
     }
 
     &__messages {

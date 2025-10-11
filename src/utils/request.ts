@@ -66,16 +66,17 @@ export class HTTPTransport {
                 try {
                     response = xhr.response ? JSON.parse(xhr.response) : null;
                 } catch {
-                    throw new Error('Response is not valid JSON');
+                    // Если не JSON, просто вернуть текст как есть
+                    response = xhr.response;
                 }
 
-                if (xhr.status === 200) {
+                if (xhr.status >= 200 && xhr.status < 300) {
                     resolve(response as R);
                 } else {
                     const error = new Error(`HTTP error: ${xhr.status}`) as Error & {
-                        status: number;
-                        response: unknown;
-                    };
+            status?: number;
+            response?: unknown;
+        };
                     error.status = xhr.status;
                     error.response = response;
                     reject(error);

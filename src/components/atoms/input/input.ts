@@ -17,7 +17,6 @@ export default class Input extends Block {
 }
 
 function mapUserToProps(state: unknown) {
-    console.log('rerender Input');
     const s = state as Indexed;
     return {
         value: s.searchIdValue,

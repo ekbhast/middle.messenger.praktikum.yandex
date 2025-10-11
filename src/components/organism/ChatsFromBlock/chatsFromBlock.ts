@@ -13,6 +13,7 @@ import { ConnecteActiveChatSpan } from '../../atoms/span/spat';
 import { userController } from '../../../controllers/UserController';
 import store from '../../../framework/Store';
 import { ConnecteActiveChatAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
+import Button from '../../atoms/button/button';
 
 
 export default class ChatsFromBlock extends Block {
@@ -59,9 +60,25 @@ export default class ChatsFromBlock extends Block {
                 placeholder: 'Сообщение',
                 type: 'text',
                 name: 'message',
+                events: {
+                    submit: (e: Event) => {
+                        e.preventDefault();
+                        console.log('Отправка сообщения не реализована');
+                    },
+                },
             }),
             Dialog: new Dialog({
                 class: 'dialog',
+            }),
+            NewChatButton: new Button({
+                class: 'chat__message--newChatButton button__primary',
+                label: 'Создать чат',
+                type: 'button',
+                events: {
+                    click: ()=>{
+                        console.log('создан новый чат');
+                    },
+                },
             }),
             SearchDilog: new ConnectedSearchDialog({
                 events: {
@@ -69,6 +86,7 @@ export default class ChatsFromBlock extends Block {
                         console.log('click');
                         store.set('activChatUser', store.getState().searchUser);
                         document.querySelector('.searchDilog')?.classList.add('disable');
+                        document.querySelector('.chats__messages')?.classList.remove('disable');
                         console.log(store.getState());
                     },
                 },
@@ -93,6 +111,12 @@ export default class ChatsFromBlock extends Block {
                 class: 'chats__messages--sendButton',
                 imgClass: 'chats__messages--buttonMenu',
                 imgSrc: '/src/assets/sendArrow.png',
+                events: {
+                    submit: (e: Event) => {
+                        e.preventDefault();
+                        console.log('Отправка сообщения не реализована');
+                    },
+                },
             }),
             MessageIn: new Message({
                 class: 'chats__messages-message',
@@ -125,12 +149,13 @@ export default class ChatsFromBlock extends Block {
                     {{{Link}}}
                     </div>
                     {{{SearchForm}}}
+                    {{{NewChatButton}}}
                     <div class="chats__dilogs">
                     {{{SearchDilog}}}
                     {{{Dialog}}}
                     </div>
                 </div>
-                <div class="chats__messages">
+                <div class="chats__messages disable">
                     <div class="chats__messages--header">
                         <div class="chats__messages--user">
                                 {{{AvatarIcon}}}
@@ -141,9 +166,7 @@ export default class ChatsFromBlock extends Block {
                         </div>
                     </div>
                     <div class="chats__messages--chat">
-                        {{{MessageIn}}}
-                        {{{MessageOut}}}
-                        {{{SpanDate}}}
+                        
                     </div>
                     <form class="chats__messages--actions">
                         {{{IconButtonAttachment}}}
@@ -156,3 +179,7 @@ export default class ChatsFromBlock extends Block {
         `;
     }
 }
+
+// {{{MessageIn;}}}
+// {{{MessageOut;}}}
+// {{{SpanDate;}}}

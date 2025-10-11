@@ -76,6 +76,9 @@ export interface IconButtonProps extends DefaultClassProps {
     imgSrc: string,
     alt?: string,
     imgClass: string,
+    events?: {
+        [key: string]: (e: Event) => void;
+    };
 }
 
 export interface MessageProps extends DefaultClassProps{

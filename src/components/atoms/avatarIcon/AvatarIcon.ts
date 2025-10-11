@@ -42,7 +42,7 @@ function mapActiveChatToPropsAvatar(state: unknown): {
 
     return {
         imgSrc: baseUrlResourse + s.activChatUser?.avatar || '',
-        class: 'avatarIcon',
+        class: 'chats__messages--avatarIcon',
         classImg: 'avatarIcon__img',
     };
 }
