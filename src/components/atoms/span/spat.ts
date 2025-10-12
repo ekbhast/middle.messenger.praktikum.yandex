@@ -23,7 +23,7 @@ function mapActiveChatToPropsAvatar(state: unknown): {
 
     return {
         class: 'chats__messages--userName',
-        text: s.activChatUser?.first_name || '',
+        text: s.activeChatInfo?.title || 'Без названия',
     };
 }
 

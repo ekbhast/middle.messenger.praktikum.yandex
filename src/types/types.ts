@@ -32,7 +32,7 @@ export interface ButtonProps extends DefaultClassProps{
     type?: string,
     events?: {
         [key: string]: (e: Event) => void;
-    };
+    },
 }
 
 export interface LinkProps extends DefaultClassProps{
@@ -104,4 +104,14 @@ export type ChatProps = {
   avatar?: string;
   last_message?: string;
   unread_count?: number;
+};
+
+export type DialogProps = DefaultClassProps & {
+    chatData: {
+        avatar: string;
+        title: string;
+        lastMessage: string;
+        unreadCount: number;
+        id: number;
+    };
 };

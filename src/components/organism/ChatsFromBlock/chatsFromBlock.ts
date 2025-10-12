@@ -11,6 +11,11 @@ import { userController } from '../../../controllers/UserController';
 import { chatsController } from '../../../controllers/ChatsController';
 import { ChatProps } from '../../../types/types';
 import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
+import handleChatSelect from '../../../utils/handleChatSelect';
+import { ConnecteActiveChatAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
+import { ConnecteActiveChatSpan } from '../../atoms/span/spat';
+import IconButton from '../../molecules/iconButton/iconButton';
+
 
 export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: Dialog[] }> {
     constructor(props: DefaultClassProps) {
@@ -75,6 +80,33 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     },
                 },
             }),
+            AvatarIcon: new ConnecteActiveChatAvatarIcon({
+                class: 'chats__messages--avatarIcon',
+                imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
+                classImg: 'avatarIcon__img',
+            }),
+            SpanMessagesUser: new ConnecteActiveChatSpan(),
+            IconButtonMenu: new IconButton({
+                class: 'chats__messages--buttonMenu',
+                imgClass: 'chats__messages--buttonMenu',
+                imgSrc: '/src/assets/chats__header--buttonMenu.png',
+            }),
+            IconButtonAttachment: new IconButton({
+                class: 'chats__messages--attachmentButton',
+                imgClass: 'chats__messages--buttonMenu',
+                imgSrc: '/src/assets/attachment.png',
+            }),
+            IconButtonSend: new IconButton({
+                class: 'chats__messages--sendButton',
+                imgClass: 'chats__messages--buttonMenu',
+                imgSrc: '/src/assets/sendArrow.png',
+                events: {
+                    submit: (e: Event) => {
+                        e.preventDefault();
+                        console.log('Отправка сообщения не реализована');
+                    },
+                },
+            }),
         });
 
         this.lists.dialogs = [];
@@ -84,6 +116,9 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
         (async () => {
             try {
                 const chats = await chatsController.getChats() as ChatProps[];
+                console.log('Ответ с сервера:', chats);
+                store.set('chats', chats);
+                console.log('Что положили в стор:', store.getState().chats);
                 const dialogBlocks = chats.map((chat) =>
                     new Dialog({
                         class: 'dialog',
@@ -92,13 +127,19 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                             lastMessage: chat.last_message ?? 'Сообщений нет',
                             avatar: chat.avatar ?? '/src/assets/default-avatar.jpg',
                             unreadCount: chat.unread_count ?? 0,
+                            id: chat.id,
                         },
                     }),
                 );
-
                 this.lists.dialogs = dialogBlocks;
-
-                this.setProps({ dialogs: dialogBlocks });
+                dialogBlocks.forEach((dialog) => {
+                    const el = dialog.getContent();
+                    if (el) {
+                        el.addEventListener('click', () => {
+                            handleChatSelect(dialog.props.chatData.id);
+                        });
+                    }
+                });
             } catch (err) {
                 console.error('Ошибка получения чатов', err);
             }
@@ -121,7 +162,23 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     </div>
                 </div>
                 <div class="chats__messages disable">
-                    <!-- Здесь можно оставить логику сообщений -->
+                       <div class="chats__messages--header">
+                        <div class="chats__messages--user">
+                                {{{AvatarIcon}}}
+                                {{{SpanMessagesUser}}}
+                        </div>
+                        <div class="chats__messages--headerMenu">
+                                {{{IconButtonMenu}}}
+                        </div>
+                    </div>
+                    <div class="chats__messages--chat">
+                        
+                    </div>
+                    <form class="chats__messages--actions">
+                        {{{IconButtonAttachment}}}
+                        {{{MessageInput}}}
+                        {{{IconButtonSend}}}
+                    </form>
                 </div>
             </div>
         `;

@@ -1,21 +1,10 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
 import Span from '../../atoms/span/spat';
 import H2 from '../../atoms/headers/h2/h2';
 import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
 import { baseUrlResourse } from '../../../api/baseUrls';
-// import { ConnecteUserChatsToProps } from '../../atoms/avatarIcon/AvatarIcon';
-// import { ConnecteUserChatsH2 } from '../../atoms/headers/h2/h2';
-// import { ConnecteUserChatsSpan } from '../../atoms/span/spat';
-// import { ConnecteUserChatsUnreadSpan } from '../../atoms/span/spat';
-type DialogProps = DefaultClassProps & {
-    chatData: {
-        avatar: string;
-        title: string;
-        lastMessage: string;
-        unreadCount: number;
-    };
-};
+import { DialogProps } from '../../../types/types';
+
 
 export default class Dialog extends Block {
     constructor(props: DialogProps) {
@@ -32,7 +21,7 @@ export default class Dialog extends Block {
             }),
             SpanLastMessageTime: new Span({
                 class: 'dialog__lastMessageTime',
-                text: '12:00', // Временная заглушка, можно заменить на реальное время из props.chatData.lastMessageTime
+                text: '12:00',
             }),
             SpanTextMessage: new Span({
                 class: 'dialog__textMessage',

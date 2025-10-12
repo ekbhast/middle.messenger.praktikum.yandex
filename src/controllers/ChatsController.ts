@@ -17,6 +17,7 @@ class ChatsController {
     public async getChats() {
         try {
             const chats = await chatsApi.getChats();
+            console.log('Чаты получены', chats);
             store.set('chats', chats);
             console.log(store.getState());
             return chats;
