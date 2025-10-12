@@ -15,6 +15,9 @@
 @use '/src/components/molecules/searchDilog/searchDilog.scss';
 @use '/src/components/molecules/iconButton/iconButton.scss';
 @use '/src/components/molecules/message/message.scss';
+@use '/src/components/molecules/chatMenu/chatMenu.scss';
+@use '/src/components/molecules/searchUserId/searchUserId.scss';
+@use '/src/components/molecules/searchUsersChat/searchUsersChat.scss';
 
 @use '/src/components/organism/navigate/navigate.scss';
 @use '/src/components/organism/loginFromBlock/loginFromBlock.scss';

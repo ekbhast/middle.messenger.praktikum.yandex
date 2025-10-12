@@ -26,6 +26,38 @@ class ChatsController {
             throw err;
         }
     }
+    public async changeAvatar(formData: FormData) {
+        try {
+            const response = await chatsApi.changeAvatar(formData);
+            console.log('Аватар изменен', response);
+            return response;
+        } catch (err) {
+            console.error('Ошибка при изменении аватара', err);
+            throw err;
+        }
+    }
+    public async addUserToChat(userId: number, chatId: number) {
+        try {
+            const response = await chatsApi.addUserToChat({
+                users: [userId],
+                chatId,
+            });
+            console.log('Пользователь добавлен в чат', response);
+            return response;
+        } catch (err) {
+            console.error('Ошибка при добавлении пользователя в чат', err);
+            throw err;
+        }
+    }
+    public async getUserChat(chatId: number) {
+        try {
+            const response = await chatsApi.getUserChat(chatId);
+            console.log('Пользователи чата получены:', response);
+            return response;
+        } catch (err) {
+            console.error('Ошибка при получении пользователей чата', err);
+            throw err;
+        }
+    }
 }
-
 export const chatsController = new ChatsController();

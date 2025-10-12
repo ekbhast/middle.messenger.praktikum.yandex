@@ -9,7 +9,7 @@ export interface BlockProps {
 export type DefaultClassProps = {
     class?: string;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
+     [key: string]: any | undefined;
 }
 export interface LabelProps extends DefaultClassProps {
     for?: string,
@@ -108,10 +108,16 @@ export type ChatProps = {
 
 export type DialogProps = DefaultClassProps & {
     chatData: {
-        avatar: string;
-        title: string;
-        lastMessage: string;
-        unreadCount: number;
-        id: number;
+        avatar?: string;
+        title?: string;
+        lastMessage?: string;
+        unreadCount?: number;
+        id?: number;
     };
 };
+export type ChatMenuProps = DefaultClassProps;
+export interface ChatUsersListProps extends DefaultClassProps{
+     events?: {
+        [key: string]: (e: Event) => void;
+    };
+}

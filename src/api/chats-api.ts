@@ -16,10 +16,10 @@ export class ChatsAPI extends BaseAPI {
     getUserChat(id: number) {
         return chatsAPIInstance.get(`/chats/${id}/users`);
     }
-    changeAvataer(formData: FormData) {
+    changeAvatar(formData: {chatId?: number, avatar: File}) {
         return chatsAPIInstance.put(`/chats/avatar`, { data: formData });
     }
-    addUserToChat(data: Record<string, number[] | number>) {
+    addUserToChat(data: { users: number[]; chatId: number }) {
         return chatsAPIInstance.put('/chats/users', { data });
     }
     deleteUserFromChat(data: Record<string, number[] | number>) {

@@ -5,9 +5,7 @@ import Input from '../../atoms/input/input';
 import Link from '../../atoms/link/link';
 import Dialog from '../../molecules/dialog/dialog';
 import Button from '../../atoms/button/button';
-import SearchFrom from '../../molecules/searchForm/searchForm';
 import store from '../../../framework/Store';
-import { userController } from '../../../controllers/UserController';
 import { chatsController } from '../../../controllers/ChatsController';
 import { ChatProps } from '../../../types/types';
 import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
@@ -15,6 +13,9 @@ import handleChatSelect from '../../../utils/handleChatSelect';
 import { ConnecteActiveChatAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
 import { ConnecteActiveChatSpan } from '../../atoms/span/spat';
 import IconButton from '../../molecules/iconButton/iconButton';
+import ChatMenu from '../../molecules/chatMenu/chatMenu';
+import SearchUserId from '../../molecules/searchUserId/searchUserId';
+import { ConnectedChatUsersList } from '../../molecules/searchUsersChat/searchUsersChat';
 
 
 export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: Dialog[] }> {
@@ -32,26 +33,26 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     },
                 },
             }),
-            SearchForm: new SearchFrom({
-                class: 'chats__search',
-                events: {
-                    submit: async (e: Event) => {
-                        e.preventDefault();
-                        const inputEl = document.getElementById('search-input') as HTMLInputElement;
-                        const login = inputEl?.value.trim();
-                        if (!login) return;
+            // SearchForm: new SearchFrom({
+            //     class: 'chats__search',
+            //     events: {
+            //         submit: async (e: Event) => {
+            //             e.preventDefault();
+            //             const inputEl = document.getElementById('search-input') as HTMLInputElement;
+            //             const login = inputEl?.value.trim();
+            //             if (!login) return;
 
-                        try {
-                            const user = await userController.getUserById(Number(login));
-                            console.log('Пользователь найден:', user);
-                            store.set('searchIdValue', '');
-                            document.querySelector('.searchDilog')?.classList.remove('disable');
-                        } catch (err) {
-                            console.error('Ошибка поиска пользователя', err);
-                        }
-                    },
-                },
-            }),
+            //             try {
+            //                 const user = await userController.getUserById(Number(login));
+            //                 console.log('Пользователь найден:', user);
+            //                 store.set('searchIdValue', '');
+            //                 document.querySelector('.searchDilog')?.classList.remove('disable');
+            //             } catch (err) {
+            //                 console.error('Ошибка поиска пользователя', err);
+            //             }
+            //         },
+            //     },
+            // }),
             SearchDilog: new ConnectedSearchDialog(),
             MessageInput: new Input({
                 class: 'chats__message--inputMessage',
@@ -90,6 +91,18 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                 class: 'chats__messages--buttonMenu',
                 imgClass: 'chats__messages--buttonMenu',
                 imgSrc: '/src/assets/chats__header--buttonMenu.png',
+                events: {
+                    click: () => {
+                        const chatMenu = document.querySelector('.chatMenu') as HTMLInputElement;
+                        const overlay = document.querySelector('.chatMenu__overlay') as HTMLInputElement;
+                        if (overlay) {
+                            overlay.classList.toggle('disable');
+                        }
+                        if (chatMenu) {
+                            chatMenu.classList.toggle('disable');
+                        }
+                    },
+                },
             }),
             IconButtonAttachment: new IconButton({
                 class: 'chats__messages--attachmentButton',
@@ -107,6 +120,23 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     },
                 },
             }),
+            ChatMenu: new ChatMenu({
+                class: 'chatMenu disable',
+                events: {
+                    click: (e: Event) => {
+                        e.stopPropagation();
+                        const chatMenu = document.querySelector('.chatMenu') as HTMLInputElement;
+                        const overlay = document.querySelector('.chatMenu__overlay') as HTMLInputElement;
+                        const searchUserId = document.querySelector('.searchUserId') as HTMLInputElement;
+                        if (e.target === overlay) {
+                            chatMenu?.classList.add('disable');
+                            overlay.classList.add('disable');
+                            searchUserId?.classList.add('disable');
+                        }
+                    },
+                } }),
+            SearchUserId: new SearchUserId({ class: 'searchUserId disable' }),
+            SearchUsersChat: new ConnectedChatUsersList(),
         });
 
         this.lists.dialogs = [];
@@ -116,9 +146,7 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
         (async () => {
             try {
                 const chats = await chatsController.getChats() as ChatProps[];
-                console.log('Ответ с сервера:', chats);
                 store.set('chats', chats);
-                console.log('Что положили в стор:', store.getState().chats);
                 const dialogBlocks = chats.map((chat) =>
                     new Dialog({
                         class: 'dialog',
@@ -147,16 +175,15 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
     }
 
     protected render(): string {
+        console.log('render chat from block', this.lists.dialogs);
         return `
            <div class="chats__fromBlock">
                 <div class="chats__chats">
                     <div class="chats__profile">
                         {{{Link}}}
                     </div>
-                    {{{SearchForm}}}
                     {{{NewChatButton}}}
                     <div class="chats__dialogs">
-                    {{{SearchDilog}}}
                         <span class='chats__mychats'>Мои чаты</span>
                         {{{dialogs}}}
                     </div>
@@ -168,11 +195,15 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                                 {{{SpanMessagesUser}}}
                         </div>
                         <div class="chats__messages--headerMenu">
-                                {{{IconButtonMenu}}}
+                            {{{ChatMenu}}}
+                            {{{SearchUserId}}}
+                            {{{SearchUsersChat}}}
+                            {{{IconButtonMenu}}}
                         </div>
                     </div>
                     <div class="chats__messages--chat">
-                        
+
+
                     </div>
                     <form class="chats__messages--actions">
                         {{{IconButtonAttachment}}}
