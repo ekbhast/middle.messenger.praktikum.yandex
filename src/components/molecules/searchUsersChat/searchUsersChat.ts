@@ -3,19 +3,18 @@ import { Indexed } from '../../../types/types';
 import { connect } from '../../../utils/connect';
 import { ChatUsersListProps } from '../../../types/types';
 import Dialog from '../../molecules/dialog/dialog';
-import store from '../../../framework/Store';
 import { ChatProps } from '../../../types/types';
 import { chatsController } from '../../../controllers/ChatsController';
 import { ConnectedChatUsersListDilog } from '../../molecules/dialog/dialog';
-
-
+import { DefaultClassProps, BlockProps } from '../../../types/types';
+type ChatUsersList2Props = DefaultClassProps & BlockProps;
 export class ChatUsersList extends Block <ChatUsersListProps, {user: Dialog[]}> {
-    constructor(props: ChatUsersListProps) {
+    constructor(props?: ChatUsersList2Props) {
         super({ ...props });
         this.lists.user = [];
     }
 
-    protected componentDidUpdate(oldProps: ChatUsersListProps, newProps: ChatUsersListProps): boolean {
+    protected componentDidUpdate(_oldProps: ChatUsersListProps, newProps: ChatUsersListProps): boolean {
         if (newProps.activeChat) {
             (async () => {
                 try {
@@ -33,7 +32,8 @@ export class ChatUsersList extends Block <ChatUsersListProps, {user: Dialog[]}> 
                             },
                         }),
                     );
-                    this.lists.user = dialogBlocks;
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    (this.lists as any).user = dialogBlocks;
                 } catch (err) {
                     console.error('Ошибка получения чатов', err);
                 }

@@ -98,11 +98,17 @@ export type Indexed<T = any> = {
   [key in string]: T;
 };
 
+type LastMessage = {
+    content: string;
+    time: string;
+    user: { id: number; name: string };
+};
+
 export type ChatProps = {
-  id?: number;
+  id: number;
   title?: string;
   avatar?: string;
-  last_message?: string;
+  last_message?: LastMessage;
   unread_count?: number;
   type?: string;
   first_name?: string;

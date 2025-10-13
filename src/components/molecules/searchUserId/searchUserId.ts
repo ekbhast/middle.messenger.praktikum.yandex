@@ -4,7 +4,6 @@ import SearchFrom from '../searchForm/searchForm';
 import { userController } from '../../../controllers/UserController';
 import store from '../../../framework/Store';
 import { ConnectedSearchDialog } from '../searchDilog/searchDilog';
-import { closeModal } from '../../../utils/closeModalAll';
 
 
 export default class SearchUserId extends Block {

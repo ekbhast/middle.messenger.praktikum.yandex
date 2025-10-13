@@ -7,5 +7,5 @@ export function closeModal(e:Event) {
     overlay?.classList.add('disable');
     searchUserId?.classList.add('disable');
     searchUsersChats?.classList.add('disable');
-    console.log('close modal run');
+    console.log('close modal run', e);
 }

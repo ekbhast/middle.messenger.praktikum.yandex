@@ -17,6 +17,27 @@ import SearchUserId from '../../molecules/searchUserId/searchUserId';
 import { ConnectedChatUsersList } from '../../molecules/searchUsersChat/searchUsersChat';
 import Message from '../../molecules/message/message';
 import { ChatSocket } from '../../../api/chatSocket';
+interface MessageType {
+    chat_id: number;
+    user_id: number;
+    content: string;
+    time: string; // ISO-строка
+}
+interface ChatsFromBlockProps extends DefaultClassProps {
+    dialogs?: Dialog[];
+    Link: Link;
+    MessageInput: Input;
+    newChatInput: Input;
+    NewChatButton: Button;
+    IconButtonMenu: IconButton;
+    IconButtonAttachment: IconButton;
+    IconButtonSend: IconButton;
+    messageOut: Message;
+    ChatMenu: ChatMenu;
+    SearchUserId: SearchUserId;
+}
+
+
 export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs: Dialog[] }> {
     socket: ChatSocket | null = null;
 
@@ -131,6 +152,11 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                 const unreadCount = chat.unread_count || 0;
 
                 return new Dialog({
+                    events: {
+                        click: ()=>{
+                            activeChat(chat.id);
+                        },
+                    },
                     class: 'dialog',
                     chatData: {
                         ...chat,
@@ -145,28 +171,23 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             });
             this.lists.dialogs = dialogBlocks;
 
-            const activeChat = (store: any, chatId: number | string) => {
-                if (store.state.activeChatId === chatId) {
+            const activeChat = (chatId: number) => {
+                const state = store.getState();
+                if (state.activeChatId === chatId) {
                     handleChatSelect(chatId);
                 } else {
                     handleChatSelect(chatId);
                     this.connectToChat(chatId);
                 }
             };
-
-            dialogBlocks.forEach((dialog) => {
-                const el = dialog.getContent();
-                if (el) {
-                    el.addEventListener('click', () => activeChat(store, dialog.props.chatData.id));
-                }
-            });
-
             const formEl = document.querySelector<HTMLFormElement>('.chats__messages--actions');
             formEl?.addEventListener('submit', (e) => this.handleSubmit(e));
         })();
     }
 
     async connectToChat(chatId: number | string) {
+        const chatContainer = document.querySelector('.chats__messages--chat');
+        if (chatContainer) chatContainer.innerHTML = '';
         if (this.socket) {
             this.socket.disconnect();
             this.socket = null;
@@ -187,9 +208,8 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             const data = await response.json();
             const token = data.token;
             if (!token) throw new Error('Токен не получен');
-            console.log('websocet store', store);
-
-            const userId = store.state.user.id;
+            const getStore = store.getState();
+            const userId = getStore.user.id;
 
             this.socket = new ChatSocket(userId, chatId, token);
 
@@ -199,13 +219,6 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                     msg.reverse().forEach((m) => this.addMessageToChat(m));
                 } else {
                     this.addMessageToChat(msg);
-                }
-                if (msg.user_id !== store.state.user.id) {
-                    const dialog = this.lists.dialogs.find((d) => d.props.chatData.id === msg.chat_id);
-                    if (dialog) {
-                        dialog.props.chatData.unreadCount++;
-                        dialog.props.SpanMessageCount.setProps({ text: String(dialog.props.chatData.unreadCount) });
-                    }
                 }
             };
             this.socket.onClose = (event: CloseEvent) =>
@@ -230,7 +243,8 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
         if (inputEl) inputEl.value = '';
     }
 
-    addMessageToChat(msg: any) {
+    addMessageToChat(msg: MessageType) {
+        const getStore = store.getState();
         const chatContainer = document.querySelector('.chats__messages--chat');
         if (!chatContainer) return;
         const formattedTime = new Date(msg.time).toLocaleTimeString('ru-RU', {
@@ -241,7 +255,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
         const messageBlock = new Message({
             class: 'chats__messages-messageText',
             classMessage:
-            msg.user_id === store.state.user.id ?
+            msg.user_id === getStore.user.id ?
                 'chats__messages-message chats__messages-message--inMessage':
                 'chats__messages-message chats__messages-message--outMessage',
             text: msg.content,

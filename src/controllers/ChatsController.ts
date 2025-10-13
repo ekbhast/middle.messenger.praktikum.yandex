@@ -27,8 +27,11 @@ class ChatsController {
         }
     }
     public async changeAvatar(formData: FormData) {
+        const file = formData.get('avatar');
+        if (!(file instanceof File)) throw new Error('Файл аватара не найден');
+
         try {
-            const response = await chatsApi.changeAvatar(formData);
+            const response = await chatsApi.changeAvatar({ avatar: file });
             console.log('Аватар изменен', response);
             return response;
         } catch (err) {
