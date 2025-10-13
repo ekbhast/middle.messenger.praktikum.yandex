@@ -4,10 +4,11 @@ export class ChatSocket {
     token: string;
     socket: WebSocket | null = null;
     pingInterval: number | null = null;
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onMessage: ((data: any) => void) | null = null;
     onOpen: (() => void) | null = null;
     onClose: ((event: CloseEvent) => void) | null = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: ((err: any) => void) | null = null;
 
     constructor(userId: number | string, chatId: number | string, token: string) {
@@ -50,7 +51,7 @@ export class ChatSocket {
             if (this.onClose) this.onClose(event);
         });
     }
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     handleMessage(data: any) {
         if (Array.isArray(data)) {
             if (this.onMessage) this.onMessage(data);
@@ -83,7 +84,7 @@ export class ChatSocket {
             this.pingInterval = null;
         }
     }
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     send(data: any) {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(JSON.stringify(data));
