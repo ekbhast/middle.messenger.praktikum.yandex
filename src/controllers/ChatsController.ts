@@ -26,7 +26,7 @@ class ChatsController {
             throw err;
         }
     }
-    public async changeAvatar(formData: {chatId?: number, avatar: File}) {
+    public async changeAvatar(formData: FormData) {
         try {
             const response = await chatsApi.changeAvatar(formData);
             console.log('Аватар изменен', response);

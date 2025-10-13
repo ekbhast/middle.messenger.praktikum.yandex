@@ -16,7 +16,7 @@ export class ChatsAPI extends BaseAPI {
     getUserChat(id: number) {
         return chatsAPIInstance.get(`/chats/${id}/users`);
     }
-    changeAvatar(formData: {chatId?: number, avatar: File}) {
+    changeAvatar(formData: FormData) {
         return chatsAPIInstance.put(`/chats/avatar`, { data: formData });
     }
     addUserToChat(data: { users: number[]; chatId: number }) {
