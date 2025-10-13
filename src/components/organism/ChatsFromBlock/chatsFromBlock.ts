@@ -33,26 +33,6 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     },
                 },
             }),
-            // SearchForm: new SearchFrom({
-            //     class: 'chats__search',
-            //     events: {
-            //         submit: async (e: Event) => {
-            //             e.preventDefault();
-            //             const inputEl = document.getElementById('search-input') as HTMLInputElement;
-            //             const login = inputEl?.value.trim();
-            //             if (!login) return;
-
-            //             try {
-            //                 const user = await userController.getUserById(Number(login));
-            //                 console.log('Пользователь найден:', user);
-            //                 store.set('searchIdValue', '');
-            //                 document.querySelector('.searchDilog')?.classList.remove('disable');
-            //             } catch (err) {
-            //                 console.error('Ошибка поиска пользователя', err);
-            //             }
-            //         },
-            //     },
-            // }),
             SearchDilog: new ConnectedSearchDialog(),
             MessageInput: new Input({
                 class: 'chats__message--inputMessage',
@@ -146,7 +126,6 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
         (async () => {
             try {
                 const chats = await chatsController.getChats() as ChatProps[];
-                store.set('chats', chats);
                 const dialogBlocks = chats.map((chat) =>
                     new Dialog({
                         class: 'dialog',
@@ -175,7 +154,6 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
     }
 
     protected render(): string {
-        console.log('render chat from block', this.lists.dialogs);
         return `
            <div class="chats__fromBlock">
                 <div class="chats__chats">

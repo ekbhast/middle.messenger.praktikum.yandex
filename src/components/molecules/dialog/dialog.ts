@@ -4,6 +4,8 @@ import H2 from '../../atoms/headers/h2/h2';
 import AvatarIcon from '../../atoms/avatarIcon/AvatarIcon';
 import { baseUrlResourse } from '../../../api/baseUrls';
 import { DialogProps } from '../../../types/types';
+import Button from '../../atoms/button/button';
+import { connect } from '../../../utils/connect';
 
 
 export default class Dialog extends Block {
@@ -31,10 +33,38 @@ export default class Dialog extends Block {
                 class: 'dialog__newMessageCount--text',
                 text: String(props.chatData.unreadCount),
             }),
+            deleteUserButton: new Button({
+                type: 'button',
+                label: 'Удалить',
+                class: 'button__primary deleteUserButton',
+                events: {
+                    click: ()=>{
+                        console.log(`Удалить ${props.chatData.id} из чата ${props.chatData.activeChat}`);
+                    },
+                },
+            }),
         });
     }
     protected render(): string {
-        return `
+        if (this.props.chatData.type === 'searchUserChat') {
+            return `
+        <div class="{{class}}">
+            <div class="dialog__block">
+                <div class="dialog__block--avatar">
+                    {{{AvatarIcon}}}
+                </div>
+                <div class="dialog__block--message">
+                    <div class="dialog__block--header">
+                        {{{H2}}}
+                    </div>
+                            
+                </div>
+                {{{deleteUserButton}}}   
+            </div>    
+        </div>
+        `;
+        } else {
+            return `
         <div class="{{class}}">
             <div class="dialog__block">
                 <div class="dialog__block--avatar">
@@ -57,5 +87,15 @@ export default class Dialog extends Block {
             </div>    
         </div>
         `;
+        }
     }
 }
+function mapStateToProps(state: unknown) {
+    const s = state as Indexed;
+
+    return {
+        activeChat: s?.activeChatId||'',
+    };
+}
+
+export const ConnectedChatUsersListDilog = connect(Dialog, mapStateToProps);

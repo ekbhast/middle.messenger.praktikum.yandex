@@ -6,6 +6,7 @@ import Dialog from '../../molecules/dialog/dialog';
 import store from '../../../framework/Store';
 import { ChatProps } from '../../../types/types';
 import { chatsController } from '../../../controllers/ChatsController';
+import { ConnectedChatUsersListDilog } from '../../molecules/dialog/dialog';
 
 
 export class ChatUsersList extends Block <ChatUsersListProps, {user: Dialog[]}> {
@@ -14,37 +15,34 @@ export class ChatUsersList extends Block <ChatUsersListProps, {user: Dialog[]}> 
         this.lists.user = [];
     }
 
-    protected componentDidMount(): void {
-        (async () => {
-            try {
-                const chats = await chatsController.getUserChat(85890) as ChatProps[];
-                store.set('chats', chats);
-                const dialogBlocks = chats.map((chat) =>
-                    new Dialog({
-                        class: 'dialog',
-                        events: {
-                            click: () => {
-                                console.log('тык', chat.id);
+    protected componentDidUpdate(oldProps: ChatUsersListProps, newProps: ChatUsersListProps): boolean {
+        if (newProps.activeChat) {
+            (async () => {
+                try {
+                    const chats = await chatsController.getUserChat(newProps.activeChat) as ChatProps[];
+                    const dialogBlocks = chats.map((chat) =>
+                        new ConnectedChatUsersListDilog({
+                            class: 'dialog',
+                            chatData: {
+                                title: chat.first_name ?? 'Без названия',
+                                avatar: chat.avatar ?? '/src/assets/default-avatar.jpg',
+                                unreadCount: chat.unread_count ?? 0,
+                                id: chat.id,
+                                type: 'searchUserChat',
+                                activeChat: this.props.activeChat,
                             },
-                        },
-                        chatData: {
-                            title: chat.title ?? 'Без названия',
-                            lastMessage: chat.last_message ?? 'Сообщений нет',
-                            avatar: chat.avatar ?? '/src/assets/default-avatar.jpg',
-                            unreadCount: chat.unread_count ?? 0,
-                            id: chat.id,
-                        },
-                    }),
-                );
-                this.lists.user = dialogBlocks;
-            } catch (err) {
-                console.error('Ошибка получения чатов', err);
-            }
-        })();
+                        }),
+                    );
+                    this.lists.user = dialogBlocks;
+                } catch (err) {
+                    console.error('Ошибка получения чатов', err);
+                }
+            })();
+        }
+        return true;
     }
 
     protected render(): string {
-        console.log('Search users chat', this.lists.user);
         return `
         <div class="{{class}}">
             {{{user}}}
@@ -58,6 +56,7 @@ function mapStateToProps(state: unknown) {
 
     return {
         class: 'searchUsersChats disable',
+        activeChat: s?.activeChatId||'',
     };
 }
 

@@ -99,11 +99,14 @@ export type Indexed<T = any> = {
 };
 
 export type ChatProps = {
-  id: number;
-  title: string;
+  id?: number;
+  title?: string;
   avatar?: string;
   last_message?: string;
   unread_count?: number;
+  type?: string;
+  first_name?: string;
+  activeChat?: string;
 };
 
 export type DialogProps = DefaultClassProps & {
@@ -113,6 +116,8 @@ export type DialogProps = DefaultClassProps & {
         lastMessage?: string;
         unreadCount?: number;
         id?: number;
+        type?: string;
+        activeChat?: string;
     };
 };
 export type ChatMenuProps = DefaultClassProps;
