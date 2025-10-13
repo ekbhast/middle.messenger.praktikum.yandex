@@ -84,11 +84,11 @@ export interface IconButtonProps extends DefaultClassProps {
 }
 
 export interface MessageProps extends DefaultClassProps{
-    text: string,
-    time: string,
-    classText: string,
-    classTime: string,
-    classMessage: string,
+    text?: string,
+    time?: string,
+    classText?: string,
+    classTime?: string,
+    classMessage?: string,
 }
 
 export type BlockConstructor = new (props: { rootQuery: HTMLElement; class: string }) => Block;

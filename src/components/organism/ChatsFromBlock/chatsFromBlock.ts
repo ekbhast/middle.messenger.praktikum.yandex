@@ -16,6 +16,7 @@ import IconButton from '../../molecules/iconButton/iconButton';
 import ChatMenu from '../../molecules/chatMenu/chatMenu';
 import SearchUserId from '../../molecules/searchUserId/searchUserId';
 import { ConnectedChatUsersList } from '../../molecules/searchUsersChat/searchUsersChat';
+import Message from '../../molecules/message/message';
 
 
 export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: Dialog[] }> {
@@ -100,6 +101,12 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                     },
                 },
             }),
+            messageOut: new Message({
+                class: 'chats__messages-messageText',
+                classMessage: 'chats__messages-message chats__messages-message--inMessage',
+                text: 'привеt',
+
+            }),
             ChatMenu: new ChatMenu({
                 class: 'chatMenu disable',
                 events: {
@@ -182,7 +189,7 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                         </div>
                     </div>
                     <div class="chats__messages--chat">
-
+                        {{{messageOut}}}
 
                     </div>
                     <form class="chats__messages--actions">
