@@ -15,13 +15,13 @@ export default class RegFromBlock extends Block {
             Button: new Button({
                 class: 'button__primary reg__button',
                 id: 'enter',
-                label: 'Войти',
+                label: 'Зарегистрироваться',
                 type: 'submit',
             }),
             Link: new Link({
-                href: '#',
+                href: '/',
                 class: 'reg__link',
-                text: 'Зарегистрироваться',
+                text: 'Войти',
             }),
             RegFields: new RegFields({
                 class: 'form-inputs',

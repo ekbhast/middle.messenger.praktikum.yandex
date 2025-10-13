@@ -21,11 +21,11 @@ export const validationRules = {
     },
     password_confirm: {
         regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/,
-        errorMessage: 'Подтверждение пароля должно соответствовать паролю',
+        errorMessage: 'От 8 до 40 символов, заглавная буква и цифра',
     },
     oldPassword: {
         regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/,
-        errorMessage: 'Старый пароль указан неверно',
+        errorMessage: 'От 8 до 40 символов, заглавная буква и цифра',
     },
     newPassword: {
         regex: /^(?=.*[A-Z])(?=.*\d).{8,40}$/,
@@ -43,13 +43,25 @@ export const validationRules = {
         regex: /^[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё-]*$/,
         errorMessage: 'С заглавной буквы, только буквы и дефис',
     },
+    avatar: {
+        regex: /.+/,
+        errorMessage: '',
+    },
 } as const;
 
 export type FieldName = keyof typeof validationRules;
 
-export function validateField(fieldName: FieldName, value: string): { isError: boolean; errorMessage?: string } {
+export function validateField(
+    fieldName: FieldName,
+    value: string,
+): { isError: boolean; errorMessage?: string } {
+    if (fieldName === 'avatar') {
+        return { isError: false };
+    }
+
     const rule = validationRules[fieldName];
     const isValid = rule.regex.test(value);
+
     return {
         isError: !isValid,
         errorMessage: isValid ? undefined : rule.errorMessage,

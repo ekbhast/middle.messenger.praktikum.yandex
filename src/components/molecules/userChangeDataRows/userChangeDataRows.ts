@@ -1,47 +1,14 @@
 import Block from '../../../framework/Block';
-import { DefaultClassProps } from '../../../types/types';
+import { DefaultClassProps, BlockProps } from '../../../types/types';
 import Input from '../../atoms/input/input';
 import Span from '../../atoms/span/spat';
-
+import { connect } from '../../../utils/connect';
+import { Indexed } from '../../../types/types';
+type UserChangeDataRows2Props = DefaultClassProps & BlockProps;
 export default class UserChangeDataRows extends Block {
-    constructor(props: DefaultClassProps) {
+    constructor(props?: UserChangeDataRows2Props) {
         super({ ...props,
-            InputMail: new Input({
-                class: 'userChangeData__input',
-                placeholder: 'pochta@yandex.ru',
-                name: 'email',
-                type: 'text',
-            }),
-            InputLogin: new Input({
-                class: 'userChangeData__input',
-                placeholder: 'ivanivanov',
-                name: 'login',
-                type: 'text',
-            }),
-            InputName: new Input({
-                class: 'userChangeData__input',
-                placeholder: 'Иван',
-                name: 'first_name',
-                type: 'text',
-            }),
-            InputSecondName: new Input({
-                class: 'userChangeData__input',
-                placeholder: 'Иванов',
-                name: 'second_name',
-                type: 'text',
-            }),
-            InputDisplayName: new Input({
-                class: 'userChangeData__input',
-                placeholder: 'Иван',
-                name: 'display_name',
-                type: 'text',
-            }),
-            InputPhone: new Input({
-                class: 'userChangeData__input',
-                placeholder: 'Телефон',
-                name: 'phone',
-                type: 'text',
-            }),
+
             SpanMail: new Span({
                 class: 'userSettings__label',
                 text: 'Почта',
@@ -112,3 +79,55 @@ export default class UserChangeDataRows extends Block {
         `;
     }
 }
+
+function mapUserToProps(state: unknown) {
+    const s = state as Indexed;
+    const user = s.user || {};
+
+    return {
+        class: 'userChangeData__rows',
+        InputMail: new Input({
+            class: 'userChangeData__input',
+            placeholder: 'pochta@yandex.ru',
+            name: 'email',
+            type: 'text',
+            value: user.email || '',
+        }),
+        InputLogin: new Input({
+            class: 'userChangeData__input',
+            placeholder: 'ivanivanov',
+            name: 'login',
+            type: 'text',
+            value: user.login || '',
+        }),
+        InputName: new Input({
+            class: 'userChangeData__input',
+            placeholder: 'Иван',
+            name: 'first_name',
+            type: 'text',
+            value: user.first_name || '',
+        }),
+        InputSecondName: new Input({
+            class: 'userChangeData__input',
+            placeholder: 'Иванов',
+            name: 'second_name',
+            type: 'text',
+            value: user.second_name || '',
+        }),
+        InputDisplayName: new Input({
+            class: 'userChangeData__input',
+            placeholder: 'Иван',
+            name: 'display_name',
+            type: 'text',
+            value: user.display_name || '',
+        }),
+        InputPhone: new Input({
+            class: 'userChangeData__input',
+            placeholder: 'Телефон',
+            name: 'phone',
+            type: 'text',
+            value: user.phone || '',
+        }),
+    };
+}
+export const ConnectedUserChangeDataRows = connect(UserChangeDataRows, mapUserToProps);

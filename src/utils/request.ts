@@ -24,20 +24,29 @@ function queryStringify(data: Record<string, string | number | boolean>): string
 }
 
 export class HTTPTransport {
-    get: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.GET }, options?.timeout);
+    private baseUrl: string;
 
-    put: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.PUT }, options?.timeout);
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
 
-    post: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.POST }, options?.timeout);
+    get: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.GET }, options?.timeout);
 
-    delete: HTTPMethod = (url, options?: Options) =>
-        this.request(url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
+    post: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.POST }, options?.timeout);
 
-    // Основной метод запроса
-    private request<R = unknown>(url: string, options: Options = { method: METHODS.GET }, timeout?: number): Promise<R> {
+    put: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.PUT }, options?.timeout);
+
+    delete: HTTPMethod = (url, options) =>
+        this.request(this.baseUrl + url, { ...(options || {}), method: METHODS.DELETE }, options?.timeout);
+
+    private request<R = unknown>(
+        url: string,
+        options: Options = { method: METHODS.GET },
+        timeout?: number,
+    ): Promise<R> {
         const { method = METHODS.GET, data } = options;
 
         return new Promise<R>((resolve, reject) => {
@@ -49,25 +58,43 @@ export class HTTPTransport {
             }
 
             xhr.open(method, requestUrl);
+            xhr.withCredentials = true;
 
             xhr.onload = () => {
+                let response: unknown = xhr.response;
+
                 try {
-                    resolve(JSON.parse(xhr.response) as R);
+                    response = xhr.response ? JSON.parse(xhr.response) : null;
                 } catch {
-                    resolve(xhr.response as unknown as R);
+                    response = xhr.response;
+                }
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(response as R);
+                } else {
+                    const error = new Error(`HTTP error: ${xhr.status}`) as Error & {
+            status?: number;
+            response?: unknown;
+        };
+                    error.status = xhr.status;
+                    error.response = response;
+                    reject(error);
                 }
             };
+
             xhr.onabort = reject;
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            if (timeout) {
-                xhr.timeout = timeout;
-            }
+            if (timeout) xhr.timeout = timeout;
 
             if (method !== METHODS.GET && data) {
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify(data));
+                if (data instanceof FormData) {
+                    xhr.send(data);
+                } else {
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify(data));
+                }
             } else {
                 xhr.send();
             }

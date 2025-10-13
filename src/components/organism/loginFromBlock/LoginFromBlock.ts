@@ -3,7 +3,6 @@ import Button from '../../atoms/button/button';
 import H1 from '../../atoms/headers/h1/h1';
 import Link from '../../atoms/link/link';
 import LoginFields from '../../molecules/loginFields/loginFields';
-
 interface LoginFromBlockProps{
     class? : string
 }
@@ -25,7 +24,7 @@ export default class LoginFromBlock extends Block {
                 type: 'submit',
             }),
             Link: new Link({
-                href: '#',
+                href: 'registration',
                 class: 'auth__link',
                 text: 'Зарегистрироваться',
             }),

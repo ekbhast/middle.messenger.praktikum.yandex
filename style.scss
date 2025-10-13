@@ -12,8 +12,12 @@
 @use '/src/components/molecules/userChangeDataRows/userChangeDataRows.scss';
 @use '/src/components/molecules/userChangePasswordRows/userChangePasswordRows.scss';
 @use '/src/components/molecules/dialog/dialog.scss';
+@use '/src/components/molecules/searchDilog/searchDilog.scss';
 @use '/src/components/molecules/iconButton/iconButton.scss';
 @use '/src/components/molecules/message/message.scss';
+@use '/src/components/molecules/chatMenu/chatMenu.scss';
+@use '/src/components/molecules/searchUserId/searchUserId.scss';
+@use '/src/components/molecules/searchUsersChat/searchUsersChat.scss';
 
 @use '/src/components/organism/navigate/navigate.scss';
 @use '/src/components/organism/loginFromBlock/loginFromBlock.scss';
@@ -106,4 +110,10 @@ body{
 
 .userChangeData__input.errorBottom {
   border-color: red;
+}
+.active{
+    display: block;
+}
+.disable{
+    display: none;
 }

@@ -25,7 +25,7 @@ export default class Page404 extends Block {
 
     protected render(): string {
         return `
-        <main class="{{class}}">
+        <main class="page page404">
             {{{H1}}}
             {{{H2}}}
             {{{Link}}}

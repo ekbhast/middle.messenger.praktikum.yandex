@@ -29,6 +29,7 @@ export default class LoginFields extends Block {
                 id: 'login__password',
                 name: 'password',
                 type: 'password',
+                suggested: 'current-password',
             }),
         });
     }

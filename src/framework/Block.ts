@@ -1,17 +1,11 @@
 import EventBus, { EventCallback } from './EventBus';
 import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
+import { BlockProps } from '../types/types';
 
-export interface BlockProps {
-  events?: Record<string, (event: Event) => void>;
-  attr?: Record<string, string>;
-  [key: string]: unknown;
-}
+
 export default class Block<
   P extends BlockProps = BlockProps,
-// Используем {} как дефолтное значение для generic L.
-// eslint ругался на empty object type, но в данном случае это безопасно,
-// потому что мы указываем тип через Record<string, Array<...>>.
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   L extends Record<string, Array<Block | string | number | HTMLElement>> = {}
 > {
@@ -58,7 +52,6 @@ export default class Block<
                 (props as Partial<P>)[key as keyof P] = value;
             }
         });
-
         return { props: props as P, children, lists: lists as L };
     }
 
@@ -77,6 +70,14 @@ export default class Block<
             deleteProperty: () => {
                 throw new Error('No access');
             },
+        });
+    }
+
+    public setProps(nextProps: Partial<Record<string, unknown>>) {
+        if (!nextProps) return;
+
+        Object.keys(nextProps).forEach((key) => {
+            (this.props as Record<string, unknown>)[key] = nextProps[key];
         });
     }
 
@@ -132,6 +133,10 @@ export default class Block<
 
         this._addEvents();
         this.addAttributes();
+        if (!this._isMounted) {
+            this._isMounted = true;
+            this.dispatchComponentDidMount();
+        }
     }
 
     protected render(): string {
@@ -167,7 +172,7 @@ export default class Block<
     public hide(): void {
         this.getContent().style.display = 'none';
     }
-
+    private _isMounted = false;
     private _componentDidMount(): void {
         this.componentDidMount();
         Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
@@ -184,7 +189,6 @@ export default class Block<
         if (response) this._render();
     }
 
-    // Просто прокидываем пропсы
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected componentDidUpdate(_oldProps: P, _newProps: P): boolean {
         return true;
