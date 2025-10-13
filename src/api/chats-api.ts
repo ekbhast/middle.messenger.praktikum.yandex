@@ -10,7 +10,7 @@ export class ChatsAPI extends BaseAPI {
     createChat(data: { title: string }) {
         return chatsAPIInstance.post('/chats', { data });
     }
-    deleteChat(data: Record<string, number>) {
+    deleteChat(data: { chatId: number }) {
         return chatsAPIInstance.delete('/chats', { data });
     }
     getUserChat(id: number) {
@@ -22,7 +22,7 @@ export class ChatsAPI extends BaseAPI {
     addUserToChat(data: { users: number[]; chatId: number }) {
         return chatsAPIInstance.put('/chats/users', { data });
     }
-    deleteUserFromChat(data: Record<string, number[] | number>) {
+    deleteUserFromChat(data: { users: number[]; chatId: number }) {
         return chatsAPIInstance.delete('/chats/users', { data });
     }
 }

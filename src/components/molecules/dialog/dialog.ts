@@ -6,6 +6,7 @@ import { baseUrlResourse } from '../../../api/baseUrls';
 import { DialogProps } from '../../../types/types';
 import Button from '../../atoms/button/button';
 import { connect } from '../../../utils/connect';
+import { chatsController } from '../../../controllers/ChatsController';
 
 
 export default class Dialog extends Block {
@@ -38,8 +39,17 @@ export default class Dialog extends Block {
                 label: 'Удалить',
                 class: 'button__primary deleteUserButton',
                 events: {
-                    click: ()=>{
-                        console.log(`Удалить ${props.chatData.id} из чата ${props.chatData.activeChat}`);
+                    click: async ()=>{
+                        if (props.chatData.id && props.chatData.activeChat) {
+                            try {
+                                const deleteUser = await chatsController.deleteUserFromChat({ users: [props.chatData.id], chatId: props.chatData.activeChat });
+                                console.log('юзер удален', deleteUser);
+                            } catch (err) {
+                                console.log('Удалить не удалось', err);
+                            }
+                        } else {
+                            console.log('Для удаления пользователя нет необходимых данных');
+                        }
                     },
                 },
             }),

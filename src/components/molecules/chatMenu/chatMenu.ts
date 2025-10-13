@@ -65,6 +65,20 @@ export default class ChatMenu extends Block {
                     },
                 },
             }),
+            buttonDeleteChat: new Button({
+                class: 'button__primary',
+                label: 'Удалить чат',
+                events: {
+                    click: async ()=>{
+                        const activeChatId = store.getState().activeChatId;
+                        try {
+                            const deleteChat = await chatsController.deleteChat({ chatId: activeChatId });
+                            console.log('Чат удален', deleteChat);
+                        } catch (err) {
+                            console.log('Не удалось удалить чат', err);
+                        }
+                    } },
+            }),
             inputAvatar: new Input({
                 class: 'disable',
                 type: 'file',
@@ -108,7 +122,7 @@ export default class ChatMenu extends Block {
             {{{buttonDeleteUserChat}}}
             </div>
             <div>
-            <button class='button__primary'>Удалить этот чат</button>
+            {{{buttonDeleteChat}}}
             </div>
                 
             </div>

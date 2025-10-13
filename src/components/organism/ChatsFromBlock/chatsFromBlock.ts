@@ -108,10 +108,12 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                         const chatMenu = document.querySelector('.chatMenu') as HTMLInputElement;
                         const overlay = document.querySelector('.chatMenu__overlay') as HTMLInputElement;
                         const searchUserId = document.querySelector('.searchUserId') as HTMLInputElement;
+                        const searchUsersChats = document.querySelector('.searchUsersChats') as HTMLInputElement;
                         if (e.target === overlay) {
                             chatMenu?.classList.add('disable');
                             overlay.classList.add('disable');
                             searchUserId?.classList.add('disable');
+                            searchUsersChats.classList.add('disable');
                         }
                     },
                 } }),

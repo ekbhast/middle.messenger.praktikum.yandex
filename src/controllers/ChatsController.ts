@@ -59,5 +59,25 @@ class ChatsController {
             throw err;
         }
     }
+    public async deleteUserFromChat(data: { users: number[]; chatId: number }) {
+        try {
+            const response = await chatsApi.deleteUserFromChat(data);
+            console.log('Пользователь(и) удалены из чата:', response);
+            return response;
+        } catch (err) {
+            console.error('Ошибка при удалении пользователя из чата', err);
+            throw err;
+        }
+    }
+    public async deleteChat(data: { chatId: number }) {
+        try {
+            const response = await chatsApi.deleteChat(data);
+            console.log('Чат удалён:', response);
+            return response;
+        } catch (err) {
+            console.error('Ошибка при удалении чата', err);
+            throw err;
+        }
+    }
 }
 export const chatsController = new ChatsController();
