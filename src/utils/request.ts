@@ -66,7 +66,6 @@ export class HTTPTransport {
                 try {
                     response = xhr.response ? JSON.parse(xhr.response) : null;
                 } catch {
-                    // Если не JSON, просто вернуть текст как есть
                     response = xhr.response;
                 }
 

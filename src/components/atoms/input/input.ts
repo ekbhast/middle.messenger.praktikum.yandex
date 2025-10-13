@@ -23,4 +23,5 @@ function mapUserToProps(state: unknown) {
     };
 }
 
+
 export const ConnectedSearchIdValue = connect(Input, mapUserToProps);

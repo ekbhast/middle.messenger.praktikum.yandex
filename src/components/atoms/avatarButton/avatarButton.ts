@@ -27,8 +27,3 @@ export default class AvatarButton extends Block {
         `;
     }
 }
-
-// <button class="{{class}}" type="{{buttonType}}">
-//             <img src="{{imgSrcAvatarChange}}" alt="{{alt}}" class="{{classImgAvatarChange}}"/>
-//             <img src="{{imgSrcAvatar}}" alt="{{alt}}" class="{{classImgAvatar}}"/>
-//         </button>

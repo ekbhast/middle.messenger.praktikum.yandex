@@ -19,16 +19,14 @@ export class ChatSocket {
     connect() {
         if (!this.token) throw new Error('Token required for connecting');
 
-        // создаём WebSocket с правильным URL
         this.socket = new WebSocket(
             `wss://ya-praktikum.tech/ws/chats/${this.userId}/${this.chatId}/${this.token}/`,
         );
 
-        // подписка на события
         this.socket.addEventListener('open', () => {
             console.log('✅ WebSocket подключен');
             this.startPing();
-            this.getOld(0); // сразу запрашиваем первые 20 сообщений
+            this.getOld(0);
             if (this.onOpen) this.onOpen();
         });
 
@@ -54,9 +52,7 @@ export class ChatSocket {
     }
 
     handleMessage(data: any) {
-        // Обрабатываем только текстовые сообщения
         if (Array.isArray(data)) {
-            // передаём весь массив целиком — пусть родитель сортирует
             if (this.onMessage) this.onMessage(data);
             return;
         }

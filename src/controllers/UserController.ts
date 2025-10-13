@@ -27,7 +27,7 @@ class UserController {
     public async changeAvatar(file: File) {
         const formData = new FormData();
         formData.append('avatar', file);
-        console.log(formData); // обязательно имя 'avatar'
+        console.log(formData);
 
         try {
             const avatar = await userApi.changeAvatar(formData);

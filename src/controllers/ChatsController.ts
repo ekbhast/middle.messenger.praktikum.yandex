@@ -3,9 +3,9 @@ import store from '../framework/Store';
 
 const chatsApi = new ChatsAPI();
 class ChatsController {
-    public async createChat() {
+    public async createChat(name: string) {
         try {
-            const chat = await chatsApi.createChat({ title: 'Клевый чатик' });
+            const chat = await chatsApi.createChat({ title: name });
             store.set('currentChat', chat);
             console.log('Чат создан', chat);
             console.log(store.getState());

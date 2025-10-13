@@ -17,9 +17,6 @@ import SearchUserId from '../../molecules/searchUserId/searchUserId';
 import { ConnectedChatUsersList } from '../../molecules/searchUsersChat/searchUsersChat';
 import Message from '../../molecules/message/message';
 import { ChatSocket } from '../../../api/chatSocket';
-
-interface ChatsFromBlockProps extends DefaultClassProps {}
-
 export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs: Dialog[] }> {
     socket: ChatSocket | null = null;
 
@@ -44,6 +41,14 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                 type: 'text',
                 name: 'message',
             }),
+            newChatInput: new Input({
+                placeholder: store.getState().newNameChat || 'Введите название чата',
+                events: {
+                    input: (e: Event) => {
+                        store.set('newNameChat', (e.target as HTMLInputElement).value);
+                    },
+                },
+            }),
             NewChatButton: new Button({
                 class: 'chat__message--newChatButton button__primary',
                 label: 'Создать чат',
@@ -51,7 +56,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                 events: {
                     click: async () => {
                         try {
-                            const newChat = await chatsController.createChat();
+                            const newChat = await chatsController.createChat(store.getState().newNameChat);
                             console.log('Чат создан', newChat);
                         } catch (err) {
                             console.error('Ошибка создания чата', err);
@@ -134,7 +139,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                             time: chat.last_message?.time,
                             user: chat.last_message?.user,
                         },
-                        unreadCount, // для SpanMessageCount
+                        unreadCount,
                     },
                 });
             });
@@ -142,10 +147,8 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
 
             const activeChat = (store: any, chatId: number | string) => {
                 if (store.state.activeChatId === chatId) {
-                    // чат уже активный → просто вызываем handleChatSelect
                     handleChatSelect(chatId);
                 } else {
-                    // чат новый → выбираем и подключаем сокет
                     handleChatSelect(chatId);
                     this.connectToChat(chatId);
                 }
@@ -169,16 +172,14 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             this.socket = null;
         }
 
-        // Обновляем активный чат
         store.set('activeChatId', chatId);
 
         try {
-        // Получаем токен для текущего чата
             const host = 'https://ya-praktikum.tech';
             const response = await fetch(`${host}/api/v2/chats/token/${chatId}`, {
                 method: 'POST',
                 mode: 'cors',
-                credentials: 'include', // отправляем cookie
+                credentials: 'include',
             });
 
             if (!response.ok) throw new Error(`Не удалось получить токен: ${response.status}`);
@@ -188,26 +189,21 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             if (!token) throw new Error('Токен не получен');
             console.log('websocet store', store);
 
-            const userId = store.state.user.id; // берём ID текущего пользователя из store
+            const userId = store.state.user.id;
 
-            // Создаём сокет с правильным URL
             this.socket = new ChatSocket(userId, chatId, token);
 
-            // Подписка на события
             this.socket.onOpen = () => console.log('Сокет открыт для чата', chatId);
             this.socket.onMessage = (msg) => {
                 if (Array.isArray(msg)) {
-                    // старые сообщения приходят в обратном порядке → разворачиваем
                     msg.reverse().forEach((m) => this.addMessageToChat(m));
                 } else {
-                    // новые сообщения добавляем сразу
                     this.addMessageToChat(msg);
                 }
                 if (msg.user_id !== store.state.user.id) {
                     const dialog = this.lists.dialogs.find((d) => d.props.chatData.id === msg.chat_id);
                     if (dialog) {
                         dialog.props.chatData.unreadCount++;
-                        // обновляем текст счетчика
                         dialog.props.SpanMessageCount.setProps({ text: String(dialog.props.chatData.unreadCount) });
                     }
                 }
@@ -216,7 +212,6 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                 console.log('Сокет закрыт', event.code, event.reason);
             this.socket.onError = (err) => console.error('Ошибка сокета', err);
 
-            // Подключаемся
             this.socket.connect();
         } catch (err) {
             console.error('Ошибка подключения к чату:', err);
@@ -253,7 +248,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             time: formattedTime,
         });
 
-        chatContainer.appendChild(messageBlock.getContent()!); // всегда в конец
+        chatContainer.appendChild(messageBlock.getContent()!);
     }
 
     protected componentWillUnmount(): void {
@@ -267,6 +262,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                     <div class="chats__profile">
                         {{{Link}}}
                     </div>
+                    {{{newChatInput}}}
                     {{{NewChatButton}}}
                     <div class="chats__dialogs">
                         <span class='chats__mychats'>Мои чаты</span>

@@ -111,16 +111,16 @@ export type ChatProps = {
 
 export type DialogProps = DefaultClassProps & {
     chatData: {
-        id?: number; // ID чата
-        title?: string; // Название чата
-        avatar?: string; // URL аватара
-        type?: string; // Тип, например 'searchUserChat'
-        activeChat?: string; // ID активного чата
-        unreadCount?: number; // Кол-во непрочитанных сообщений
-        lastMessage?: { // Последнее сообщение
-            content?: string; // Текст сообщения
-            time?: string; // Время сообщения ISO
-            user?: { // Автор сообщения
+        id?: number;
+        title?: string;
+        avatar?: string;
+        type?: string;
+        activeChat?: string;
+        unreadCount?: number;
+        lastMessage?: {
+            content?: string;
+            time?: string;
+            user?: {
                 id?: number;
                 first_name?: string;
                 second_name?: string;

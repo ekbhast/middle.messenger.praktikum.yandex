@@ -50,7 +50,6 @@ class UserSettingsRows extends Block {
     }
 }
 
-// Функция для получения данных пользователя из стора
 function mapUserToProps(state: unknown) {
     const s = state as Indexed;
     const user = s.user || {};
@@ -66,6 +65,4 @@ function mapUserToProps(state: unknown) {
     };
 }
 
-
-// Подключаем компонент к стору через HOC
 export const ConnectedUserSettingsRows = connect(UserSettingsRows, mapUserToProps);

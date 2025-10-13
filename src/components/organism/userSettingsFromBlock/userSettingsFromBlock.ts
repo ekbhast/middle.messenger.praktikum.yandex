@@ -95,7 +95,4 @@ function mapUserToProps(state: unknown) {
         }),
     };
 }
-
-
-// Подключаем компонент к стору через HOC
 export const ConnectedUserSettingsFromBlock = connect(UserSettingsFromBlock, mapUserToProps);

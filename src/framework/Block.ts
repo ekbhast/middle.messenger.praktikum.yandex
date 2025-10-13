@@ -6,9 +6,6 @@ import { BlockProps } from '../types/types';
 
 export default class Block<
   P extends BlockProps = BlockProps,
-// Используем {} как дефолтное значение для generic L.
-// eslint ругался на empty object type, но в данном случае это безопасно,
-// потому что мы указываем тип через Record<string, Array<...>>.
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   L extends Record<string, Array<Block | string | number | HTMLElement>> = {}
 > {

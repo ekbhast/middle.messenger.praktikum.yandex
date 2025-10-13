@@ -130,7 +130,4 @@ function mapUserToProps(state: unknown) {
         }),
     };
 }
-
-
-// Подключаем компонент к стору через HOC
 export const ConnectedUserChangeDataRows = connect(UserChangeDataRows, mapUserToProps);

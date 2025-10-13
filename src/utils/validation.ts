@@ -43,9 +43,8 @@ export const validationRules = {
         regex: /^[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё-]*$/,
         errorMessage: 'С заглавной буквы, только буквы и дефис',
     },
-    // 🔹 Исключение для аватара
     avatar: {
-        regex: /.+/, // фиктивный шаблон, не используется
+        regex: /.+/,
         errorMessage: '',
     },
 } as const;
@@ -56,7 +55,6 @@ export function validateField(
     fieldName: FieldName,
     value: string,
 ): { isError: boolean; errorMessage?: string } {
-    // 🔹 Для аватара валидация не выполняется
     if (fieldName === 'avatar') {
         return { isError: false };
     }

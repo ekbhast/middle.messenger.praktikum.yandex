@@ -55,10 +55,6 @@ export default class ChatMenu extends Block {
                             } catch (err) {
                                 console.log('Пользователи чата не загрузились', err);
                             }
-
-
-                            // При желании можно сохранить в store
-
                             console.log(store.getState());
                         } catch (err) {
                             console.error('Ошибка при получении пользователей чата', err);
