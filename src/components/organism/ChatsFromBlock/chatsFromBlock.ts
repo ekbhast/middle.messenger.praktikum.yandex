@@ -1,13 +1,12 @@
 import Block from '../../../framework/Block';
 import { router } from '../../../framework/Router';
-import { DefaultClassProps } from '../../../types/types';
+import { DefaultClassProps, ChatProps } from '../../../types/types';
 import Input from '../../atoms/input/input';
 import Link from '../../atoms/link/link';
 import Dialog from '../../molecules/dialog/dialog';
 import Button from '../../atoms/button/button';
 import store from '../../../framework/Store';
 import { chatsController } from '../../../controllers/ChatsController';
-import { ChatProps } from '../../../types/types';
 import { ConnectedSearchDialog } from '../../molecules/searchDilog/searchDilog';
 import handleChatSelect from '../../../utils/handleChatSelect';
 import { ConnecteActiveChatAvatarIcon } from '../../atoms/avatarIcon/AvatarIcon';
@@ -17,9 +16,13 @@ import ChatMenu from '../../molecules/chatMenu/chatMenu';
 import SearchUserId from '../../molecules/searchUserId/searchUserId';
 import { ConnectedChatUsersList } from '../../molecules/searchUsersChat/searchUsersChat';
 import Message from '../../molecules/message/message';
+import { ChatSocket } from '../../../api/chatSocket';
 
+interface ChatsFromBlockProps extends DefaultClassProps {}
 
-export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: Dialog[] }> {
+export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs: Dialog[] }> {
+    socket: ChatSocket | null = null;
+
     constructor(props: DefaultClassProps) {
         super({
             ...props,
@@ -40,12 +43,6 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                 placeholder: 'Сообщение',
                 type: 'text',
                 name: 'message',
-                events: {
-                    submit: (e: Event) => {
-                        e.preventDefault();
-                        console.log('Отправка сообщения не реализована');
-                    },
-                },
             }),
             NewChatButton: new Button({
                 class: 'chat__message--newChatButton button__primary',
@@ -64,7 +61,7 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
             }),
             AvatarIcon: new ConnecteActiveChatAvatarIcon({
                 class: 'chats__messages--avatarIcon',
-                imgSrc: '/src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
+                imgSrc: '/src/assets/default-avatar.jpg',
                 classImg: 'avatarIcon__img',
             }),
             SpanMessagesUser: new ConnecteActiveChatSpan(),
@@ -74,14 +71,10 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                 imgSrc: '/src/assets/chats__header--buttonMenu.png',
                 events: {
                     click: () => {
-                        const chatMenu = document.querySelector('.chatMenu') as HTMLInputElement;
-                        const overlay = document.querySelector('.chatMenu__overlay') as HTMLInputElement;
-                        if (overlay) {
-                            overlay.classList.toggle('disable');
-                        }
-                        if (chatMenu) {
-                            chatMenu.classList.toggle('disable');
-                        }
+                        const chatMenu = document.querySelector('.chatMenu') as HTMLElement;
+                        const overlay = document.querySelector('.chatMenu__overlay') as HTMLElement;
+                        chatMenu?.classList.toggle('disable');
+                        overlay?.classList.toggle('disable');
                     },
                 },
             }),
@@ -94,36 +87,30 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                 class: 'chats__messages--sendButton',
                 imgClass: 'chats__messages--buttonMenu',
                 imgSrc: '/src/assets/sendArrow.png',
-                events: {
-                    submit: (e: Event) => {
-                        e.preventDefault();
-                        console.log('Отправка сообщения не реализована');
-                    },
-                },
             }),
             messageOut: new Message({
                 class: 'chats__messages-messageText',
                 classMessage: 'chats__messages-message chats__messages-message--inMessage',
-                text: 'привеt',
-
+                text: '',
             }),
             ChatMenu: new ChatMenu({
                 class: 'chatMenu disable',
                 events: {
                     click: (e: Event) => {
                         e.stopPropagation();
-                        const chatMenu = document.querySelector('.chatMenu') as HTMLInputElement;
-                        const overlay = document.querySelector('.chatMenu__overlay') as HTMLInputElement;
-                        const searchUserId = document.querySelector('.searchUserId') as HTMLInputElement;
-                        const searchUsersChats = document.querySelector('.searchUsersChats') as HTMLInputElement;
+                        const chatMenu = document.querySelector('.chatMenu') as HTMLElement;
+                        const overlay = document.querySelector('.chatMenu__overlay') as HTMLElement;
+                        const searchUserId = document.querySelector('.searchUserId') as HTMLElement;
+                        const searchUsersChats = document.querySelector('.searchUsersChats') as HTMLElement;
                         if (e.target === overlay) {
                             chatMenu?.classList.add('disable');
-                            overlay.classList.add('disable');
+                            overlay?.classList.add('disable');
                             searchUserId?.classList.add('disable');
-                            searchUsersChats.classList.add('disable');
+                            searchUsersChats?.classList.add('disable');
                         }
                     },
-                } }),
+                },
+            }),
             SearchUserId: new SearchUserId({ class: 'searchUserId disable' }),
             SearchUsersChat: new ConnectedChatUsersList(),
         });
@@ -133,33 +120,144 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
 
     protected componentDidMount(): void {
         (async () => {
-            try {
-                const chats = await chatsController.getChats() as ChatProps[];
-                const dialogBlocks = chats.map((chat) =>
-                    new Dialog({
-                        class: 'dialog',
-                        chatData: {
-                            title: chat.title ?? 'Без названия',
-                            lastMessage: chat.last_message ?? 'Сообщений нет',
-                            avatar: chat.avatar ?? '/src/assets/default-avatar.jpg',
-                            unreadCount: chat.unread_count ?? 0,
-                            id: chat.id,
+            const chats = await chatsController.getChats() as ChatProps[];
+            const dialogBlocks = chats.map((chat) => {
+                const lastMessageText = chat.last_message?.content || 'Сообщений нет';
+                const unreadCount = chat.unread_count || 0;
+
+                return new Dialog({
+                    class: 'dialog',
+                    chatData: {
+                        ...chat,
+                        lastMessage: {
+                            content: lastMessageText,
+                            time: chat.last_message?.time,
+                            user: chat.last_message?.user,
                         },
-                    }),
-                );
-                this.lists.dialogs = dialogBlocks;
-                dialogBlocks.forEach((dialog) => {
-                    const el = dialog.getContent();
-                    if (el) {
-                        el.addEventListener('click', () => {
-                            handleChatSelect(dialog.props.chatData.id);
-                        });
-                    }
+                        unreadCount, // для SpanMessageCount
+                    },
                 });
-            } catch (err) {
-                console.error('Ошибка получения чатов', err);
-            }
+            });
+            this.lists.dialogs = dialogBlocks;
+
+            const activeChat = (store: any, chatId: number | string) => {
+                if (store.state.activeChatId === chatId) {
+                    // чат уже активный → просто вызываем handleChatSelect
+                    handleChatSelect(chatId);
+                } else {
+                    // чат новый → выбираем и подключаем сокет
+                    handleChatSelect(chatId);
+                    this.connectToChat(chatId);
+                }
+            };
+
+            dialogBlocks.forEach((dialog) => {
+                const el = dialog.getContent();
+                if (el) {
+                    el.addEventListener('click', () => activeChat(store, dialog.props.chatData.id));
+                }
+            });
+
+            const formEl = document.querySelector<HTMLFormElement>('.chats__messages--actions');
+            formEl?.addEventListener('submit', (e) => this.handleSubmit(e));
         })();
+    }
+
+    async connectToChat(chatId: number | string) {
+        if (this.socket) {
+            this.socket.disconnect();
+            this.socket = null;
+        }
+
+        // Обновляем активный чат
+        store.set('activeChatId', chatId);
+
+        try {
+        // Получаем токен для текущего чата
+            const host = 'https://ya-praktikum.tech';
+            const response = await fetch(`${host}/api/v2/chats/token/${chatId}`, {
+                method: 'POST',
+                mode: 'cors',
+                credentials: 'include', // отправляем cookie
+            });
+
+            if (!response.ok) throw new Error(`Не удалось получить токен: ${response.status}`);
+
+            const data = await response.json();
+            const token = data.token;
+            if (!token) throw new Error('Токен не получен');
+            console.log('websocet store', store);
+
+            const userId = store.state.user.id; // берём ID текущего пользователя из store
+
+            // Создаём сокет с правильным URL
+            this.socket = new ChatSocket(userId, chatId, token);
+
+            // Подписка на события
+            this.socket.onOpen = () => console.log('Сокет открыт для чата', chatId);
+            this.socket.onMessage = (msg) => {
+                if (Array.isArray(msg)) {
+                    // старые сообщения приходят в обратном порядке → разворачиваем
+                    msg.reverse().forEach((m) => this.addMessageToChat(m));
+                } else {
+                    // новые сообщения добавляем сразу
+                    this.addMessageToChat(msg);
+                }
+                if (msg.user_id !== store.state.user.id) {
+                    const dialog = this.lists.dialogs.find((d) => d.props.chatData.id === msg.chat_id);
+                    if (dialog) {
+                        dialog.props.chatData.unreadCount++;
+                        // обновляем текст счетчика
+                        dialog.props.SpanMessageCount.setProps({ text: String(dialog.props.chatData.unreadCount) });
+                    }
+                }
+            };
+            this.socket.onClose = (event: CloseEvent) =>
+                console.log('Сокет закрыт', event.code, event.reason);
+            this.socket.onError = (err) => console.error('Ошибка сокета', err);
+
+            // Подключаемся
+            this.socket.connect();
+        } catch (err) {
+            console.error('Ошибка подключения к чату:', err);
+        }
+    }
+
+    handleSubmit(e: Event) {
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        const inputEl = form.querySelector<HTMLInputElement>('.chats__message--inputMessage');
+        const text = inputEl?.value.trim();
+        if (!text || !this.socket) return;
+
+        this.socket.sendMessage(text);
+
+        if (inputEl) inputEl.value = '';
+    }
+
+    addMessageToChat(msg: any) {
+        const chatContainer = document.querySelector('.chats__messages--chat');
+        if (!chatContainer) return;
+        const formattedTime = new Date(msg.time).toLocaleTimeString('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+
+        const messageBlock = new Message({
+            class: 'chats__messages-messageText',
+            classMessage:
+            msg.user_id === store.state.user.id ?
+                'chats__messages-message chats__messages-message--inMessage':
+                'chats__messages-message chats__messages-message--outMessage',
+            text: msg.content,
+            time: formattedTime,
+        });
+
+        chatContainer.appendChild(messageBlock.getContent()!); // всегда в конец
+    }
+
+    protected componentWillUnmount(): void {
+        if (this.socket) this.socket.disconnect();
     }
 
     protected render(): string {
@@ -189,8 +287,6 @@ export default class ChatsFromBlock extends Block<DefaultClassProps, { dialogs: 
                         </div>
                     </div>
                     <div class="chats__messages--chat">
-                        {{{messageOut}}}
-
                     </div>
                     <form class="chats__messages--actions">
                         {{{IconButtonAttachment}}}

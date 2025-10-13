@@ -4,6 +4,7 @@ import Button from '../../atoms/button/button';
 import { chatsController } from '../../../controllers/ChatsController';
 import Input from '../../atoms/input/input';
 import store from '../../../framework/Store';
+import { closeModal } from '../../../utils/closeModalAll';
 
 export default class ChatMenu extends Block {
     constructor(props?: ChatMenuProps) {
@@ -69,11 +70,12 @@ export default class ChatMenu extends Block {
                 class: 'button__primary',
                 label: 'Удалить чат',
                 events: {
-                    click: async ()=>{
+                    click: async (e: Event)=>{
                         const activeChatId = store.getState().activeChatId;
                         try {
                             const deleteChat = await chatsController.deleteChat({ chatId: activeChatId });
                             console.log('Чат удален', deleteChat);
+                            closeModal(e);
                         } catch (err) {
                             console.log('Не удалось удалить чат', err);
                         }
@@ -96,6 +98,7 @@ export default class ChatMenu extends Block {
                             try {
                                 await chatsController.changeAvatar(formData);
                                 console.log('Аватар обновлён');
+                                closeModal(e);
                             } catch (err) {
                                 console.error('Ошибка при обновлении аватара', err);
                             }

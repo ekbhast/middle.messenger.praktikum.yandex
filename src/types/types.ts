@@ -111,13 +111,25 @@ export type ChatProps = {
 
 export type DialogProps = DefaultClassProps & {
     chatData: {
-        avatar?: string;
-        title?: string;
-        lastMessage?: string;
-        unreadCount?: number;
-        id?: number;
-        type?: string;
-        activeChat?: string;
+        id?: number; // ID чата
+        title?: string; // Название чата
+        avatar?: string; // URL аватара
+        type?: string; // Тип, например 'searchUserChat'
+        activeChat?: string; // ID активного чата
+        unreadCount?: number; // Кол-во непрочитанных сообщений
+        lastMessage?: { // Последнее сообщение
+            content?: string; // Текст сообщения
+            time?: string; // Время сообщения ISO
+            user?: { // Автор сообщения
+                id?: number;
+                first_name?: string;
+                second_name?: string;
+                avatar?: string;
+                email?: string;
+                login?: string;
+                phone?: string;
+            };
+        };
     };
 };
 export type ChatMenuProps = DefaultClassProps;

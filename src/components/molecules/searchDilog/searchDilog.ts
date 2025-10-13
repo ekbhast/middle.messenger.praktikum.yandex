@@ -7,6 +7,7 @@ import { Indexed } from '../../../types/types';
 import Button from '../../atoms/button/button';
 import { chatsController } from '../../../controllers/ChatsController';
 import store from '../../../framework/Store';
+import { closeModal } from '../../../utils/closeModalAll';
 
 type SearchDialog2Props = DefaultClassProps & BlockProps;
 
@@ -20,7 +21,7 @@ export default class SearchDialog extends Block {
                 class: 'searchDilog__buttonAddUser',
                 label: 'Добавить',
                 events: {
-                    click: async () => {
+                    click: async (e: Event) => {
                         console.log('Добавить пользователя в чат');
 
                         const searchUserId = store.getState().searchUser?.id;
@@ -34,6 +35,7 @@ export default class SearchDialog extends Block {
                         try {
                             const response = await chatsController.addUserToChat(searchUserId, activeChatId);
                             console.log('Пользователь добавлен в чат', response);
+                            closeModal(e);
                         } catch (err) {
                             console.error('Ошибка при добавлении пользователя в чат', err);
                         }

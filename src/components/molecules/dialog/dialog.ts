@@ -7,6 +7,7 @@ import { DialogProps } from '../../../types/types';
 import Button from '../../atoms/button/button';
 import { connect } from '../../../utils/connect';
 import { chatsController } from '../../../controllers/ChatsController';
+import { closeModal } from '../../../utils/closeModalAll';
 
 
 export default class Dialog extends Block {
@@ -28,7 +29,7 @@ export default class Dialog extends Block {
             }),
             SpanTextMessage: new Span({
                 class: 'dialog__textMessage',
-                text: props.chatData.lastMessage,
+                text: props.chatData.lastMessage?.content || '',
             }),
             SpanMessageCount: new Span({
                 class: 'dialog__newMessageCount--text',
@@ -39,11 +40,12 @@ export default class Dialog extends Block {
                 label: 'Удалить',
                 class: 'button__primary deleteUserButton',
                 events: {
-                    click: async ()=>{
+                    click: async (e:Event)=>{
                         if (props.chatData.id && props.chatData.activeChat) {
                             try {
                                 const deleteUser = await chatsController.deleteUserFromChat({ users: [props.chatData.id], chatId: props.chatData.activeChat });
                                 console.log('юзер удален', deleteUser);
+                                closeModal(e);
                             } catch (err) {
                                 console.log('Удалить не удалось', err);
                             }
