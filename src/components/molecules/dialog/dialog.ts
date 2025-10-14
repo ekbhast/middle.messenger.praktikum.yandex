@@ -20,7 +20,7 @@ export default class Dialog extends Block {
             ...props,
             AvatarIcon: new AvatarIcon({
                 class: 'avatarIcon',
-                imgSrc: baseUrlResourse + props?.chatData.avatar,
+                imgSrc: props?.chatData.avatar ? baseUrlResourse + props?.chatData.avatar : '../../../src/assets/default-avatar.jpg',
                 classImg: 'avatarIcon__img',
             }),
             H2: new H2({

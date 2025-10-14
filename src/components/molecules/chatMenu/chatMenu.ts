@@ -70,6 +70,7 @@ export default class ChatMenu extends Block {
                         const activeChatId = store.getState().activeChatId;
                         try {
                             const deleteChat = await chatsController.deleteChat({ chatId: activeChatId });
+                            await chatsController.getChats();
                             console.log('Чат удален', deleteChat);
                             closeModal(e);
                         } catch (err) {

@@ -1,7 +1,8 @@
 import { HTTPTransport } from '../utils/request';
 import { BaseAPI } from './baseApi';
+import { baseUrl } from './baseUrls';
 
-const chatsAPIInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2');
+const chatsAPIInstance = new HTTPTransport(baseUrl);
 
 export class ChatsAPI extends BaseAPI {
     getChats() {

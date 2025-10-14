@@ -20,7 +20,7 @@ class AuthController {
             await authApi.signin(data);
             const user = await this.getUser();
             store.set('user', user);
-            router.go('/chats');
+            router.go('/messenger');
             return user;
         } catch (err) {
             console.error('Не авторизован', err);
@@ -44,7 +44,7 @@ class AuthController {
             const user = await this.getUser();
             store.set('user', user);
             console.log('Зарегистрирован', userId);
-            router.go('/chats');
+            router.go('/messenger');
             return user;
         } catch (err) {
             console.error('Ошибка регистрации', err);

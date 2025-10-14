@@ -1,7 +1,8 @@
 import { HTTPTransport } from '../utils/request';
 import { BaseAPI } from './baseApi';
+import { baseUrl } from './baseUrls';
 
-const authAPIInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2');
+const authAPIInstance = new HTTPTransport(baseUrl);
 
 export class AuthAPI extends BaseAPI {
     getUser() {

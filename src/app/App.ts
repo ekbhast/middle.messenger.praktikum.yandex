@@ -13,13 +13,13 @@ export default class App {
     constructor() {
         router
             .use('/', Auth)
-            .use('/chats', Chats)
+            .use('/messenger', Chats)
             .use('/page500', Page500)
             .use('/page404', Page404)
             .use('/user-change-date', UserChangeData)
             .use('/user-change-password', UserChangePassword)
-            .use('/user-settings', UserSettings)
-            .use('/registration', Registration);
+            .use('/settings', UserSettings)
+            .use('/sign-up', Registration);
         router.start();
     }
 }
