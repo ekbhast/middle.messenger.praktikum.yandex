@@ -54,7 +54,7 @@ function mapUserChatsToProps(state: unknown): {
     const s = state as Indexed;
 
     return {
-        imgSrc: baseUrlResourse + s.activeChatInfo?.avatar || '/src/assets/default-avatar.jpg',
+        imgSrc: baseUrlResourse + s.activeChatInfo?.avatar || '../../../src/assets/default-avatar.jpg',
         class: 'chats__messages--avatarIcon',
         classImg: 'avatarIcon__img',
     };

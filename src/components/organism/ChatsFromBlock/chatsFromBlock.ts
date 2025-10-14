@@ -17,6 +17,7 @@ import SearchUserId from '../../molecules/searchUserId/searchUserId';
 import { ConnectedChatUsersList } from '../../molecules/searchUsersChat/searchUsersChat';
 import Message from '../../molecules/message/message';
 import { ChatSocket } from '../../../api/chatSocket';
+import { baseUrl } from '../../../api/baseUrls';
 interface MessageType {
     chat_id: number;
     user_id: number;
@@ -51,7 +52,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
                 events: {
                     click: (e: Event) => {
                         e.preventDefault();
-                        router.go('/user-settings');
+                        router.go('/settings');
                     },
                 },
             }),
@@ -87,14 +88,14 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             }),
             AvatarIcon: new ConnecteActiveChatAvatarIcon({
                 class: 'chats__messages--avatarIcon',
-                imgSrc: '/src/assets/default-avatar.jpg',
+                imgSrc: '../../../src/assets/default-avatar.jpg',
                 classImg: 'avatarIcon__img',
             }),
             SpanMessagesUser: new ConnecteActiveChatSpan(),
             IconButtonMenu: new IconButton({
                 class: 'chats__messages--buttonMenu',
                 imgClass: 'chats__messages--buttonMenu',
-                imgSrc: '/src/assets/chats__header--buttonMenu.png',
+                imgSrc: '../../../src/assets/chats__header--buttonMenu.png',
                 events: {
                     click: () => {
                         const chatMenu = document.querySelector('.chatMenu') as HTMLElement;
@@ -107,12 +108,12 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
             IconButtonAttachment: new IconButton({
                 class: 'chats__messages--attachmentButton',
                 imgClass: 'chats__messages--buttonMenu',
-                imgSrc: '/src/assets/attachment.png',
+                imgSrc: '../../../src/assets/attachment.png',
             }),
             IconButtonSend: new IconButton({
                 class: 'chats__messages--sendButton',
                 imgClass: 'chats__messages--buttonMenu',
-                imgSrc: '/src/assets/sendArrow.png',
+                imgSrc: '../../../src/assets/sendArrow.png',
             }),
             messageOut: new Message({
                 class: 'chats__messages-messageText',
@@ -196,8 +197,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlockProps, { dialogs
         store.set('activeChatId', chatId);
 
         try {
-            const host = 'https://ya-praktikum.tech';
-            const response = await fetch(`${host}/api/v2/chats/token/${chatId}`, {
+            const response = await fetch(`${baseUrl}/chats/token/${chatId}`, {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'include',

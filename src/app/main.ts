@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const user = await authUser.getUser();
         store.set('user', user);
         if (window.location.pathname ==='/') {
-            router.go('/chats');
+            router.go('/messenger');
         }
         console.log('Авторизован', store);
     } catch (err) {

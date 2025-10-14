@@ -1,6 +1,7 @@
 import { HTTPTransport } from '../utils/request';
+import { baseUrl } from './baseUrls';
 
-const userAPIInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2');
+const userAPIInstance = new HTTPTransport(baseUrl);
 
 export class UserAPI {
     profile(data: Record<string, string>) {
