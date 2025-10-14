@@ -303,7 +303,7 @@ export default class ChatsFromBlock extends Block<ChatsFromBlock2Props, { dialog
                     {{{newChatInput}}}
                     {{{NewChatButton}}}
                     <div class="chats__dialogs">
-                        <span class='chats__mychats'>Мои чаты</span>
+                        <span class='chats__mychats'>Мои чатыыы</span>
                         {{{dialogs}}}
                     </div>
                 </div>
