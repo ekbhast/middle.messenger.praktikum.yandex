@@ -86,7 +86,7 @@ function mapUserToProps(state: unknown) {
         }),
         AvatarButton: new AvatarButton({
             class: 'avatarButton',
-            imgSrcAvatarChange: '/static/assets/change_avatar.jpg',
+            imgSrcAvatarChange: 'assets/change_avatar.jpg',
             imgSrcAvatar: `${baseUrlResourse + (user.avatar || '')}`,
             buttonType: 'file',
             classImgAvatar: 'avatar-img',
