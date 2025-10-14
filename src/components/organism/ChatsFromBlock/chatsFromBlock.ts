@@ -156,6 +156,8 @@ export default class ChatsFromBlock extends Block<ChatsFromBlock2Props, { dialog
             if (chats && chats.length > 0) {
                 this.renderChats(chats);
             }
+            const formEl = document.querySelector<HTMLFormElement>('.chats__messages--actions');
+            formEl?.addEventListener('submit', (e) => this.handleSubmit(e));
 
             console.log('Чаты загружены при монтировании');
         } catch (err) {
