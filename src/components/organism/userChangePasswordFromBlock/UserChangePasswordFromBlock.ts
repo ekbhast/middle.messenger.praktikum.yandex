@@ -9,8 +9,8 @@ export default class UserChangePasswordFromBlock extends Block {
         super({ ...props,
             AvatarButton: new AvatarButton({
                 class: 'avatarButton',
-                imgSrcAvatarChange: '../../../src/assets/change_avatar.jpg',
-                imgSrcAvatar: '../../../src/assets/1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
+                imgSrcAvatarChange: '/static/assets//change_avatar.jpg',
+                imgSrcAvatar: '/static/assets//1648314277_5-kartinkof-club-p-yao-min-mem-5.jpg',
                 buttonType: 'file',
                 classImgAvatar: 'avatarButton__img',
                 classImgAvatarChange: 'avatarButton__img avatarButton__img--change',
