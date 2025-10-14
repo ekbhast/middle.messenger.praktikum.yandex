@@ -24,7 +24,7 @@ export class ChatUsersList extends Block <ChatUsersListProps, {user: Dialog[]}> 
                             class: 'dialog',
                             chatData: {
                                 title: chat.first_name ?? 'Без названия',
-                                avatar: chat.avatar ?? '../../../src/assets/default-avatar.jpg',
+                                avatar: chat.avatar,
                                 unreadCount: chat.unread_count ?? 0,
                                 id: chat.id,
                                 type: 'searchUserChat',
