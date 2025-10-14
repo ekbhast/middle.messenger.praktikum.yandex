@@ -163,7 +163,8 @@ export default class ChatsFromBlock extends Block<ChatsFromBlock2Props, { dialog
         }
     }
 
-    protected componentDidUpdate(_oldProps, newProps): boolean {
+    protected componentDidUpdate( _oldProps: ChatsFromBlockProps,
+        newProps: ChatsFromBlockProps): boolean {
     // Обновляем чаты только если они изменились
         if (newProps.chats && newProps.chats !== _oldProps.chats) {
             this.renderChats(newProps.chats);

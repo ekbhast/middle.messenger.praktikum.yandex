@@ -1,5 +1,6 @@
 import { ChatsAPI } from '../api/chats-api';
 import store from '../framework/Store';
+import { ChatProps } from '../types/types';
 
 const chatsApi = new ChatsAPI();
 class ChatsController {
@@ -14,9 +15,9 @@ class ChatsController {
             throw err;
         }
     }
-    public async getChats() {
+    public async getChats(): Promise<ChatProps[]> {
         try {
-            const chats = await chatsApi.getChats();
+            const chats = await chatsApi.getChats() as ChatProps[];
             console.log('Чаты получены', chats);
             store.set('chats', chats);
             console.log(store.getState());
