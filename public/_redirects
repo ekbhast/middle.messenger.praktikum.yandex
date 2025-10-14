@@ -1,9 +1,1 @@
-/           /           200
-/messenger  /messenger  200
-/page500    /page500    200
-/page404    /page404    200
-/user-change-date     /user-change-date     200
-/user-change-password /user-change-password 200
-/settings   /settings   200
-/sign-up    /sign-up    200
-/*          /           200
+/*    /index.html   200
