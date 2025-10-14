@@ -1,7 +1,6 @@
 import Block from './Block';
 import { BlockConstructor } from '../types/types';
 
-
 export class Route {
     private _pathname: string;
     private _blockClass: BlockConstructor;
@@ -9,17 +8,15 @@ export class Route {
     private _props: { rootQuery: HTMLElement; class: string };
 
     constructor(pathname: string, view: BlockConstructor, props: { rootQuery: HTMLElement; class: string }) {
-        this._pathname = pathname;
+        this._pathname = pathname.replace(/\/$/, ''); // убираем слеш в конце
         this._blockClass = view;
         this._block = null;
         this._props = props;
     }
 
     navigate(pathname: string) {
-        if (this.match(pathname)) {
-            this._pathname = pathname;
-            this.render();
-        }
+        this._pathname = pathname.replace(/\/$/, '');
+        this.render();
     }
 
     leave() {
@@ -29,7 +26,7 @@ export class Route {
     }
 
     match(pathname: string): boolean {
-        return pathname === this._pathname;
+        return pathname.replace(/\/$/, '') === this._pathname;
     }
 
     render() {
