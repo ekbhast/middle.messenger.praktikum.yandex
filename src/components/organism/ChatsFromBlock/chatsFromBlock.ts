@@ -93,14 +93,14 @@ export default class ChatsFromBlock extends Block<ChatsFromBlock2Props, { dialog
             }),
             AvatarIcon: new ConnecteActiveChatAvatarIcon({
                 class: 'chats__messages--avatarIcon',
-                imgSrc: '../../../src/assets/default-avatar.jpg',
+                imgSrc: '/static/assets//default-avatar.jpg',
                 classImg: 'avatarIcon__img',
             }),
             SpanMessagesUser: new ConnecteActiveChatSpan(),
             IconButtonMenu: new IconButton({
                 class: 'chats__messages--buttonMenu',
                 imgClass: 'chats__messages--buttonMenu',
-                imgSrc: '../../../src/assets/chats__header--buttonMenu.png',
+                imgSrc: '/static/assets//chats__header--buttonMenu.png',
                 events: {
                     click: () => {
                         const chatMenu = document.querySelector('.chatMenu') as HTMLElement;
@@ -113,12 +113,12 @@ export default class ChatsFromBlock extends Block<ChatsFromBlock2Props, { dialog
             IconButtonAttachment: new IconButton({
                 class: 'chats__messages--attachmentButton',
                 imgClass: 'chats__messages--buttonMenu',
-                imgSrc: '../../../src/assets/attachment.png',
+                imgSrc: '/static/assets//attachment.png',
             }),
             IconButtonSend: new IconButton({
                 class: 'chats__messages--sendButton',
                 imgClass: 'chats__messages--buttonMenu',
-                imgSrc: '../../../src/assets/sendArrow.png',
+                imgSrc: '/static/assets//sendArrow.png',
             }),
             messageOut: new Message({
                 class: 'chats__messages-messageText',
