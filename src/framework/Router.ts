@@ -18,7 +18,11 @@ export default class Router {
     }
 
     use(pathname: string, block: BlockConstructor, className?: string) {
-        const route = new Route(pathname, block, { rootQuery: this._rootQuery, class: className || '' });
+        const route = new Route(
+            pathname.replace(/\/$/, ''), // убираем слеш в конце
+            block,
+            { rootQuery: this._rootQuery, class: className || '' },
+        );
         this.routes.push(route);
         return this;
     }
@@ -28,11 +32,22 @@ export default class Router {
             this._onRoute(window.location.pathname);
         };
 
-        this._onRoute(window.location.pathname);
+        // Обрабатываем первый заход на страницу
+        let initialPath = window.location.pathname;
+
+        // Если пользователь зашел напрямую на /index.html, заменяем на /
+        if (initialPath === '/index.html') {
+            initialPath = '/';
+            this.history.replaceState({}, '', initialPath);
+        }
+
+        this._onRoute(initialPath);
     }
 
     private _onRoute(pathname: string) {
-        const route = this.getRoute(pathname);
+        // убираем слеш в конце для маршрутов
+        const cleanPath = pathname.replace(/\/$/, '');
+        const route = this.getRoute(cleanPath);
         if (!route) return;
 
         if (this._currentRoute && this._currentRoute !== route) {
@@ -45,8 +60,9 @@ export default class Router {
     }
 
     go(pathname: string) {
-        this.history.pushState({}, '', pathname);
-        this._onRoute(pathname);
+        const cleanPath = pathname.replace(/\/$/, '');
+        this.history.pushState({}, '', cleanPath);
+        this._onRoute(cleanPath);
     }
 
     back() {
@@ -58,8 +74,10 @@ export default class Router {
     }
 
     getRoute(pathname: string): Route | null {
-        return this.routes.find((route) => route.match(pathname)) || null;
+        const cleanPath = pathname.replace(/\/$/, '');
+        return this.routes.find((route) => route.match(cleanPath)) || null;
     }
 }
-export const router = new Router(document.getElementById('app')!);
 
+// Экспортируем singleton
+export const router = new Router(document.getElementById('app')!);
