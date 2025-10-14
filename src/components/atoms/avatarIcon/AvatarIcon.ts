@@ -27,7 +27,7 @@ function mapSearchUserToPropsAvatar(state: unknown): {
     const s = state as Indexed;
 
     return {
-        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : '/static/assets/default-avatar.jpg',
+        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : 'assets/default-avatar.jpg',
         class: 'avatarIcon',
         classImg: 'avatarIcon__img',
     };
@@ -41,7 +41,7 @@ function mapActiveChatToPropsAvatar(state: unknown): {
     const s = state as Indexed;
 
     return {
-        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : '/static/assets/default-avatar.jpg',
+        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : 'assets/default-avatar.jpg',
         class: 'chats__messages--avatarIcon',
         classImg: 'avatarIcon__img',
     };
@@ -54,7 +54,7 @@ function mapUserChatsToProps(state: unknown): {
     const s = state as Indexed;
 
     return {
-        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : '/static/assets/default-avatar.jpg',
+        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : 'assets/default-avatar.jpg',
         class: 'chats__messages--avatarIcon',
         classImg: 'avatarIcon__img',
     };

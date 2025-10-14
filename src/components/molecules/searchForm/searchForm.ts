@@ -17,7 +17,7 @@ export default class SearchFrom extends Block {
     protected render(): string {
         return `
        <form class="{{class}}">
-            <img src="/static/assets/search_icon.svg" alt="icon" class="chats__search--icon" />
+            <img src="assets/search_icon.svg" alt="icon" class="chats__search--icon" />
             {{{SearchInput}}}
         </form>
         `;

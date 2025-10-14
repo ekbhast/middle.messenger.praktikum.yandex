@@ -39,7 +39,7 @@ function mapUserToProps(state: unknown) {
         class: 'userChangeDataFromBlock',
         AvatarButton: new AvatarButton({
             class: 'avatarButton',
-            imgSrcAvatarChange: '/static/assets/change_avatar.jpg',
+            imgSrcAvatarChange: 'assets/change_avatar.jpg',
             imgSrcAvatar: `${baseUrlResourse + avatar}`,
             buttonType: 'file',
             classImgAvatar: 'avatar-img',
