@@ -1,21 +1,41 @@
 import UserChangeDataTemplate from '../../components/templates/UserChangeDataTemplate/userChangeDataTemplate';
 import Block from '../../framework/Block';
 import { DefaultClassProps } from '../../types/types';
-import createFormEvents from '../../utils/fromEvents';
-
+import { validateInput } from '../../utils/fromEvents';
+import { validateForm } from '../../utils/validateForm';
+import { userController } from '../../controllers/UserController';
 export default class UserChangeData extends Block {
     constructor(props: DefaultClassProps) {
         super({ ...props,
             UserChangeDataTemplate: new UserChangeDataTemplate({
                 class: 'userChangeData__template',
             }),
-            events: createFormEvents(),
+            events: {
+                focusout: (e:Event) => validateInput(e),
+                submit: async (e:Event) => {
+                    e.preventDefault();
+                    const validationResult = ()=>validateForm(e);
+                    if (!validationResult().error) {
+                        const formData = validationResult().formData;
+                        console.log(formData);
+                        try {
+                            await userController.profile(formData);
+                        } catch (err: unknown) {
+                            console.log(err);
+                        }
+                        const avatarInput = document.getElementById('avatarInput') as HTMLInputElement;
+                        const avatarFile = avatarInput.files?.[0] ?? null;
+                        console.log('аватарочка', avatarFile);
+                        if (avatarFile) await userController.changeAvatar(avatarFile);
+                    }
+                },
+            },
         });
     }
 
     protected render(): string {
         return `
-            <main class="{{class}}">
+            <main class="page page__userChangeData">
                 {{{UserChangeDataTemplate}}}
             </main>
         `;

@@ -1,0 +1,31 @@
+.searchUsersChats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+    position: absolute;
+    top: 120px;
+    right: 390px;
+    z-index: 1000;
+    background-color: #fff
+}
+.chatUser{
+    width: auto;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.chatUser__avatar {
+    width: 50px;
+    height: 50px;
+    background-image: url('/path/to/avatar.jpg');
+    background-size: cover;      /* или contain */
+    background-position: center;
+    border-radius: 50%;
+}
+

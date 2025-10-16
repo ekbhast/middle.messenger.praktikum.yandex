@@ -1,8 +1,13 @@
 import Block from '../../../framework/Block';
-import { AvatarIconProps } from '../../../types/types';
-export default class AvatarIcon extends Block {
-    constructor(props: AvatarIconProps) {
-        super({ ...props });
+import { AvatarIconProps, BlockProps } from '../../../types/types';
+import { connect } from '../../../utils/connect';
+import { Indexed } from '../../../types/types';
+import { baseUrlResourse } from '../../../api/baseUrls';
+
+type Avatar2Props = AvatarIconProps & BlockProps;
+export default class AvatarIcon extends Block<AvatarIconProps> {
+    constructor(props?: Avatar2Props) {
+        super(props);
     }
 
     protected render(): string {
@@ -13,3 +18,48 @@ export default class AvatarIcon extends Block {
         `;
     }
 }
+
+function mapSearchUserToPropsAvatar(state: unknown): {
+    imgSrc: string;
+    class: string;
+    classImg: string;
+} {
+    const s = state as Indexed;
+
+    return {
+        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : 'assets/default-avatar.jpg',
+        class: 'avatarIcon',
+        classImg: 'avatarIcon__img',
+    };
+}
+
+function mapActiveChatToPropsAvatar(state: unknown): {
+    imgSrc: string;
+    class: string;
+    classImg: string;
+} {
+    const s = state as Indexed;
+
+    return {
+        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : 'assets/default-avatar.jpg',
+        class: 'chats__messages--avatarIcon',
+        classImg: 'avatarIcon__img',
+    };
+}
+function mapUserChatsToProps(state: unknown): {
+    imgSrc: string;
+    class: string;
+    classImg: string;
+} {
+    const s = state as Indexed;
+
+    return {
+        imgSrc: s.activeChatInfo?.avatar ? baseUrlResourse + s.activeChatInfo?.avatar : 'assets/default-avatar.jpg',
+        class: 'chats__messages--avatarIcon',
+        classImg: 'avatarIcon__img',
+    };
+}
+
+export const ConnecteSearchUserAvatarIcon = connect(AvatarIcon, mapSearchUserToPropsAvatar);
+export const ConnecteActiveChatAvatarIcon = connect(AvatarIcon, mapActiveChatToPropsAvatar);
+export const ConnecteUserChatsToProps = connect(AvatarIcon, mapUserChatsToProps);
