@@ -24,7 +24,7 @@ export default class LoginFromBlock extends Block {
                 type: 'submit',
             }),
             Link: new Link({
-                href: 'registration',
+                href: 'sign-up',
                 class: 'auth__link',
                 text: 'Зарегистрироваться',
             }),
