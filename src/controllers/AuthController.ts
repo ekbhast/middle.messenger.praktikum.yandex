@@ -1,5 +1,5 @@
 import { AuthAPI } from '../api/auth-api';
-import { router } from '../framework/Router';
+import { router } from '../app/main';
 import store from '../framework/Store';
 
 const authApi = new AuthAPI();

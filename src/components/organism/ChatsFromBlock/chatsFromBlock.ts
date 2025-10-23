@@ -1,5 +1,5 @@
 import Block from '../../../framework/Block';
-import { router } from '../../../framework/Router';
+import { router } from '../../../app/main';
 import { DefaultClassProps, ChatProps, BlockProps } from '../../../types/types';
 import Input from '../../atoms/input/input';
 import Link from '../../atoms/link/link';
