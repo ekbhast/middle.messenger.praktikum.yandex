@@ -78,6 +78,3 @@ export default class Router {
         return this.routes.find((route) => route.match(cleanPath)) || null;
     }
 }
-
-// Экспортируем singleton
-export const router = new Router(document.getElementById('app')!);

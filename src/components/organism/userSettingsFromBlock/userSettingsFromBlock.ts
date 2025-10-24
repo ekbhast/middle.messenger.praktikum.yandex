@@ -7,7 +7,7 @@ import { ConnectedUserSettingsRows } from '../../molecules/userSettingsRows/User
 import { authController } from '../../../controllers/AuthController';
 import { Indexed } from '../../../types/types';
 import { connect } from '../../../utils/connect';
-import { router } from '../../../framework/Router';
+import { router } from '../../../app/main';
 import { baseUrlResourse } from '../../../api/baseUrls';
 type UserSettings2Props = DefaultClassProps & BlockProps;
 

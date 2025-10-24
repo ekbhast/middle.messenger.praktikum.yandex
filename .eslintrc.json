@@ -24,6 +24,9 @@
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
+      "parserOptions": {
+        "project": null
+      },
       "rules": {
         "@typescript-eslint/no-explicit-any": "error",
         "linebreak-style": "off",

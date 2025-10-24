@@ -12,6 +12,12 @@ npm run start
 Сборка проекта:
 npm run build
 
+Запуск текстов
+npm run test
+
+Запуск линтера
+npm run lint
+
 Ссылка на деплой проекта netlify
 https://messangerpracticum.netlify.app/
 
